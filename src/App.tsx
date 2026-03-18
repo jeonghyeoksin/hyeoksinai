@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Lock, Unlock, ExternalLink, Menu, X, Settings, Zap, Sparkles, ArrowRight, Copy, Check, Bot, Youtube } from 'lucide-react';
+import { Search, Lock, Unlock, ExternalLink, Menu, X, Settings, Zap, Sparkles, ArrowRight, Copy, Check, Bot, Youtube, Star, FileText } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { additionalPrompts } from './promptsData';
 
@@ -66,7 +66,8 @@ const PROGRAMS: Program[] = [
     ),
     access: 'FREE',
     category: 'VIDEO',
-    tags: ['이미지 생성', '3D 모델링']
+    tags: ['이미지 생성', '3D 모델링'],
+    link: 'https://hyeoksinailite.vercel.app'
   },
   {
     id: '2',
@@ -454,6 +455,97 @@ const PROGRAMS: Program[] = [
     category: 'DESIGN',
     tags: ['유튜브', '썸네일', '디자인'],
     link: 'https://hyeoksinthumbnailver1.vercel.app/'
+  },
+  {
+    id: '12',
+    title: '혁신 제안서 AI',
+    description: '단 몇 번의 클릭으로 완벽하게 구조화된 비즈니스 제안서를 완성하세요. AI가 당신의 아이디어를 설득력 있는 문서와 시각 자료로 변환합니다.',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full relative overflow-hidden flex flex-col justify-center p-8">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop)' }}
+        ></div>
+        {/* Dark/Blue Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1e1b4b]/95 via-[#312e81]/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-black/30"></div>
+        
+        {/* Content */}
+        <div className="relative z-10 w-full max-w-[90%]">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-900/60 backdrop-blur-md mb-4">
+            <div className="w-2 h-2 rounded-full bg-indigo-400"></div>
+            <span className="text-indigo-100 text-[11px] font-semibold tracking-wide">AI-Powered Business Solutions</span>
+          </div>
+          
+          <h2 className="text-4xl font-extrabold text-white mb-3 tracking-tight drop-shadow-lg">
+            혁신 제안서 AI
+          </h2>
+          <p className="text-indigo-100/90 text-sm leading-relaxed drop-shadow-md font-medium">
+            단 몇 번의 클릭으로 완벽하게 구조화된 비즈니스 제안서를 완성하세요.<br/>
+            AI가 당신의 아이디어를 설득력 있는 문서와 시각 자료로 변환합니다.
+          </p>
+        </div>
+      </div>
+    ),
+    access: 'PREMIUM',
+    category: 'PLANNING',
+    tags: ['제안서', '비즈니스'],
+    link: 'https://hyeoksin-proposal.vercel.app/'
+  },
+  {
+    id: '13',
+    title: '혁신 리뷰 AI',
+    description: '프리미엄 바이럴 크리에이터. 설득력 있고 자연스러운 고품질 리뷰를 자동으로 생성합니다.',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center bg-[#1a1b41] p-6">
+        {/* Background Circles */}
+        <div className="absolute top-[-10%] left-[-10%] w-32 h-32 bg-blue-500/10 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-[-20%] right-[-20%] w-48 h-48 bg-purple-500/10 rounded-full blur-3xl"></div>
+        
+        {/* Icon Container */}
+        <div className="relative mb-6 flex flex-col items-center">
+          <div className="relative w-20 h-24 border-2 border-slate-600/50 rounded-lg bg-slate-800/30 backdrop-blur-sm flex flex-col p-3 shadow-lg">
+            {/* Document Lines */}
+            <div className="w-10 h-1 bg-slate-500/60 rounded-full mb-2"></div>
+            <div className="w-12 h-1 bg-slate-500/60 rounded-full mb-2"></div>
+            <div className="w-8 h-1 bg-slate-500/60 rounded-full mb-4"></div>
+            
+            {/* Stars */}
+            <div className="flex gap-0.5 mt-auto">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <Star key={i} className="w-3 h-3 text-yellow-500 fill-yellow-500 drop-shadow-[0_0_5px_rgba(234,179,8,0.8)]" />
+              ))}
+            </div>
+            
+            {/* Pen Icon (Positioned absolutely) */}
+            <div className="absolute -right-3 bottom-6 text-blue-400 drop-shadow-[0_0_8px_rgba(96,165,250,0.8)] transform rotate-12">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" fill="currentColor"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+        
+        {/* Title Section */}
+        <div className="text-center z-10">
+          <h2 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-purple-300 tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(147,197,253,0.5)]">
+            혁신 리뷰 AI
+          </h2>
+          <p className="text-slate-400 text-[10px] font-bold tracking-[0.2em] uppercase">
+            Premium Viral Creator
+          </p>
+        </div>
+      </div>
+    ),
+    access: 'PREMIUM',
+    category: 'MARKETING',
+    tags: ['리뷰', '바이럴', '마케팅'],
+    link: 'https://hyeoksin-review.fragrant-flower-7056.workers.dev'
   },
   {
     id: 'p1',
@@ -1521,13 +1613,21 @@ export default function App() {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#" className="text-zinc-300 hover:text-white transition-colors">홈</a>
+              <a href="/" className="text-zinc-300 hover:text-white transition-colors">홈</a>
               <a href="#" className="text-zinc-300 hover:text-white transition-colors">프로그램</a>
-              <a href="#" className="text-zinc-300 hover:text-white transition-colors">인사이트</a>
             </div>
 
             {/* Right Actions */}
             <div className="hidden md:flex items-center space-x-4">
+              <a 
+                href="https://docs.google.com/presentation/d/10BbgaNbQg60yh3xkNgSahAEm9lyiaZJEUn8W6F6kS3U/edit?usp=sharing" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors border-r border-zinc-800 pr-4 flex items-center gap-1.5 font-medium"
+              >
+                <ExternalLink className="w-4 h-4" />
+                API KEY 설정방법
+              </a>
               <div className="text-sm text-zinc-500 border-r border-zinc-800 pr-4">
                 Dev: 정혁신
               </div>
@@ -1596,9 +1696,17 @@ export default function App() {
               className="md:hidden border-b border-white/10 bg-[#0a0a0a]"
             >
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#" className="block px-3 py-2 text-base font-medium text-white bg-white/5 rounded-md">홈</a>
+                <a href="/" className="block px-3 py-2 text-base font-medium text-white bg-white/5 rounded-md">홈</a>
                 <a href="#" className="block px-3 py-2 text-base font-medium text-zinc-300 hover:text-white hover:bg-white/5 rounded-md">프로그램</a>
-                <a href="#" className="block px-3 py-2 text-base font-medium text-zinc-300 hover:text-white hover:bg-white/5 rounded-md">인사이트</a>
+                <a 
+                  href="https://docs.google.com/presentation/d/10BbgaNbQg60yh3xkNgSahAEm9lyiaZJEUn8W6F6kS3U/edit?usp=sharing" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-3 py-2 text-base font-medium text-blue-400 hover:text-blue-300 hover:bg-white/5 rounded-md"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  API KEY 설정방법
+                </a>
                 <div className="px-3 py-2 text-sm text-amber-500 font-medium">Dev: 정혁신</div>
                 
                 <div className="pt-4 pb-2 border-t border-zinc-800">
