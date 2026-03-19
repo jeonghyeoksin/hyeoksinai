@@ -67,7 +67,7 @@ const PROGRAMS: Program[] = [
     access: 'FREE',
     category: 'VIDEO',
     tags: ['이미지 생성', '3D 모델링'],
-    link: 'https://hyeoksinailite.vercel.app'
+    link: 'https://hyeoksinailite.fragrant-flower-7056.workers.dev'
   },
   {
     id: '2',
