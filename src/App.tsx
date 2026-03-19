@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Lock, Unlock, ExternalLink, Menu, X, Settings, Zap, Sparkles, ArrowRight, Copy, Check, Bot, Youtube, Star, FileText } from 'lucide-react';
+import { Search, Lock, Unlock, ExternalLink, Menu, X, Settings, Zap, Sparkles, ArrowRight, Copy, Check, Bot, Youtube, Star, FileText, AlertTriangle, Wand2, Code } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { additionalPrompts } from './promptsData';
 
@@ -188,6 +188,47 @@ const PROGRAMS: Program[] = [
     link: 'https://hyeoksin-sangsepage-ver16.vercel.app'
   },
   {
+    id: '16',
+    title: '혁신 홈페이지 개발 AI',
+    description: '당신의 아이디어를 구글 AI 스튜디오를 위한 완벽한 프롬프트로 변환합니다',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center p-6 bg-gradient-to-br from-[#1a0b2e] via-[#2d1b4e] to-[#1a0b2e]">
+        {/* Background Glows */}
+        <div className="absolute top-[-20%] left-[-10%] w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-[-20%] right-[-10%] w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"></div>
+        
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center text-center w-full">
+          {/* Top Icon */}
+          <div className="w-12 h-12 rounded-2xl border border-indigo-400/30 bg-indigo-500/10 flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(99,102,241,0.2)]">
+            <Sparkles className="w-6 h-6 text-indigo-300" />
+          </div>
+          
+          {/* Title */}
+          <h2 className="text-4xl font-bold tracking-tight leading-tight mb-4 text-transparent bg-clip-text bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-300 drop-shadow-sm">
+            혁신 홈페이지 개발 AI
+          </h2>
+          
+          {/* Subtitle */}
+          <p className="text-zinc-300 text-sm font-medium tracking-wide leading-relaxed mb-8 drop-shadow-md">
+            당신의 아이디어를 구글 AI 스튜디오를 위한<br/>완벽한 프롬프트로 변환합니다
+          </p>
+          
+          {/* Developer Badge */}
+          <div className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-black/40 backdrop-blur-md">
+            <Code className="w-3.5 h-3.5 text-indigo-400" />
+            <span className="text-zinc-300 text-xs font-medium tracking-wider">개발자: 정혁신</span>
+          </div>
+        </div>
+      </div>
+    ),
+    access: 'PREMIUM',
+    category: 'PLANNING',
+    tags: ['홈페이지', '개발', '프롬프트'],
+    link: 'https://hyeoksin-homepage.fragrant-flower-7056.workers.dev'
+  },
+  {
     id: '5',
     title: '혁신 직무역량 강화 AI',
     description: '당신의 잠재력을 깨우고 커리어의 새로운 패러다임을 제시합니다',
@@ -339,7 +380,8 @@ const PROGRAMS: Program[] = [
     ),
     access: 'PREMIUM',
     category: 'PLANNING',
-    tags: ['전자책', '출판']
+    tags: ['전자책', '출판'],
+    link: 'https://hyeoksin-book-ver3.vercel.app'
   },
   {
     id: '9',
@@ -546,6 +588,105 @@ const PROGRAMS: Program[] = [
     category: 'MARKETING',
     tags: ['리뷰', '바이럴', '마케팅'],
     link: 'https://hyeoksin-review.fragrant-flower-7056.workers.dev'
+  },
+  {
+    id: '14',
+    title: 'AI 비즈니스 팩트 폭격기 & 리스크 분석가 에이전트',
+    description: '비즈니스 아이디어와 전략의 팩트를 점검하고 잠재적 리스크를 철저하게 분석하는 AI 에이전트입니다.',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full relative overflow-hidden flex flex-col justify-between p-6 bg-slate-950">
+        {/* Background Image with Overlay */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-luminosity"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop)' }}
+        ></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/60 via-slate-900/80 to-rose-900/60"></div>
+        
+        {/* Cyberpunk Grid/Lines */}
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'linear-gradient(rgba(34, 211, 238, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(34, 211, 238, 0.1) 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+
+        {/* Top Section: Facts & Risk */}
+        <div className="relative z-10 flex justify-between items-start w-full">
+          <div className="flex flex-col gap-1">
+            <span className="text-cyan-400 font-black text-[10px] tracking-[0.2em] uppercase drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]">Facts</span>
+            <div className="w-8 h-0.5 bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></div>
+          </div>
+          <div className="flex flex-col gap-1 items-end">
+            <span className="text-rose-500 font-black text-[10px] tracking-[0.2em] uppercase drop-shadow-[0_0_8px_rgba(244,63,94,0.8)]">Risk Analyst</span>
+            <div className="w-8 h-0.5 bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.8)]"></div>
+          </div>
+        </div>
+
+        {/* Center: Holographic UI Elements */}
+        <div className="relative z-10 flex-grow flex items-center justify-center w-full my-4">
+          <div className="absolute left-6 w-14 h-14 border border-cyan-500/30 rounded bg-cyan-500/10 flex items-center justify-center backdrop-blur-sm shadow-[0_0_15px_rgba(34,211,238,0.2)]">
+            <Zap className="w-6 h-6 text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
+          </div>
+          <div className="absolute right-6 w-14 h-14 border border-rose-500/30 rounded bg-rose-500/10 flex items-center justify-center backdrop-blur-sm shadow-[0_0_15px_rgba(244,63,94,0.2)]">
+            <AlertTriangle className="w-6 h-6 text-rose-500 drop-shadow-[0_0_8px_rgba(244,63,94,0.8)]" />
+          </div>
+          
+          {/* Center Target */}
+          <div className="w-24 h-24 rounded-full border border-dashed border-slate-400/30 flex items-center justify-center animate-[spin_10s_linear_infinite]">
+            <div className="w-16 h-16 rounded-full border border-slate-400/20 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-full border border-slate-400/10"></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Section: Title */}
+        <div className="relative z-10 w-full text-center">
+          <h2 className="text-2xl font-black text-white tracking-tight leading-tight drop-shadow-lg flex flex-col gap-1">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-cyan-100">AI 비즈니스 팩트 폭격기</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-100 to-rose-300 text-xl">& 리스크 분석가</span>
+          </h2>
+        </div>
+      </div>
+    ),
+    access: 'PREMIUM',
+    category: 'PLANNING',
+    tags: ['비즈니스', '분석', '리스크'],
+    link: 'https://gemini.google.com/gem/1KpshogfylCy9GoY4QGNZACEfJ81FkCjd?usp=sharing'
+  },
+  {
+    id: '15',
+    title: '혁신 맞춤 프롬프트 AI',
+    description: '당신의 비즈니스와 마케팅을 위한 완벽한 프롬프트를 설계해 드립니다.',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center p-6 bg-slate-900">
+        {/* Background Image with Overlay */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=800&auto=format&fit=crop)' }}
+        ></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-slate-900/40"></div>
+        
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center text-center w-full mt-8">
+          {/* Badge */}
+          <div className="flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-emerald-500/30 bg-slate-800/50 backdrop-blur-md mb-6 shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+            <Wand2 className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="text-emerald-50 text-xs font-medium tracking-wider">PROMPT ENGINEERING</span>
+          </div>
+          
+          {/* Title */}
+          <h2 className="text-3xl font-black text-white tracking-tight leading-tight drop-shadow-lg mb-4">
+            혁신 맞춤 프롬프트 AI
+          </h2>
+          
+          {/* Subtitle */}
+          <p className="text-slate-300 text-sm font-medium tracking-wide max-w-[90%] drop-shadow-md">
+            당신의 비즈니스와 마케팅을 위한<br/>완벽한 프롬프트를 설계해 드립니다.
+          </p>
+        </div>
+      </div>
+    ),
+    access: 'PREMIUM',
+    category: 'PROMPT',
+    tags: ['프롬프트', '엔지니어링', '맞춤형'],
+    link: 'https://hyeoksin-custum.vercel.app'
   },
   {
     id: 'p1',
@@ -1944,7 +2085,7 @@ export default function App() {
                     {program.access === 'PREMIUM' ? (
                       <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PREMIUM' ? 'bg-emerald-500' : 'bg-amber-500'} text-black text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
                         {authLevel === 'PREMIUM' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                        {authLevel === 'PREMIUM' ? '인증됨' : '프리미엄 멤버십 전용'}
+                        {authLevel === 'PREMIUM' ? '인증됨' : '프리미엄 멤버십'}
                       </div>
                     ) : (
                       <div className="flex items-center gap-1.5 px-2.5 py-1 bg-white/10 text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md border border-white/20">
@@ -2039,7 +2180,7 @@ export default function App() {
                 </button>
               </div>
               <p className="text-zinc-400 text-sm mb-6">
-                {showAuthModal === 'PREMIUM' ? '프리미엄 멤버십 전용 코드를 입력해주세요.' : '멤버십 전용 코드를 입력해주세요.'}
+                {showAuthModal === 'PREMIUM' ? '프리미엄 멤버십 코드를 입력해주세요.' : '멤버십 전용 코드를 입력해주세요.'}
               </p>
               <div className="mb-4">
                 <input
