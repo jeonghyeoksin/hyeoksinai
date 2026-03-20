@@ -112,7 +112,8 @@ const PROGRAMS: Program[] = [
     ),
     access: 'PREMIUM',
     category: 'PLANNING',
-    tags: ['LLM', '번역']
+    tags: ['LLM', '번역'],
+    link: 'https://hyeoksin-money.fragrant-flower-7056.workers.dev/'
   },
   {
     id: '3',
@@ -381,7 +382,7 @@ const PROGRAMS: Program[] = [
     access: 'PREMIUM',
     category: 'PLANNING',
     tags: ['전자책', '출판'],
-    link: 'https://hyeoksin-book-ver3.vercel.app'
+    link: 'https://hyeoksin-book.fragrant-flower-7056.workers.dev'
   },
   {
     id: '9',
@@ -648,45 +649,6 @@ const PROGRAMS: Program[] = [
     category: 'PLANNING',
     tags: ['비즈니스', '분석', '리스크'],
     link: 'https://gemini.google.com/gem/1KpshogfylCy9GoY4QGNZACEfJ81FkCjd?usp=sharing'
-  },
-  {
-    id: '15',
-    title: '혁신 맞춤 프롬프트 AI',
-    description: '당신의 비즈니스와 마케팅을 위한 완벽한 프롬프트를 설계해 드립니다.',
-    image: '',
-    customVisual: (
-      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center p-6 bg-slate-900">
-        {/* Background Image with Overlay */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=800&auto=format&fit=crop)' }}
-        ></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-slate-900/40"></div>
-        
-        {/* Content */}
-        <div className="relative z-10 flex flex-col items-center text-center w-full mt-8">
-          {/* Badge */}
-          <div className="flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-emerald-500/30 bg-slate-800/50 backdrop-blur-md mb-6 shadow-[0_0_15px_rgba(16,185,129,0.15)]">
-            <Wand2 className="w-3.5 h-3.5 text-emerald-400" />
-            <span className="text-emerald-50 text-xs font-medium tracking-wider">PROMPT ENGINEERING</span>
-          </div>
-          
-          {/* Title */}
-          <h2 className="text-3xl font-black text-white tracking-tight leading-tight drop-shadow-lg mb-4">
-            혁신 맞춤 프롬프트 AI
-          </h2>
-          
-          {/* Subtitle */}
-          <p className="text-slate-300 text-sm font-medium tracking-wide max-w-[90%] drop-shadow-md">
-            당신의 비즈니스와 마케팅을 위한<br/>완벽한 프롬프트를 설계해 드립니다.
-          </p>
-        </div>
-      </div>
-    ),
-    access: 'PREMIUM',
-    category: 'PROMPT',
-    tags: ['프롬프트', '엔지니어링', '맞춤형'],
-    link: 'https://hyeoksin-custum.vercel.app'
   },
   {
     id: 'p1',
@@ -1712,7 +1674,7 @@ export default function App() {
   const [authError, setAuthError] = useState('');
 
   const handleAuth = () => {
-    if (showAuthModal === 'PREMIUM' && authCode === '0705') {
+    if (showAuthModal === 'PREMIUM' && authCode === 'hsaip0705') {
       setAuthLevel('PREMIUM');
       setShowAuthModal(false);
       setAuthCode('');
@@ -2185,7 +2147,7 @@ export default function App() {
               <div className="mb-4">
                 <input
                   type="password"
-                  placeholder="인증 번호 (4자리)"
+                  placeholder="인증 코드 입력"
                   className="w-full bg-black border border-zinc-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all"
                   value={authCode}
                   onChange={(e) => {
