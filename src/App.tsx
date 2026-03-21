@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { additionalPrompts } from './promptsData';
 
 // --- Types ---
-type AccessLevel = 'FREE' | 'PREMIUM' | 'PARTNER' | 'STUDENT';
+type AccessLevel = 'FREE' | 'BASIC' | 'PREMIUM' | 'PARTNER' | 'STUDENT';
 type Category = 'ALL' | 'PROGRAM' | 'MARKETING' | 'DESIGN' | 'VIDEO' | 'PLANNING' | 'PROMPT' | 'LECTURE';
 type PromptSubCategory = '비즈니스' | '마케팅' | '디자인' | '콘텐츠' | '개발' | '교육' | '일상';
 
@@ -46,6 +46,98 @@ const PROGRAMS: Program[] = ([
     category: 'LECTURE',
     tags: ['가이드', 'API', '결제'],
     link: 'https://docs.google.com/document/d/1S37vCHrloJwcD1w-m8X1OXsBOAhO4MDJrzuVs0wbKkw/edit?tab=t.0#heading=h.7kaiinz6a899'
+  },
+  {
+    id: 'lecture-api-tier1',
+    title: "구글 API Key 'Tier 1' 표시가 뜰 경우?",
+    description: "구글 API Key 'Tier 1' 표시가 뜰 경우의 해결 방법에 대한 가이드 문서입니다.",
+    image: '',
+    customVisual: (
+      <div className="w-full h-full bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81] relative overflow-hidden flex items-center justify-center p-6 text-center">
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.4) 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+        <div className="relative z-10 w-full flex flex-col items-center justify-center">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/20 text-blue-300 text-xs font-bold w-max mb-4">
+            <span className="text-blue-400">📚</span> 수강생 전용 자료
+          </div>
+          <h2 className="text-2xl font-black text-white tracking-tight mb-3 drop-shadow-lg break-keep leading-snug">
+            구글 API Key<br/>'Tier 1' 표시가 뜰 경우?
+          </h2>
+        </div>
+      </div>
+    ),
+    access: 'STUDENT',
+    category: 'LECTURE',
+    tags: ['가이드', 'API', 'Tier 1'],
+    link: 'https://docs.google.com/document/d/1xl434p1XbyqqYQt4GgKwiDFYd2oDK-sUvItl5Af4efk/edit?usp=sharing'
+  },
+  {
+    id: 'lecture-markdown-guide',
+    title: '마크다운 파일 생성해야하는 이유와 생성방법',
+    description: '마크다운 파일의 필요성과 생성 방법에 대한 상세 가이드입니다.',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81] relative overflow-hidden flex items-center justify-center p-6 text-center">
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.4) 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+        <div className="relative z-10 w-full flex flex-col items-center justify-center">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/20 text-blue-300 text-xs font-bold w-max mb-4">
+            <span className="text-blue-400">📚</span> 수강생 전용 자료
+          </div>
+          <h2 className="text-2xl font-black text-white tracking-tight mb-3 drop-shadow-lg break-keep leading-snug">
+            마크다운 파일 생성해야하는<br/>이유와 생성방법
+          </h2>
+        </div>
+      </div>
+    ),
+    access: 'STUDENT',
+    category: 'LECTURE',
+    tags: ['가이드', '마크다운', 'Markdown'],
+    link: 'https://hyeoksin.notion.site/2ebd4d37e510802a8685ce8ebfb6307e'
+  },
+  {
+    id: 'lecture-api-security',
+    title: '구글 API Key 보안을 철저히 해야 하는 이유',
+    description: '구글 API Key 보안의 중요성과 관리 방법에 대한 상세 가이드입니다.',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81] relative overflow-hidden flex items-center justify-center p-6 text-center">
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.4) 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+        <div className="relative z-10 w-full flex flex-col items-center justify-center">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/20 text-blue-300 text-xs font-bold w-max mb-4">
+            <span className="text-blue-400">📚</span> 수강생 전용 자료
+          </div>
+          <h2 className="text-2xl font-black text-white tracking-tight mb-3 drop-shadow-lg break-keep leading-snug">
+            구글 API Key 보안을<br/>철저히 해야 하는 이유
+          </h2>
+        </div>
+      </div>
+    ),
+    access: 'STUDENT',
+    category: 'LECTURE',
+    tags: ['가이드', 'API', '보안'],
+    link: 'https://docs.google.com/document/d/1E5R1Eq2s-nl4kKrSsOfrjKA1iDkL-uKtOlWkL5-1eEg/edit?usp=sharing'
+  },
+  {
+    id: 'lecture-api-remote-service',
+    title: '구글 API Key 설치 원격 서비스 (수강생 전용)',
+    description: '구글 API Key 설치가 어려운 분들을 위한 원격 지원 서비스 안내입니다.',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81] relative overflow-hidden flex items-center justify-center p-6 text-center">
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.4) 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+        <div className="relative z-10 w-full flex flex-col items-center justify-center">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/20 text-blue-300 text-xs font-bold w-max mb-4">
+            <span className="text-blue-400">📚</span> 수강생 전용 자료
+          </div>
+          <h2 className="text-2xl font-black text-white tracking-tight mb-3 drop-shadow-lg break-keep leading-snug">
+            구글 API Key 설치<br/>원격 서비스
+          </h2>
+        </div>
+      </div>
+    ),
+    access: 'STUDENT',
+    category: 'LECTURE',
+    tags: ['가이드', 'API', '원격지원'],
+    link: 'https://docs.google.com/document/d/1WiYeaHaJ2zuR7iJ-z0wwRa8mhQacukenWt3veEjAKEg/edit?usp=sharing'
   },
   {
     id: '1',
@@ -177,7 +269,7 @@ const PROGRAMS: Program[] = ([
         </div>
       </div>
     ),
-    access: 'PREMIUM',
+    access: 'STUDENT',
     category: 'PLANNING',
     tags: ['LLM', '번역'],
     link: 'https://hyeoksin-money.fragrant-flower-7056.workers.dev/'
@@ -201,10 +293,34 @@ const PROGRAMS: Program[] = ([
         </div>
       </div>
     ),
-    access: 'PARTNER',
+    access: 'STUDENT',
     category: 'BUSINESS',
     tags: ['트렌드', '비즈니스', '수익화'],
     link: 'https://hyeoksin-trend.fragrant-flower-7056.workers.dev'
+  },
+  {
+    id: 'calendar',
+    title: '혁신 수익화 캘린더 AI',
+    description: 'AI를 활용한 2026년 수익화 로드맵을 90일 캘린더로 완성하세요.',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full bg-[#1a1a1a] relative overflow-hidden flex flex-col items-center justify-center p-6 text-center">
+        <div className="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1506784951209-26879bd3b2cb?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center mix-blend-luminosity"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/70 to-transparent"></div>
+        <div className="relative z-10 w-full flex flex-col items-center justify-center">
+          <h2 className="text-4xl font-black text-white tracking-tight mb-4 drop-shadow-lg">
+            혁신 수익화 캘린더 AI
+          </h2>
+          <p className="text-zinc-300 text-sm leading-relaxed max-w-[90%] font-medium drop-shadow-md">
+            AI를 활용한 2026년 수익화 로드맵을<br/>90일 캘린더로 완성하세요.
+          </p>
+        </div>
+      </div>
+    ),
+    access: 'STUDENT',
+    category: 'PLANNING',
+    tags: ['캘린더', '로드맵', '수익화'],
+    link: 'https://hyeoksin-calendar.fragrant-flower-7056.workers.dev/'
   },
   {
     id: '3',
@@ -1690,7 +1806,7 @@ Apply this style consistently across all slides for a cohesive, professional sli
     promptText: '당신은 숏폼 콘텐츠 디렉터입니다. MZ세대를 타겟으로 [우리 과자]를 활용한 틱톡 챌린지를 기획해 주세요. 누구나 쉽게 따라 할 수 있는 동작이나 재미있는 상황 설정을 구상하고, 챌린지에 어울릴 만한 배경음악(BGM) 스타일과 필수 해시태그를 제안해 주세요.'
   },
   ...additionalPrompts
-] as Program[]).map((p) => p.category === 'PROMPT' ? { ...p, access: 'PREMIUM' } : p);
+] as Program[]).map((p) => p.category === 'PROMPT' ? { ...p, access: 'BASIC' } : p.category === 'LECTURE' ? { ...p, access: 'STUDENT' } : p);
 
 function PromptCard({ 
   program, 
@@ -1704,7 +1820,11 @@ function PromptCard({
 }) {
   const [copied, setCopied] = useState(false);
 
-  const isLocked = (program.access === 'PREMIUM' && authLevel !== 'PREMIUM' && authLevel !== 'STUDENT') || (program.access === 'PARTNER' && authLevel !== 'PARTNER' && authLevel !== 'PREMIUM' && authLevel !== 'STUDENT') || (program.access === 'STUDENT' && authLevel !== 'STUDENT');
+  const isLocked = 
+    (program.access === 'PREMIUM' && authLevel !== 'PREMIUM' && authLevel !== 'PARTNER') || 
+    (program.access === 'PARTNER' && authLevel !== 'PARTNER') || 
+    (program.access === 'STUDENT' && authLevel !== 'STUDENT') ||
+    (program.access === 'BASIC' && authLevel !== 'BASIC' && authLevel !== 'PREMIUM' && authLevel !== 'PARTNER');
 
   const handleCopy = () => {
     if (isLocked) {
@@ -1736,18 +1856,26 @@ function PromptCard({
               🎓 수강생 전용
             </span>
           )}
-          {(program.access === 'PREMIUM' || program.access === 'PARTNER') && (
+          {(program.access === 'PREMIUM' || program.access === 'PARTNER' || program.access === 'BASIC') && (
             <>
               {program.access === 'PARTNER' && (
-                <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'PARTNER' || authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? 'bg-emerald-100 text-emerald-700' : 'bg-purple-100 text-purple-700'} text-[10px] font-bold rounded-md shrink-0`}>
-                  {authLevel === 'PARTNER' || authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'PARTNER' ? 'bg-emerald-100 text-emerald-700' : 'bg-purple-100 text-purple-700'} text-[10px] font-bold rounded-md shrink-0`}>
+                  {authLevel === 'PARTNER' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
                   🤝 파트너 전용
                 </span>
               )}
-              <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'PREMIUM' || authLevel === 'STUDENT' || (program.access === 'PARTNER' && authLevel === 'PARTNER') ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'} text-[10px] font-bold rounded-md shrink-0`}>
-                {authLevel === 'PREMIUM' || authLevel === 'STUDENT' || (program.access === 'PARTNER' && authLevel === 'PARTNER') ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                👑 멤버십 전용
-              </span>
+              {program.access === 'PREMIUM' && (
+                <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'PREMIUM' || authLevel === 'PARTNER' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'} text-[10px] font-bold rounded-md shrink-0`}>
+                  {authLevel === 'PREMIUM' || authLevel === 'PARTNER' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                  💎 프리미엄 멤버십 전용
+                </span>
+              )}
+              {program.access === 'BASIC' && (
+                <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'PARTNER' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'} text-[10px] font-bold rounded-md shrink-0`}>
+                  {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'PARTNER' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                  👑 멤버십 전용
+                </span>
+              )}
             </>
           )}
           {program.promptSubCategory && (
@@ -1773,7 +1901,12 @@ function PromptCard({
               <div className="bg-white p-3 rounded-full shadow-md mb-3">
                 <Lock className="w-6 h-6 text-amber-500" />
               </div>
-              <p className="text-sm font-bold text-gray-900 mb-1">{program.access === 'STUDENT' ? '🎓 수강생 전용 프롬프트' : '👑 멤버십 전용 프롬프트'}</p>
+              <p className="text-sm font-bold text-gray-900 mb-1">
+                {program.access === 'STUDENT' ? '🎓 수강생 전용 프롬프트' : 
+                 program.access === 'PREMIUM' ? '💎 프리미엄 멤버십 전용 프롬프트' : 
+                 program.access === 'PARTNER' ? '🤝 파트너 전용 프롬프트' : 
+                 '👑 멤버십 전용 프롬프트'}
+              </p>
               <p className="text-xs text-gray-600 text-center px-4">
                 인증 코드를 입력하고<br/>모든 프롬프트를 확인하세요
               </p>
@@ -1794,7 +1927,7 @@ function PromptCard({
           {isLocked ? (
             <>
               <Lock className="w-4 h-4" />
-              멤버십 인증하기
+              코드 인증하기
             </>
           ) : copied ? (
             <>
@@ -1817,11 +1950,11 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<Category>('ALL');
   const [selectedSubCategory, setSelectedSubCategory] = useState<PromptSubCategory | 'ALL'>('ALL');
-  const [selectedAccess, setSelectedAccess] = useState<'ALL' | 'FREE' | 'PREMIUM' | 'PARTNER' | 'STUDENT'>('ALL');
+  const [selectedAccess, setSelectedAccess] = useState<'ALL' | 'FREE' | 'BASIC' | 'PREMIUM' | 'PARTNER' | 'STUDENT'>('ALL');
   const [isVersionDropdownOpen, setIsVersionDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [authLevel, setAuthLevel] = useState<'NONE' | 'BASIC' | 'PREMIUM' | 'PARTNER' | 'STUDENT'>('NONE');
-  const [showAuthModal, setShowAuthModal] = useState<false | 'BASIC' | 'PREMIUM' | 'PARTNER' | 'STUDENT'>(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
   const [showSupportModal, setShowSupportModal] = useState(false);
@@ -1884,8 +2017,6 @@ export default function App() {
     let matchesAccess = false;
     if (selectedAccess === 'ALL') {
       matchesAccess = true;
-    } else if (selectedAccess === 'STUDENT') {
-      matchesAccess = ['STUDENT', 'PREMIUM', 'PARTNER'].includes(program.access) || program.category === 'LECTURE';
     } else {
       matchesAccess = program.access === selectedAccess;
     }
@@ -1902,7 +2033,7 @@ export default function App() {
         key={program.id} 
         program={program} 
         authLevel={authLevel}
-        onRequireAuth={() => setShowAuthModal('BASIC')}
+        onRequireAuth={() => setShowAuthModal(true)}
       />
     ) : (
       <motion.div
@@ -1938,19 +2069,24 @@ export default function App() {
               </div>
             ) : program.access === 'PARTNER' ? (
               <>
-                <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PARTNER' || authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? 'bg-emerald-500' : 'bg-purple-500'} text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
-                  {authLevel === 'PARTNER' || authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                  {authLevel === 'PARTNER' || authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? '인증됨' : '🤝 혁신 파트너'}
+                <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PARTNER' ? 'bg-emerald-500' : 'bg-purple-500'} text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
+                  {authLevel === 'PARTNER' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                  {authLevel === 'PARTNER' ? '인증됨' : '🤝 혁신 파트너'}
                 </div>
-                <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PREMIUM' || authLevel === 'PARTNER' || authLevel === 'STUDENT' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-black'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
-                  {authLevel === 'PREMIUM' || authLevel === 'PARTNER' || authLevel === 'STUDENT' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                  {authLevel === 'PREMIUM' || authLevel === 'PARTNER' || authLevel === 'STUDENT' ? '인증됨' : '👑 프리미엄 멤버십'}
+                <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PREMIUM' || authLevel === 'PARTNER' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-black'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
+                  {authLevel === 'PREMIUM' || authLevel === 'PARTNER' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                  {authLevel === 'PREMIUM' || authLevel === 'PARTNER' ? '인증됨' : '💎 프리미엄 멤버십'}
                 </div>
               </>
             ) : program.access === 'PREMIUM' ? (
-              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-black'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
-                {authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                {authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? '인증됨' : '👑 프리미엄 멤버십'}
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PREMIUM' || authLevel === 'PARTNER' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-black'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
+                {authLevel === 'PREMIUM' || authLevel === 'PARTNER' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                {authLevel === 'PREMIUM' || authLevel === 'PARTNER' ? '인증됨' : '💎 프리미엄 멤버십'}
+              </div>
+            ) : program.access === 'BASIC' ? (
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'PARTNER' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-black'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
+                {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'PARTNER' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'PARTNER' ? '인증됨' : '👑 멤버십'}
               </div>
             ) : (
               <div className="flex items-center gap-1.5 px-2.5 py-1 bg-white/10 text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md border border-white/20">
@@ -1973,37 +2109,55 @@ export default function App() {
           <div className="mt-auto pt-4">
             {program.access === 'STUDENT' && authLevel !== 'STUDENT' ? (
               <button 
-                onClick={() => setShowAuthModal('STUDENT')}
-                className={`w-full flex items-center justify-center gap-2 py-2.5 font-bold rounded-xl transition-all bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-400 hover:to-cyan-500 text-white shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]`}
+                onClick={() => setShowAuthModal(true)}
+                className={`w-full flex items-center justify-center gap-2 py-2.5 font-bold rounded-xl transition-all ${
+                  authLevel !== 'NONE'
+                    ? 'bg-zinc-800 text-zinc-400 border border-zinc-700 cursor-not-allowed' 
+                    : 'bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-400 hover:to-cyan-500 text-white shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]'
+                }`}
+                disabled={authLevel !== 'NONE'}
               >
                 <Lock className="w-4 h-4" />
-                잠금 해제 및 이동
+                {authLevel !== 'NONE' ? '수강생 전용 이용 불가' : '잠금 해제 및 이동'}
               </button>
-            ) : program.access === 'PARTNER' && authLevel !== 'PARTNER' && authLevel !== 'PREMIUM' && authLevel !== 'STUDENT' ? (
+            ) : program.access === 'PARTNER' && authLevel !== 'PARTNER' ? (
               <button 
-                onClick={() => setShowAuthModal('PARTNER')}
+                onClick={() => setShowAuthModal(true)}
                 className={`w-full flex items-center justify-center gap-2 py-2.5 font-bold rounded-xl transition-all ${
-                  authLevel === 'BASIC'
+                  authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'STUDENT'
                     ? 'bg-zinc-800 text-zinc-400 border border-zinc-700 cursor-not-allowed' 
                     : 'bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500 text-white shadow-[0_0_15px_rgba(168,85,247,0.2)] hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]'
                 }`}
-                disabled={authLevel === 'BASIC'}
+                disabled={authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'STUDENT'}
               >
                 <Lock className="w-4 h-4" />
-                {authLevel === 'BASIC' ? '파트너 전용 이용 불가' : '잠금 해제 및 이동'}
+                {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? '파트너 전용 이용 불가' : '잠금 해제 및 이동'}
               </button>
-            ) : program.access === 'PREMIUM' && authLevel !== 'PREMIUM' && authLevel !== 'STUDENT' ? (
+            ) : program.access === 'PREMIUM' && authLevel !== 'PREMIUM' && authLevel !== 'PARTNER' ? (
               <button 
-                onClick={() => setShowAuthModal('PREMIUM')}
+                onClick={() => setShowAuthModal(true)}
                 className={`w-full flex items-center justify-center gap-2 py-2.5 font-bold rounded-xl transition-all ${
-                  authLevel === 'BASIC' 
+                  authLevel === 'BASIC' || authLevel === 'STUDENT'
                     ? 'bg-zinc-800 text-zinc-400 border border-zinc-700 cursor-not-allowed' 
                     : 'bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black shadow-[0_0_15px_rgba(245,158,11,0.2)] hover:shadow-[0_0_20px_rgba(245,158,11,0.4)]'
                 }`}
-                disabled={authLevel === 'BASIC'}
+                disabled={authLevel === 'BASIC' || authLevel === 'STUDENT'}
               >
                 <Lock className="w-4 h-4" />
-                {authLevel === 'BASIC' ? '프리미엄 멤버십 이용 불가' : '잠금 해제 및 이동'}
+                {authLevel === 'BASIC' || authLevel === 'STUDENT' ? '프리미엄 멤버십 이용 불가' : '잠금 해제 및 이동'}
+              </button>
+            ) : program.access === 'BASIC' && authLevel !== 'BASIC' && authLevel !== 'PREMIUM' && authLevel !== 'PARTNER' ? (
+              <button 
+                onClick={() => setShowAuthModal(true)}
+                className={`w-full flex items-center justify-center gap-2 py-2.5 font-bold rounded-xl transition-all ${
+                  authLevel === 'STUDENT'
+                    ? 'bg-zinc-800 text-zinc-400 border border-zinc-700 cursor-not-allowed' 
+                    : 'bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.2)] hover:shadow-[0_0_20px_rgba(16,185,129,0.4)]'
+                }`}
+                disabled={authLevel === 'STUDENT'}
+              >
+                <Lock className="w-4 h-4" />
+                {authLevel === 'STUDENT' ? '멤버십 이용 불가' : '잠금 해제 및 이동'}
               </button>
             ) : program.link ? (
               <a 
@@ -2055,26 +2209,8 @@ export default function App() {
               {authLevel !== 'NONE' ? (
                 <div className="flex items-center gap-3">
                   <span className="text-sm text-emerald-400 font-medium">
-                    {authLevel === 'STUDENT' ? '수강생 (모든 권한 포함)' : authLevel === 'PARTNER' ? '혁신 파트너' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '멤버십'}
+                    {authLevel === 'STUDENT' ? '수강생' : authLevel === 'PARTNER' ? '혁신 파트너' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '멤버십'}
                   </span>
-                  {authLevel === 'BASIC' && (
-                    <button 
-                      onClick={() => setShowAuthModal('PREMIUM')}
-                      className="bg-gradient-to-r from-amber-500 to-amber-600 text-black px-4 py-2 rounded-md font-medium hover:from-amber-400 hover:to-amber-500 transition-colors flex items-center gap-2"
-                    >
-                      <Lock className="w-4 h-4" />
-                      프리미엄 인증
-                    </button>
-                  )}
-                  {authLevel !== 'PARTNER' && (
-                    <button 
-                      onClick={() => setShowAuthModal('PARTNER')}
-                      className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-4 py-2 rounded-md font-medium hover:from-purple-400 hover:to-indigo-500 transition-colors flex items-center gap-2"
-                    >
-                      <Lock className="w-4 h-4" />
-                      파트너 인증
-                    </button>
-                  )}
                   <button 
                     onClick={() => setAuthLevel('NONE')}
                     className="bg-zinc-800 text-emerald-400 px-4 py-2 rounded-md font-medium hover:bg-zinc-700 transition-colors border border-zinc-700 flex items-center gap-2"
@@ -2086,28 +2222,11 @@ export default function App() {
               ) : (
                 <div className="flex items-center gap-2">
                   <button 
-                    onClick={() => setShowAuthModal('STUDENT')}
-                    className="bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-4 py-2 rounded-md font-medium hover:from-blue-400 hover:to-cyan-500 transition-colors"
+                    onClick={() => setShowAuthModal(true)}
+                    className="bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-4 py-2 rounded-md font-medium hover:from-blue-400 hover:to-cyan-500 transition-colors flex items-center gap-2"
                   >
-                    수강생 인증
-                  </button>
-                  <button 
-                    onClick={() => setShowAuthModal('BASIC')}
-                    className="bg-zinc-800 text-white px-4 py-2 rounded-md font-medium hover:bg-zinc-700 transition-colors border border-zinc-700"
-                  >
-                    멤버십 인증
-                  </button>
-                  <button 
-                    onClick={() => setShowAuthModal('PREMIUM')}
-                    className="bg-gradient-to-r from-amber-500 to-amber-600 text-black px-4 py-2 rounded-md font-medium hover:from-amber-400 hover:to-amber-500 transition-colors"
-                  >
-                    프리미엄 인증
-                  </button>
-                  <button 
-                    onClick={() => setShowAuthModal('PARTNER')}
-                    className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-4 py-2 rounded-md font-medium hover:from-purple-400 hover:to-indigo-500 transition-colors"
-                  >
-                    파트너 인증
+                    <Lock className="w-4 h-4" />
+                    코드 인증 및 해제
                   </button>
                 </div>
               )}
@@ -2147,32 +2266,8 @@ export default function App() {
                   {authLevel !== 'NONE' ? (
                     <div className="flex flex-col gap-2 px-3">
                       <span className="text-sm text-emerald-400 font-medium mb-2">
-                        {authLevel === 'STUDENT' ? '수강생 (모든 권한 포함)' : authLevel === 'PARTNER' ? '혁신 파트너' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '멤버십'} 인증 완료
+                        {authLevel === 'STUDENT' ? '수강생' : authLevel === 'PARTNER' ? '혁신 파트너' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '멤버십'} 인증 완료
                       </span>
-                      {authLevel === 'BASIC' && (
-                        <button 
-                          onClick={() => {
-                            setShowAuthModal('PREMIUM');
-                            setIsMobileMenuOpen(false);
-                          }}
-                          className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-black px-4 py-2 rounded-md font-medium hover:from-amber-400 hover:to-amber-500 transition-colors flex items-center justify-center gap-2"
-                        >
-                          <Lock className="w-4 h-4" />
-                          프리미엄 인증
-                        </button>
-                      )}
-                      {authLevel !== 'PARTNER' && (
-                        <button 
-                          onClick={() => {
-                            setShowAuthModal('PARTNER');
-                            setIsMobileMenuOpen(false);
-                          }}
-                          className="w-full bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-4 py-2 rounded-md font-medium hover:from-purple-400 hover:to-indigo-500 transition-colors flex items-center justify-center gap-2"
-                        >
-                          <Lock className="w-4 h-4" />
-                          파트너 인증
-                        </button>
-                      )}
                       <button 
                         onClick={() => {
                           setAuthLevel('NONE');
@@ -2188,39 +2283,13 @@ export default function App() {
                     <div className="flex flex-col gap-2 px-3">
                       <button 
                         onClick={() => {
-                          setShowAuthModal('STUDENT');
+                          setShowAuthModal(true);
                           setIsMobileMenuOpen(false);
                         }}
-                        className="w-full bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-4 py-2 rounded-md font-medium hover:from-blue-400 hover:to-cyan-500 transition-colors"
+                        className="w-full bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-4 py-2 rounded-md font-medium hover:from-blue-400 hover:to-cyan-500 transition-colors flex items-center justify-center gap-2"
                       >
-                        수강생 인증
-                      </button>
-                      <button 
-                        onClick={() => {
-                          setShowAuthModal('BASIC');
-                          setIsMobileMenuOpen(false);
-                        }}
-                        className="w-full bg-zinc-800 text-white px-4 py-2 rounded-md font-medium hover:bg-zinc-700 transition-colors border border-zinc-700"
-                      >
-                        멤버십 인증
-                      </button>
-                      <button 
-                        onClick={() => {
-                          setShowAuthModal('PREMIUM');
-                          setIsMobileMenuOpen(false);
-                        }}
-                        className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-black px-4 py-2 rounded-md font-medium hover:from-amber-400 hover:to-amber-500 transition-colors"
-                      >
-                        프리미엄 인증
-                      </button>
-                      <button 
-                        onClick={() => {
-                          setShowAuthModal('PARTNER');
-                          setIsMobileMenuOpen(false);
-                        }}
-                        className="w-full bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-4 py-2 rounded-md font-medium hover:from-purple-400 hover:to-indigo-500 transition-colors"
-                      >
-                        파트너 인증
+                        <Lock className="w-4 h-4" />
+                        코드 인증 및 해제
                       </button>
                     </div>
                   )}
@@ -2349,7 +2418,8 @@ export default function App() {
               {[
                 { id: 'ALL', label: '✨ 모든 버전' },
                 { id: 'FREE', label: '🎁 무료버전' },
-                { id: 'PREMIUM', label: '👑 멤버십 전용' },
+                { id: 'BASIC', label: '👑 멤버십 전용' },
+                { id: 'PREMIUM', label: '💎 프리미엄 멤버십 전용' },
                 { id: 'PARTNER', label: '🤝 파트너 전용' },
                 { id: 'STUDENT', label: '🎓 수강생 전용' },
               ].map((acc) => (
@@ -2362,11 +2432,13 @@ export default function App() {
                         ? 'bg-purple-500/20 border-purple-500/50 text-purple-300 shadow-[0_0_10px_rgba(168,85,247,0.2)]'
                         : acc.id === 'PREMIUM'
                           ? 'bg-amber-500/20 border-amber-500/50 text-amber-300 shadow-[0_0_10px_rgba(245,158,11,0.2)]'
-                          : acc.id === 'FREE'
+                          : acc.id === 'BASIC'
                             ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-300 shadow-[0_0_10px_rgba(16,185,129,0.2)]'
-                            : acc.id === 'STUDENT'
-                              ? 'bg-blue-500/20 border-blue-500/50 text-blue-300 shadow-[0_0_10px_rgba(59,130,246,0.2)]'
-                              : 'bg-zinc-100 border-zinc-100 text-black shadow-[0_0_10px_rgba(255,255,255,0.2)]'
+                            : acc.id === 'FREE'
+                              ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-300 shadow-[0_0_10px_rgba(16,185,129,0.2)]'
+                              : acc.id === 'STUDENT'
+                                ? 'bg-blue-500/20 border-blue-500/50 text-blue-300 shadow-[0_0_10px_rgba(59,130,246,0.2)]'
+                                : 'bg-zinc-100 border-zinc-100 text-black shadow-[0_0_10px_rgba(255,255,255,0.2)]'
                       : 'bg-black border-zinc-800 text-zinc-400 hover:border-zinc-600 hover:text-zinc-200'
                   }`}
                 >
@@ -2380,7 +2452,7 @@ export default function App() {
         {/* Grid */}
         {selectedCategory === 'ALL' ? (
           <div className="space-y-16">
-            {['PROGRAM', 'PROMPT'].map(catId => {
+            {['PROGRAM', 'PROMPT', 'LECTURE'].map(catId => {
               const catPrograms = filteredPrograms.filter(p => catId === 'PROGRAM' ? !['PROMPT', 'LECTURE'].includes(p.category) : p.category === catId);
               if (catPrograms.length === 0) return null;
               
@@ -2483,7 +2555,7 @@ export default function App() {
             >
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-bold text-white">
-                  {showAuthModal === 'STUDENT' ? '수강생 인증' : showAuthModal === 'PARTNER' ? '혁신 파트너 인증' : showAuthModal === 'PREMIUM' ? '프리미엄 멤버십 인증' : '멤버십 인증'}
+                  코드 인증
                 </h3>
                 <button onClick={() => {
                   setShowAuthModal(false);
@@ -2493,7 +2565,11 @@ export default function App() {
                 </button>
               </div>
               <p className="text-zinc-400 text-sm mb-2">
-                {showAuthModal === 'STUDENT' ? '수강생 전용 코드를 입력해주세요.' : showAuthModal === 'PARTNER' ? '파트너 전용 코드를 입력해주세요.' : showAuthModal === 'PREMIUM' ? '프리미엄 멤버십 코드를 입력해주세요.' : '멤버십 전용 코드를 입력해주세요.'}
+                인증 코드를 입력해주세요.
+              </p>
+              <p className="text-emerald-400 text-xs font-medium mb-2 flex items-center gap-1">
+                <Lightbulb className="w-3 h-3" />
+                멤버십 전환시 로그아웃(인증 해제) 후 다시 희망하는 코드로 입력하면 됩니다.
               </p>
               <p className="text-amber-400 text-xs font-medium mb-6 flex items-center gap-1">
                 <AlertTriangle className="w-3 h-3" />

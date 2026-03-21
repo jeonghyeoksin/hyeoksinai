@@ -1,0 +1,59 @@
+178-      </div>
+179-    ),
+180:    access: 'PREMIUM',
+181-    category: 'PLANNING',
+182-    tags: ['LLM', '번역'],
+--
+275-      </div>
+276-    ),
+277:    access: 'PREMIUM',
+278-    category: 'DESIGN',
+279-    tags: ['상세페이지', '디자인'],
+--
+316-      </div>
+317-    ),
+318:    access: 'PREMIUM',
+319-    category: 'PLANNING',
+320-    tags: ['홈페이지', '개발', '프롬프트'],
+--
+356-      </div>
+357-    ),
+358:    access: 'PREMIUM',
+359-    category: 'PLANNING',
+360-    tags: ['직무역량', '커리어']
+--
+390-      </div>
+391-    ),
+392:    access: 'PREMIUM',
+393-    category: 'MARKETING',
+394-    tags: ['키워드', '마케팅']
+--
+471-      </div>
+472-    ),
+473:    access: 'PREMIUM',
+474-    category: 'PLANNING',
+475-    tags: ['전자책', '출판'],
+--
+546-      </div>
+547-    ),
+548:    access: 'PREMIUM',
+549-    category: 'PLANNING',
+550-    tags: ['프롬프트', 'AI 에이전트'],
+--
+625-      </div>
+626-    ),
+627:    access: 'PREMIUM',
+628-    category: 'PLANNING',
+629-    tags: ['제안서', '비즈니스'],
+--
+677-      </div>
+678-    ),
+679:    access: 'PREMIUM',
+680-    category: 'MARKETING',
+681-    tags: ['리뷰', '바이럴', '마케팅'],
+--
+737-      </div>
+738-    ),
+739:    access: 'PREMIUM',
+740-    category: 'PLANNING',
+741-    tags: ['비즈니스', '분석', '리스크'],
