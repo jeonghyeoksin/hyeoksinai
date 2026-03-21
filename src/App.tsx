@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Search, Lock, Unlock, ExternalLink, Menu, X, Settings, Zap, Sparkles, ArrowRight, Copy, Check, Bot, Youtube, Star, FileText, AlertTriangle, Wand2, Code, Eye, EyeOff, ChevronLeft, ChevronRight, ChevronDown, Lightbulb, HelpCircle, Mail } from 'lucide-react';
+import { Search, Lock, Unlock, ExternalLink, Menu, X, Settings, Zap, Sparkles, ArrowRight, Copy, Check, Bot, Youtube, Star, FileText, AlertTriangle, Wand2, Code, Eye, EyeOff, ChevronLeft, ChevronRight, ChevronDown, Lightbulb, HelpCircle, Mail, Layout } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { additionalPrompts } from './promptsData';
 
 // --- Types ---
-type AccessLevel = 'FREE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER' | 'DONCLASS';
+type AccessLevel = 'FREE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER' | 'DONCLASS' | 'COACHINGPASS';
 type Category = 'ALL' | 'PROGRAM' | 'MARKETING' | 'DESIGN' | 'VIDEO' | 'PLANNING' | 'PROMPT' | 'LECTURE';
 type PromptSubCategory = '비즈니스' | '마케팅' | '디자인' | '콘텐츠' | '개발' | '교육' | '일상';
 
@@ -145,7 +145,7 @@ const PROGRAMS: Program[] = ([
     description: '블로그, 카드뉴스, 이미지, 동영상을 한 번에 생성하는 올인원 AI 크리에이티브 스튜디오',
     image: '',
     customVisual: (
-      <div className="w-full h-full bg-gradient-to-br from-[#1e1b4b] via-[#172554] to-[#0f172a] relative overflow-hidden flex items-end p-5">
+      <div className="w-full h-full bg-gradient-to-br from-[#1e1b4b] via-[#172554] to-[#0f172a] relative overflow-hidden flex flex-col items-center justify-center p-6">
         {/* Grid background */}
         <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.3) 1px, transparent 0)', backgroundSize: '16px 16px' }}></div>
         
@@ -158,24 +158,11 @@ const PROGRAMS: Program[] = ([
           <path d="M-10,60 Q45,90 65,40 T110,60" fill="none" stroke="#60a5fa" strokeWidth="0.3" />
         </svg>
 
-        {/* Big AI Text */}
-        <div className="absolute right-[-5%] top-1/2 -translate-y-1/2 text-[140px] font-black text-[#1e3a8a] opacity-60 leading-none tracking-tighter select-none" style={{ textShadow: '10px 10px 20px rgba(0,0,0,0.5)' }}>
-          AI
-        </div>
-
         {/* Content */}
-        <div className="relative z-10 w-full">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center shadow-lg">
-              <span className="text-white text-xl">✨</span>
-            </div>
-            <h2 className="text-2xl font-bold text-white leading-tight">
-              혁신 AI Lite
-            </h2>
-          </div>
-          <p className="text-zinc-300 text-[10px] leading-relaxed max-w-[85%]">
-            블로그, 카드뉴스, 이미지, 동영상을 한 번에 생성하는 올인원 AI 크리에이티브 스튜디오
-          </p>
+        <div className="relative z-10 flex flex-col items-center text-center w-full px-2">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            혁신 <br/> AI Lite
+          </h2>
         </div>
       </div>
     ),
@@ -328,34 +315,18 @@ const PROGRAMS: Program[] = ([
     description: '인공지능의 힘으로 당신만의 독창적이고 전문적인 블로그 포스팅을 완성하세요.',
     image: '',
     customVisual: (
-      <div className="w-full h-full bg-gradient-to-br from-[#064e3b] via-[#022c22] to-[#0f172a] relative overflow-hidden flex items-end p-5">
+      <div className="w-full h-full bg-gradient-to-br from-[#064e3b] via-[#022c22] to-[#0f172a] relative overflow-hidden flex flex-col items-center justify-center p-6">
         {/* Abstract Waves */}
         <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 100 100" preserveAspectRatio="none">
           <path d="M0,40 Q30,20 60,50 T100,30 L100,100 L0,100 Z" fill="#047857" opacity="0.2" />
           <path d="M0,60 Q40,40 70,70 T100,50 L100,100 L0,100 Z" fill="#065f46" opacity="0.3" />
         </svg>
 
-        {/* Big BLOG Text */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[130px] font-black text-[#065f46] opacity-40 leading-none tracking-tighter select-none w-full text-center">
-          BLOG
-        </div>
-
         {/* Content */}
-        <div className="relative z-10 w-full">
-          <div className="inline-flex items-center px-2 py-0.5 rounded-full border border-[#10b981]/50 bg-[#10b981]/10 text-[#10b981] text-[8px] font-bold tracking-wider mb-2">
-            2026 FUTURE EDITION
-          </div>
-          <h2 className="text-2xl font-bold text-white leading-tight mb-2">
-            혁신 블로그 AI
+        <div className="relative z-10 flex flex-col items-center text-center w-full px-2">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            혁신 <br/> 블로그 AI
           </h2>
-          <p className="text-zinc-300 text-[10px] leading-relaxed max-w-[80%] mb-3">
-            인공지능의 힘으로 당신만의 독창적이고 전문적인 블로그 포스팅을 완성하세요.
-          </p>
-          <div className="flex justify-end w-full">
-            <div className="bg-[#10b981] text-white text-[10px] font-bold py-1.5 px-3 rounded-full flex items-center gap-1 shadow-lg">
-              새 포스팅 작성하기 ⚡
-            </div>
-          </div>
         </div>
       </div>
     ),
@@ -370,7 +341,7 @@ const PROGRAMS: Program[] = ([
     description: '단 10분만에 완성되는 고전환율 맞춤 상세페이지 제작 AI',
     image: '',
     customVisual: (
-      <div className="w-full h-full relative overflow-hidden flex items-end justify-center pb-6">
+      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center p-6">
         {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center"
@@ -380,13 +351,10 @@ const PROGRAMS: Program[] = ([
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-[#0a0a0a]/30"></div>
         
         {/* Content */}
-        <div className="relative z-10 text-center w-full px-4">
-          <h2 className="text-3xl font-bold text-white mb-2 tracking-tight drop-shadow-lg">
-            혁신 <span className="text-[#38bdf8]">AI 상세페이지</span>
+        <div className="relative z-10 flex flex-col items-center text-center w-full px-2">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            혁신 <br/> 상세페이지 AI
           </h2>
-          <p className="text-zinc-200 text-[11px] font-medium drop-shadow-md">
-            단 10분만에 완성되는 고전환율 맞춤 상세페이지 제작 AI
-          </p>
         </div>
       </div>
     ),
@@ -401,33 +369,21 @@ const PROGRAMS: Program[] = ([
     description: '당신의 아이디어를 구글 AI 스튜디오를 위한 완벽한 프롬프트로 변환합니다',
     image: '',
     customVisual: (
-      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center p-6 bg-gradient-to-br from-[#1a0b2e] via-[#2d1b4e] to-[#1a0b2e]">
-        {/* Background Glows */}
-        <div className="absolute top-[-20%] left-[-10%] w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-[-20%] right-[-10%] w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"></div>
+      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center p-6">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop)' }}
+        ></div>
+        
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-slate-900/85 to-black/90 backdrop-blur-[2px]"></div>
         
         {/* Content */}
-        <div className="relative z-10 flex flex-col items-center text-center w-full">
-          {/* Top Icon */}
-          <div className="w-12 h-12 rounded-2xl border border-indigo-400/30 bg-indigo-500/10 flex items-center justify-center mb-6 shadow-[0_0_15px_rgba(99,102,241,0.2)]">
-            <Sparkles className="w-6 h-6 text-indigo-300" />
-          </div>
-          
-          {/* Title */}
-          <h2 className="text-4xl font-bold tracking-tight leading-tight mb-4 text-transparent bg-clip-text bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-300 drop-shadow-sm">
-            혁신 홈페이지 개발 AI
+        <div className="relative z-10 flex flex-col items-center text-center w-full px-2">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            혁신 홈페이지 <br/> 개발 AI
           </h2>
-          
-          {/* Subtitle */}
-          <p className="text-zinc-300 text-sm font-medium tracking-wide leading-relaxed mb-8 drop-shadow-md">
-            당신의 아이디어를 구글 AI 스튜디오를 위한<br/>완벽한 프롬프트로 변환합니다
-          </p>
-          
-          {/* Developer Badge */}
-          <div className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-black/40 backdrop-blur-md">
-            <Code className="w-3.5 h-3.5 text-indigo-400" />
-            <span className="text-zinc-300 text-xs font-medium tracking-wider">개발자: 정혁신</span>
-          </div>
         </div>
       </div>
     ),
@@ -442,7 +398,7 @@ const PROGRAMS: Program[] = ([
     description: '당신의 잠재력을 깨우고 커리어의 새로운 패러다임을 제시합니다',
     image: '',
     customVisual: (
-      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center">
+      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center p-6">
         {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center"
@@ -452,22 +408,10 @@ const PROGRAMS: Program[] = ([
         <div className="absolute inset-0 bg-black/50"></div>
         
         {/* Content */}
-        <div className="relative z-10 text-center w-full px-4 flex flex-col items-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm mb-4">
-            <span className="text-yellow-500 text-xs">✨</span>
-            <span className="text-zinc-300 text-[10px] font-medium tracking-wide">AI-Powered Career Growth</span>
-          </div>
-          
-          {/* Title */}
-          <h2 className="text-3xl font-bold text-white mb-3 tracking-tight drop-shadow-lg">
-            혁신 직무역량 강화 <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-yellow-500">AI</span>
+        <div className="relative z-10 flex flex-col items-center text-center w-full px-2">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            혁신 <br/> 직무역량 강화 AI
           </h2>
-          
-          {/* Subtitle */}
-          <p className="text-zinc-200 text-[11px] font-medium drop-shadow-md">
-            당신의 잠재력을 깨우고 커리어의 새로운 패러다임을 제시합니다
-          </p>
         </div>
       </div>
     ),
@@ -481,27 +425,16 @@ const PROGRAMS: Program[] = ([
     description: '데이터 기반 키워드 전략 엔진으로 최적의 키워드 조합을 생성합니다.',
     image: '',
     customVisual: (
-      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center bg-[#13111C]">
+      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center bg-[#13111C] p-6">
         {/* Background Gradients */}
         <div className="absolute top-[-20%] left-[10%] w-[60%] h-[60%] bg-indigo-900/30 rounded-full blur-[80px] mix-blend-screen"></div>
         <div className="absolute bottom-[-10%] right-[10%] w-[70%] h-[70%] bg-rose-900/20 rounded-full blur-[80px] mix-blend-screen"></div>
         
         {/* Content */}
-        <div className="relative z-10 text-center w-full px-4 flex flex-col items-center">
-          {/* Icon Box */}
-          <div className="w-12 h-12 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md flex items-center justify-center mb-5 shadow-xl">
-            <Zap className="w-5 h-5 text-zinc-200" strokeWidth={1.5} />
-          </div>
-          
-          {/* Title */}
-          <h2 className="text-3xl font-bold text-white mb-3 tracking-tight">
-            혁신 키워드 조합 AI
+        <div className="relative z-10 flex flex-col items-center text-center w-full px-2">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            혁신 <br/> 키워드 조합 AI
           </h2>
-          
-          {/* Subtitle */}
-          <p className="text-zinc-400 text-[10px] font-medium tracking-[0.15em] uppercase">
-            Data-Driven Keyword Strategy Engine
-          </p>
         </div>
       </div>
     ),
@@ -515,34 +448,17 @@ const PROGRAMS: Program[] = ([
     description: '단 한 줄의 텍스트로 시작하는 전문가 수준의 인스타그램 카드뉴스를 생성합니다.',
     image: '',
     customVisual: (
-      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center bg-[#2B0F4C]">
+      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center bg-[#2B0F4C] p-6">
         {/* Background Gradients */}
         <div className="absolute top-[-30%] left-[-20%] w-[100%] h-[100%] bg-[#B86A2E]/40 rounded-full blur-[80px]"></div>
         <div className="absolute bottom-[-30%] left-[-20%] w-[100%] h-[100%] bg-[#0C4F5A]/60 rounded-full blur-[80px]"></div>
         <div className="absolute top-[10%] right-[-30%] w-[100%] h-[100%] bg-[#4A154B]/50 rounded-full blur-[80px]"></div>
         
         {/* Content */}
-        <div className="relative z-10 text-center w-full px-4 flex flex-col items-center">
-          {/* Badge */}
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-white/20 bg-white/5 backdrop-blur-md mb-4">
-            <Sparkles className="w-3 h-3 text-indigo-300" />
-            <span className="text-white text-[10px] font-medium">Gemini 3.1 Pro & Nano Banana</span>
-          </div>
-          
-          {/* Title */}
-          <h2 className="text-4xl font-extrabold text-white mb-4 tracking-tight">
-            혁신 카드뉴스 AI
+        <div className="relative z-10 flex flex-col items-center text-center w-full px-2">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            혁신 <br/> 카드뉴스 AI
           </h2>
-          
-          {/* Subtitle */}
-          <p className="text-zinc-300 text-sm font-medium leading-relaxed mb-6">
-            단 한 줄의 텍스트로 시작하는<br/>전문가 수준의 인스타그램 카드뉴스
-          </p>
-          
-          {/* Button */}
-          <div className="bg-white text-black px-5 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 shadow-lg hover:bg-zinc-100 transition-colors">
-            지금 바로 시작하기 <ArrowRight className="w-4 h-4" />
-          </div>
         </div>
       </div>
     ),
@@ -556,33 +472,21 @@ const PROGRAMS: Program[] = ([
     description: 'Gemini 3.1 Pro의 강력한 추론 능력과 이미지 생성 기능을 결합하여 단 몇 번의 클릭으로 전문가 수준의 전자책을 기획하고 출판하세요.',
     image: '',
     customVisual: (
-      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center">
+      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center p-6">
         {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800&auto=format&fit=crop)' }}
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=800&auto=format&fit=crop)' }}
         ></div>
         {/* Purple Overlay */}
         <div className="absolute inset-0 bg-[#4A154B]/80 mix-blend-multiply"></div>
         <div className="absolute inset-0 bg-black/40"></div>
         
         {/* Content */}
-        <div className="relative z-10 text-center w-full px-4 flex flex-col items-center">
-          {/* Icon Box */}
-          <div className="w-14 h-14 rounded-2xl bg-black/40 border border-white/10 backdrop-blur-md flex items-center justify-center mb-5 shadow-xl">
-            <Sparkles className="w-7 h-7 text-indigo-200" strokeWidth={1.5} />
-          </div>
-          
-          {/* Title */}
-          <h2 className="text-4xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg">
-            혁신 전자책 AI
+        <div className="relative z-10 flex flex-col items-center text-center w-full px-2">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            혁신 <br/> 전자책 AI
           </h2>
-          
-          {/* Subtitle */}
-          <p className="text-zinc-100 text-sm font-medium leading-relaxed drop-shadow-md">
-            Gemini 3.1 Pro의 강력한 추론 능력과 이미지 생성 기능을 결합하여<br/>
-            단 몇 번의 클릭으로 전문가 수준의 전자책을 기획하고 출판하세요.
-          </p>
         </div>
       </div>
     ),
@@ -597,7 +501,7 @@ const PROGRAMS: Program[] = ([
     description: '단 몇 번의 클릭으로 완벽한 유튜브 쇼츠와 영상을 제작하세요. AI가 대본부터 음성, 이미지, 영상 렌더링까지 모든 것을 자동으로 완성합니다.',
     image: '',
     customVisual: (
-      <div className="w-full h-full relative overflow-hidden flex flex-col justify-center p-8">
+      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center p-6">
         {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center"
@@ -608,22 +512,10 @@ const PROGRAMS: Program[] = ([
         <div className="absolute inset-0 bg-black/40"></div>
         
         {/* Content */}
-        <div className="relative z-10 w-full max-w-[85%]">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-900/50 backdrop-blur-md mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-indigo-300" />
-            <span className="text-indigo-200 text-[11px] font-semibold tracking-wide">Next-Gen Video Creation</span>
-          </div>
-          
-          {/* Title */}
-          <h2 className="text-4xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg flex items-center gap-3">
-            혁신 <span className="text-[#38bdf8]">유튜브 AI</span>
+        <div className="relative z-10 flex flex-col items-center text-center w-full px-2">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            혁신 <br/> 유튜브 AI
           </h2>
-          
-          {/* Description */}
-          <p className="text-zinc-200 text-sm leading-relaxed drop-shadow-md">
-            단 몇 번의 클릭으로 완벽한 유튜브 쇼츠와 영상을 제작하세요. AI가 대본부터 음성, 이미지, 영상 렌더링까지 모든 것을 자동으로 완성합니다.
-          </p>
         </div>
       </div>
     ),
@@ -676,28 +568,11 @@ const PROGRAMS: Program[] = ([
         {/* Background Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-red-600/20 blur-[60px] rounded-full"></div>
         
-        {/* YouTube Icon with Glow */}
-        <div className="relative mb-6">
-          <div className="absolute inset-0 bg-red-600 blur-xl opacity-20 animate-pulse"></div>
-          <div className="relative bg-white rounded-2xl p-3 shadow-2xl">
-            <Youtube className="w-12 h-12 text-[#FF0000] fill-[#FF0000]" />
-          </div>
-        </div>
-
-        {/* Badge */}
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-red-500/30 bg-red-950/30 backdrop-blur-sm mb-4">
-          <Sparkles className="w-3 h-3 text-red-400" />
-          <span className="text-red-200 text-[10px] font-bold tracking-wider uppercase">Next-Gen Thumbnail Generator</span>
-        </div>
-        
-        {/* Title Section */}
-        <div className="text-center">
-          <h2 className="text-2xl font-black text-white tracking-tight mb-1">
-            혁신 유튜브 <span className="text-red-500">썸네일 AI</span>
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center text-center w-full px-2">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            혁신 유튜브 <br/> 썸네일 AI
           </h2>
-          <p className="text-zinc-400 text-[10px] font-medium leading-tight">
-            알고리즘의 선택을 받는<br/>완벽한 썸네일 디자인
-          </p>
         </div>
       </div>
     ),
@@ -712,7 +587,7 @@ const PROGRAMS: Program[] = ([
     description: '단 몇 번의 클릭으로 완벽하게 구조화된 비즈니스 제안서를 완성하세요. AI가 당신의 아이디어를 설득력 있는 문서와 시각 자료로 변환합니다.',
     image: '',
     customVisual: (
-      <div className="w-full h-full relative overflow-hidden flex flex-col justify-center p-8">
+      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center p-6">
         {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center"
@@ -723,20 +598,10 @@ const PROGRAMS: Program[] = ([
         <div className="absolute inset-0 bg-black/30"></div>
         
         {/* Content */}
-        <div className="relative z-10 w-full max-w-[90%]">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-900/60 backdrop-blur-md mb-4">
-            <div className="w-2 h-2 rounded-full bg-indigo-400"></div>
-            <span className="text-indigo-100 text-[11px] font-semibold tracking-wide">AI-Powered Business Solutions</span>
-          </div>
-          
-          <h2 className="text-4xl font-extrabold text-white mb-3 tracking-tight drop-shadow-lg">
-            혁신 제안서 AI
+        <div className="relative z-10 flex flex-col items-center text-center w-full px-2">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            혁신 <br/> 제안서 AI
           </h2>
-          <p className="text-indigo-100/90 text-sm leading-relaxed drop-shadow-md font-medium">
-            단 몇 번의 클릭으로 완벽하게 구조화된 비즈니스 제안서를 완성하세요.<br/>
-            AI가 당신의 아이디어를 설득력 있는 문서와 시각 자료로 변환합니다.
-          </p>
         </div>
       </div>
     ),
@@ -756,39 +621,11 @@ const PROGRAMS: Program[] = ([
         <div className="absolute top-[-10%] left-[-10%] w-32 h-32 bg-blue-500/10 rounded-full blur-2xl"></div>
         <div className="absolute bottom-[-20%] right-[-20%] w-48 h-48 bg-purple-500/10 rounded-full blur-3xl"></div>
         
-        {/* Icon Container */}
-        <div className="relative mb-6 flex flex-col items-center">
-          <div className="relative w-20 h-24 border-2 border-slate-600/50 rounded-lg bg-slate-800/30 backdrop-blur-sm flex flex-col p-3 shadow-lg">
-            {/* Document Lines */}
-            <div className="w-10 h-1 bg-slate-500/60 rounded-full mb-2"></div>
-            <div className="w-12 h-1 bg-slate-500/60 rounded-full mb-2"></div>
-            <div className="w-8 h-1 bg-slate-500/60 rounded-full mb-4"></div>
-            
-            {/* Stars */}
-            <div className="flex gap-0.5 mt-auto">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <Star key={i} className="w-3 h-3 text-yellow-500 fill-yellow-500 drop-shadow-[0_0_5px_rgba(234,179,8,0.8)]" />
-              ))}
-            </div>
-            
-            {/* Pen Icon (Positioned absolutely) */}
-            <div className="absolute -right-3 bottom-6 text-blue-400 drop-shadow-[0_0_8px_rgba(96,165,250,0.8)] transform rotate-12">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 20h9"></path>
-                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" fill="currentColor"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
-        
-        {/* Title Section */}
-        <div className="text-center z-10">
-          <h2 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-purple-300 tracking-tight mb-1 drop-shadow-[0_0_10px_rgba(147,197,253,0.5)]">
-            혁신 리뷰 AI
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center text-center w-full px-2">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            혁신 <br/> 리뷰 AI
           </h2>
-          <p className="text-slate-400 text-[10px] font-bold tracking-[0.2em] uppercase">
-            Premium Viral Creator
-          </p>
         </div>
       </div>
     ),
@@ -796,66 +633,6 @@ const PROGRAMS: Program[] = ([
     category: 'MARKETING',
     tags: ['리뷰', '바이럴', '마케팅'],
     link: 'https://hyeoksin-review.fragrant-flower-7056.workers.dev'
-  },
-  {
-    id: '14',
-    title: 'AI 비즈니스 팩트 폭격기 & 리스크 분석가 에이전트',
-    description: '비즈니스 아이디어와 전략의 팩트를 점검하고 잠재적 리스크를 철저하게 분석하는 AI 에이전트입니다.',
-    image: '',
-    customVisual: (
-      <div className="w-full h-full relative overflow-hidden flex flex-col justify-between p-6 bg-slate-950">
-        {/* Background Image with Overlay */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-luminosity"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop)' }}
-        ></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/60 via-slate-900/80 to-rose-900/60"></div>
-        
-        {/* Cyberpunk Grid/Lines */}
-        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'linear-gradient(rgba(34, 211, 238, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(34, 211, 238, 0.1) 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
-
-        {/* Top Section: Facts & Risk */}
-        <div className="relative z-10 flex justify-between items-start w-full">
-          <div className="flex flex-col gap-1">
-            <span className="text-cyan-400 font-black text-[10px] tracking-[0.2em] uppercase drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]">Facts</span>
-            <div className="w-8 h-0.5 bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></div>
-          </div>
-          <div className="flex flex-col gap-1 items-end">
-            <span className="text-rose-500 font-black text-[10px] tracking-[0.2em] uppercase drop-shadow-[0_0_8px_rgba(244,63,94,0.8)]">Risk Analyst</span>
-            <div className="w-8 h-0.5 bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.8)]"></div>
-          </div>
-        </div>
-
-        {/* Center: Holographic UI Elements */}
-        <div className="relative z-10 flex-grow flex items-center justify-center w-full my-4">
-          <div className="absolute left-6 w-14 h-14 border border-cyan-500/30 rounded bg-cyan-500/10 flex items-center justify-center backdrop-blur-sm shadow-[0_0_15px_rgba(34,211,238,0.2)]">
-            <Zap className="w-6 h-6 text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.8)]" />
-          </div>
-          <div className="absolute right-6 w-14 h-14 border border-rose-500/30 rounded bg-rose-500/10 flex items-center justify-center backdrop-blur-sm shadow-[0_0_15px_rgba(244,63,94,0.2)]">
-            <AlertTriangle className="w-6 h-6 text-rose-500 drop-shadow-[0_0_8px_rgba(244,63,94,0.8)]" />
-          </div>
-          
-          {/* Center Target */}
-          <div className="w-24 h-24 rounded-full border border-dashed border-slate-400/30 flex items-center justify-center animate-[spin_10s_linear_infinite]">
-            <div className="w-16 h-16 rounded-full border border-slate-400/20 flex items-center justify-center">
-              <div className="w-8 h-8 rounded-full border border-slate-400/10"></div>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Section: Title */}
-        <div className="relative z-10 w-full text-center">
-          <h2 className="text-2xl font-black text-white tracking-tight leading-tight drop-shadow-lg flex flex-col gap-1">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-cyan-100">AI 비즈니스 팩트 폭격기</span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-100 to-rose-300 text-xl">& 리스크 분석가</span>
-          </h2>
-        </div>
-      </div>
-    ),
-    access: 'PREMIUM',
-    category: 'PLANNING',
-    tags: ['비즈니스', '분석', '리스크'],
-    link: 'https://gemini.google.com/gem/1KpshogfylCy9GoY4QGNZACEfJ81FkCjd?usp=sharing'
   },
   {
     id: 'p-ppt-notebooklm',
@@ -1814,13 +1591,13 @@ function PromptCard({
   onRequireAuth 
 }: { 
   program: Program; 
-  authLevel: 'NONE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER' | 'DONCLASS';
+  authLevel: 'NONE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER' | 'DONCLASS' | 'COACHINGPASS';
   onRequireAuth: () => void;
   key?: string;
 }) {
   const [copied, setCopied] = useState(false);
 
-  const isLocked = authLevel !== 'MASTER' && authLevel !== 'DONCLASS' && (
+  const isLocked = authLevel !== 'MASTER' && authLevel !== 'DONCLASS' && authLevel !== 'COACHINGPASS' && (
     (program.access === 'PREMIUM' && authLevel !== 'PREMIUM') || 
     (program.access === 'STUDENT' && authLevel !== 'STUDENT') ||
     (program.access === 'BASIC' && authLevel !== 'BASIC' && authLevel !== 'PREMIUM')
@@ -1851,22 +1628,22 @@ function PromptCard({
       <div className="p-6 flex flex-col flex-grow overflow-hidden">
         <div className="flex items-start gap-2 mb-3 flex-wrap">
           {program.access === 'STUDENT' && (
-            <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-100 text-blue-700'} text-[10px] font-bold rounded-md shrink-0`}>
-              {authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+            <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-100 text-blue-700'} text-[10px] font-bold rounded-md shrink-0`}>
+              {authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
               🎓 수강생 전용
             </span>
           )}
           {(program.access === 'PREMIUM' || program.access === 'BASIC') && (
             <>
               {program.access === 'PREMIUM' && (
-                <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'} text-[10px] font-bold rounded-md shrink-0`}>
-                  {authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'} text-[10px] font-bold rounded-md shrink-0`}>
+                  {authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
                   💎 프리미엄 멤버십 전용
                 </span>
               )}
               {program.access === 'BASIC' && (
-                <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'} text-[10px] font-bold rounded-md shrink-0`}>
-                  {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'} text-[10px] font-bold rounded-md shrink-0`}>
+                  {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
                   👑 멤버십 전용
                 </span>
               )}
@@ -1943,10 +1720,10 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<Category>('ALL');
   const [selectedSubCategory, setSelectedSubCategory] = useState<PromptSubCategory | 'ALL'>('ALL');
-  const [selectedAccess, setSelectedAccess] = useState<'ALL' | 'FREE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER' | 'DONCLASS'>('ALL');
+  const [selectedAccess, setSelectedAccess] = useState<'ALL' | 'FREE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER' | 'DONCLASS' | 'COACHINGPASS'>('ALL');
   const [isVersionDropdownOpen, setIsVersionDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [authLevel, setAuthLevel] = useState<'NONE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER' | 'DONCLASS'>('NONE');
+  const [authLevel, setAuthLevel] = useState<'NONE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER' | 'DONCLASS' | 'COACHINGPASS'>('NONE');
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
@@ -1978,6 +1755,12 @@ export default function App() {
       setShowPassword(false);
     } else if (authCode === 'donclass1') {
       setAuthLevel('DONCLASS');
+      setShowAuthModal(false);
+      setAuthCode('');
+      setAuthError('');
+      setShowPassword(false);
+    } else if (authCode === 'cp') {
+      setAuthLevel('COACHINGPASS');
       setShowAuthModal(false);
       setAuthCode('');
       setAuthError('');
@@ -2062,19 +1845,19 @@ export default function App() {
           {/* Top Badges */}
           <div className="absolute top-3 left-3 flex gap-2 flex-wrap">
             {program.access === 'STUDENT' ? (
-              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? 'bg-emerald-500' : 'bg-blue-500'} text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
-                {authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                {authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? '인증됨' : '🎓 수강생 전용'}
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-500' : 'bg-blue-500'} text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
+                {authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                {authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? '인증됨' : '🎓 수강생 전용'}
               </div>
             ) : program.access === 'PREMIUM' ? (
-              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-black'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
-                {authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                {authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? '인증됨' : '💎 프리미엄 멤버십'}
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-black'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
+                {authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                {authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? '인증됨' : '💎 프리미엄 멤버십'}
               </div>
             ) : program.access === 'BASIC' ? (
-              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-black'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
-                {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? '인증됨' : '👑 멤버십'}
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-black'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
+                {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? '인증됨' : '👑 멤버십'}
               </div>
             ) : (
               <div className="flex items-center gap-1.5 px-2.5 py-1 bg-white/10 text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md border border-white/20">
@@ -2095,7 +1878,7 @@ export default function App() {
           
           {/* Action Button */}
           <div className="mt-auto pt-4">
-            {program.access === 'STUDENT' && authLevel !== 'STUDENT' && authLevel !== 'MASTER' && authLevel !== 'DONCLASS' ? (
+            {program.access === 'STUDENT' && authLevel !== 'STUDENT' && authLevel !== 'MASTER' && authLevel !== 'DONCLASS' && authLevel !== 'COACHINGPASS' ? (
               <button 
                 onClick={() => setShowAuthModal(true)}
                 className={`w-full flex items-center justify-center gap-2 py-2.5 font-bold rounded-xl transition-all ${
@@ -2108,7 +1891,7 @@ export default function App() {
                 <Lock className="w-4 h-4" />
                 {authLevel !== 'NONE' ? '수강생 전용 이용 불가' : '잠금 해제 및 이동'}
               </button>
-            ) : program.access === 'PREMIUM' && authLevel !== 'PREMIUM' && authLevel !== 'MASTER' && authLevel !== 'DONCLASS' ? (
+            ) : program.access === 'PREMIUM' && authLevel !== 'PREMIUM' && authLevel !== 'MASTER' && authLevel !== 'DONCLASS' && authLevel !== 'COACHINGPASS' ? (
               <button 
                 onClick={() => setShowAuthModal(true)}
                 className={`w-full flex items-center justify-center gap-2 py-2.5 font-bold rounded-xl transition-all ${
@@ -2121,7 +1904,7 @@ export default function App() {
                 <Lock className="w-4 h-4" />
                 {authLevel === 'BASIC' || authLevel === 'STUDENT' ? '프리미엄 멤버십 이용 불가' : '잠금 해제 및 이동'}
               </button>
-            ) : program.access === 'BASIC' && authLevel !== 'BASIC' && authLevel !== 'PREMIUM' && authLevel !== 'MASTER' && authLevel !== 'DONCLASS' ? (
+            ) : program.access === 'BASIC' && authLevel !== 'BASIC' && authLevel !== 'PREMIUM' && authLevel !== 'MASTER' && authLevel !== 'DONCLASS' && authLevel !== 'COACHINGPASS' ? (
               <button 
                 onClick={() => setShowAuthModal(true)}
                 className={`w-full flex items-center justify-center gap-2 py-2.5 font-bold rounded-xl transition-all ${
@@ -2163,11 +1946,17 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <a href="/" className="flex-shrink-0 flex items-center gap-2 hover:opacity-80 transition-opacity">
-              <div className="w-8 h-8 rounded bg-gradient-to-br from-red-600 to-amber-500 flex items-center justify-center">
-                <Zap className="w-5 h-5 text-white" />
+            <a href="/" className="flex-shrink-0 flex items-center gap-3 group">
+              <div className="relative flex items-center justify-center w-10 h-10">
+                <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 rounded-xl blur-[8px] opacity-70 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="relative w-full h-full bg-black rounded-xl border border-white/10 flex items-center justify-center overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-purple-500/20"></div>
+                  <Sparkles className="w-5 h-5 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+                </div>
               </div>
-              <span className="font-bold text-xl tracking-tight">혁신 AI</span>
+              <span className="font-black text-2xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-zinc-400 group-hover:from-indigo-400 group-hover:via-purple-400 group-hover:to-pink-400 transition-all duration-500">
+                혁신 AI
+              </span>
             </a>
 
             {/* Desktop Menu */}
@@ -2184,7 +1973,7 @@ export default function App() {
               {authLevel !== 'NONE' ? (
                 <div className="flex items-center gap-3">
                   <span className="text-sm text-emerald-400 font-medium">
-                    {authLevel === 'MASTER' ? '마스터' : authLevel === 'DONCLASS' ? '협력사 : 돈클' : authLevel === 'STUDENT' ? '수강생' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '멤버십'}
+                    {authLevel === 'MASTER' ? '마스터' : authLevel === 'COACHINGPASS' ? '협력사 : 코칭패스' : authLevel === 'DONCLASS' ? '협력사 : 돈클' : authLevel === 'STUDENT' ? '수강생' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '멤버십'}
                   </span>
                   <button 
                     onClick={() => setAuthLevel('NONE')}
@@ -2241,7 +2030,7 @@ export default function App() {
                   {authLevel !== 'NONE' ? (
                     <div className="flex flex-col gap-2 px-3">
                       <span className="text-sm text-emerald-400 font-medium mb-2">
-                        {authLevel === 'MASTER' ? '마스터' : authLevel === 'DONCLASS' ? '협력사 : 돈클' : authLevel === 'STUDENT' ? '수강생' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '멤버십'} 인증 완료
+                        {authLevel === 'MASTER' ? '마스터' : authLevel === 'COACHINGPASS' ? '협력사 : 코칭패스' : authLevel === 'DONCLASS' ? '협력사 : 돈클' : authLevel === 'STUDENT' ? '수강생' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '멤버십'} 인증 완료
                       </span>
                       <button 
                         onClick={() => {
@@ -2276,35 +2065,127 @@ export default function App() {
       </nav>
 
       {/* Hero Section */}
-      <div className="relative overflow-hidden">
-        {/* Background Effects */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-red-600/20 blur-[120px] rounded-full pointer-events-none" />
-        <div className="absolute top-40 left-1/4 w-[400px] h-[400px] bg-amber-500/10 blur-[100px] rounded-full pointer-events-none" />
+      <div className="relative overflow-hidden bg-[#030014] border-b border-white/5 min-h-[300px] flex items-center">
+        {/* Abstract Background Image */}
+        <motion.div 
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.2 }}
+          transition={{ duration: 2 }}
+          className="absolute inset-0 bg-cover bg-center mix-blend-luminosity"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2000&auto=format&fit=crop)' }}
+        />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 relative z-10 text-center">
+        {/* Animated Gradient Orbs */}
+        <motion.div 
+          animate={{ 
+            x: [0, 30, 0], 
+            y: [0, -30, 0],
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.5, 0.3]
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-indigo-600/40 blur-[100px] rounded-full pointer-events-none mix-blend-screen" 
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, -40, 0], 
+            y: [0, 20, 0],
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.4, 0.2]
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-fuchsia-600/30 blur-[100px] rounded-full pointer-events-none mix-blend-screen" 
+        />
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.3, 1],
+            opacity: [0.1, 0.3, 0.1]
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute top-[20%] left-[40%] w-[30%] h-[30%] bg-blue-400/20 blur-[80px] rounded-full pointer-events-none mix-blend-screen" 
+        />
+        
+        {/* Animated Particles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute bg-white rounded-full mix-blend-screen"
+              style={{
+                width: Math.random() * 4 + 1 + 'px',
+                height: Math.random() * 4 + 1 + 'px',
+                left: Math.random() * 100 + '%',
+                top: Math.random() * 100 + '%',
+                boxShadow: '0 0 10px 2px rgba(255,255,255,0.3)'
+              }}
+              animate={{
+                y: [0, -100],
+                opacity: [0, Math.random() * 0.5 + 0.3, 0],
+                scale: [0, Math.random() + 0.5, 0]
+              }}
+              transition={{
+                duration: Math.random() * 5 + 5,
+                repeat: Infinity,
+                ease: "linear",
+                delay: Math.random() * 5
+              }}
+            />
+          ))}
+        </div>
+        
+        {/* Sweeping Light Beam */}
+        <motion.div 
+          animate={{ 
+            rotate: [0, 360]
+          }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] opacity-20 pointer-events-none mix-blend-screen"
+          style={{
+            background: 'conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(99, 102, 241, 0.1) 60deg, rgba(168, 85, 247, 0.2) 120deg, transparent 180deg, rgba(99, 102, 241, 0.1) 240deg, rgba(168, 85, 247, 0.2) 300deg, transparent 360deg)'
+          }}
+        />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10 text-center flex flex-col items-center w-full">
+          
+          {/* Premium Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-6 shadow-2xl"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+            <span className="text-zinc-200 text-[10px] font-semibold tracking-[0.2em] uppercase">Next Generation AI Platform</span>
+          </motion.div>
+
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6"
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4 leading-[1.1]"
           >
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-zinc-500">
-              미래를 앞당기는
+            <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-white/70">
+              AI 통합 플랫폼
             </span>
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-red-500 to-red-600">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 drop-shadow-[0_0_30px_rgba(168,85,247,0.4)]">
               혁신 AI
             </span>
           </motion.h1>
+          
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="mt-4 max-w-2xl mx-auto text-xl text-zinc-400"
+            transition={{ delay: 0.2 }}
+            className="mt-2 max-w-2xl mx-auto text-base md:text-lg text-zinc-400 font-medium leading-relaxed"
           >
-            혁신AI를 활용해서 AI를 혁신적으로 사용하여 생산성과 효율성을 극대화하세요!
-            <br /> 멤버십 전용 AI는 여러분에게 더 큰 특별한 경쟁력을 제공합니다.
+            혁신AI를 활용해서 생산성과 효율성의 한계를 뛰어넘으세요.
+            <br className="hidden md:block" /> 
+            <span className="text-zinc-300">여러분의 수익화 파이프라인의 핵심</span>이 될 것입니다.
           </motion.p>
         </div>
+        
+        {/* Bottom Fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black to-transparent pointer-events-none"></div>
       </div>
 
       {/* Main Content */}
@@ -2685,9 +2566,16 @@ export default function App() {
       {/* Footer */}
       <footer className="border-t border-white/10 bg-black py-12 mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2">
-            <Zap className="w-5 h-5 text-red-600" />
-            <span className="font-bold text-lg">혁신 AI</span>
+          <div className="flex items-center gap-3 group cursor-pointer">
+            <div className="relative flex items-center justify-center w-8 h-8">
+              <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 rounded-lg blur-[6px] opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
+              <div className="relative w-full h-full bg-black rounded-lg border border-white/10 flex items-center justify-center">
+                <Sparkles className="w-4 h-4 text-white" />
+              </div>
+            </div>
+            <span className="font-bold text-xl tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-zinc-300 to-zinc-500 group-hover:from-indigo-400 group-hover:to-pink-400 transition-all duration-500">
+              혁신 AI
+            </span>
           </div>
           <div className="text-zinc-500 text-sm">
             © 2026 혁신 AI by 정혁신. All rights reserved.
