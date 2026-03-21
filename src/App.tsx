@@ -661,7 +661,7 @@ const PROGRAMS: Program[] = ([
         </div>
       </div>
     ),
-    access: 'PREMIUM',
+    access: 'STUDENT',
     category: 'PLANNING',
     tags: ['프롬프트', 'AI 에이전트'],
     link: 'https://gemini.google.com/gem/1GG3OdPsLk3Ra_MfrDe-MlomHajQr-tXe?usp=sharing'
