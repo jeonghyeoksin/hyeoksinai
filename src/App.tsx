@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Search, Lock, Unlock, ExternalLink, Menu, X, Settings, Zap, Sparkles, ArrowRight, Copy, Check, Bot, Youtube, Star, FileText, AlertTriangle, Wand2, Code } from 'lucide-react';
+import { Search, Lock, Unlock, ExternalLink, Menu, X, Settings, Zap, Sparkles, ArrowRight, Copy, Check, Bot, Youtube, Star, FileText, AlertTriangle, Wand2, Code, Eye, EyeOff, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { additionalPrompts } from './promptsData';
 
 // --- Types ---
-type AccessLevel = 'FREE' | 'PREMIUM';
-type Category = 'ALL' | 'MARKETING' | 'DESIGN' | 'VIDEO' | 'PLANNING' | 'PROMPT';
+type AccessLevel = 'FREE' | 'PREMIUM' | 'PARTNER' | 'STUDENT';
+type Category = 'ALL' | 'PROGRAM' | 'MARKETING' | 'DESIGN' | 'VIDEO' | 'PLANNING' | 'PROMPT' | 'LECTURE';
 type PromptSubCategory = '비즈니스' | '마케팅' | '디자인' | '콘텐츠' | '개발' | '교육' | '일상';
 
 interface Program {
@@ -23,7 +23,56 @@ interface Program {
 }
 
 // --- Mock Data ---
-const PROGRAMS: Program[] = [
+const PROGRAMS: Program[] = ([
+  {
+    id: 'lecture-api-key',
+    title: '구글 API KEY 발급 방법 & 결제카드 등록방법',
+    description: '구글 API KEY 발급 및 결제카드 등록 방법에 대한 상세 가이드 문서입니다.',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81] relative overflow-hidden flex items-center justify-center p-6 text-center">
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.4) 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+        <div className="relative z-10 w-full flex flex-col items-center justify-center">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/20 text-blue-300 text-xs font-bold w-max mb-4">
+            <span className="text-blue-400">📚</span> 수강생 전용 자료
+          </div>
+          <h2 className="text-2xl font-black text-white tracking-tight mb-3 drop-shadow-lg break-keep leading-snug">
+            구글 API KEY 발급 방법 &<br/>결제카드 등록방법
+          </h2>
+        </div>
+      </div>
+    ),
+    access: 'STUDENT',
+    category: 'LECTURE',
+    tags: ['가이드', 'API', '결제'],
+    link: 'https://docs.google.com/document/d/1S37vCHrloJwcD1w-m8X1OXsBOAhO4MDJrzuVs0wbKkw/edit?tab=t.0#heading=h.7kaiinz6a899'
+  },
+  {
+    id: 'lecture-sample',
+    title: '혁신 AI 마스터 클래스',
+    description: '수강생 전용으로 제공되는 혁신 AI 마스터 클래스 강의 자료 및 VOD 링크입니다.',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81] relative overflow-hidden flex items-center justify-center p-6 text-center">
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.4) 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+        <div className="relative z-10 w-full flex flex-col items-center justify-center">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/20 text-blue-300 text-xs font-bold w-max mb-4">
+            <span className="text-blue-400">📚</span> 수강생 전용 자료
+          </div>
+          <h2 className="text-3xl font-black text-white tracking-tight mb-3 drop-shadow-lg">
+            AI 마스터 클래스
+          </h2>
+          <p className="text-blue-200 text-sm leading-relaxed max-w-[90%] font-medium drop-shadow-md">
+            혁신 AI의 모든 것을 배우는<br/>핵심 강의 자료 모음
+          </p>
+        </div>
+      </div>
+    ),
+    access: 'STUDENT',
+    category: 'LECTURE',
+    tags: ['강의', 'VOD', '자료'],
+    link: '#'
+  },
   {
     id: '1',
     title: '혁신 AI Lite',
@@ -116,6 +165,30 @@ const PROGRAMS: Program[] = [
     link: 'https://hyeoksin-money.fragrant-flower-7056.workers.dev/'
   },
   {
+    id: 'trend',
+    title: '혁신 트렌드 AI',
+    description: '2026년 AI 수익화 트렌드를 분석하고, 당신만의 완벽한 비즈니스 로드맵과 마케팅 전략을 설계하세요.',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full bg-[#0a1128] relative overflow-hidden flex flex-col items-center justify-center p-6 text-center">
+        <div className="absolute inset-0 opacity-30 bg-[url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center mix-blend-luminosity"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a1128] via-[#0a1128]/80 to-transparent"></div>
+        <div className="relative z-10 w-full flex flex-col items-center justify-center">
+          <h2 className="text-4xl font-black text-white tracking-tight mb-4 drop-shadow-lg">
+            혁신 트렌드 AI
+          </h2>
+          <p className="text-zinc-300 text-sm leading-relaxed max-w-[90%] font-medium drop-shadow-md">
+            2026년 AI 수익화 트렌드를 분석하고, 당신만의 완벽한 비즈니스 로드맵과<br/>마케팅 전략을 설계하세요.
+          </p>
+        </div>
+      </div>
+    ),
+    access: 'PARTNER',
+    category: 'BUSINESS',
+    tags: ['트렌드', '비즈니스', '수익화'],
+    link: 'https://hyeoksin-trend.fragrant-flower-7056.workers.dev'
+  },
+  {
     id: '3',
     title: '혁신 블로그 AI',
     description: '인공지능의 힘으로 당신만의 독창적이고 전문적인 블로그 포스팅을 완성하세요.',
@@ -152,10 +225,10 @@ const PROGRAMS: Program[] = [
         </div>
       </div>
     ),
-    access: 'PREMIUM',
+    access: 'PARTNER',
     category: 'MARKETING',
     tags: ['블로그', '콘텐츠 생성'],
-    link: 'https://hyeoksin-blog-ver20.vercel.app'
+    link: 'https://hyeoksinblog.fragrant-flower-7056.workers.dev'
   },
   {
     id: '4',
@@ -339,7 +412,7 @@ const PROGRAMS: Program[] = [
         </div>
       </div>
     ),
-    access: 'PREMIUM',
+    access: 'PARTNER',
     category: 'DESIGN',
     tags: ['카드뉴스', '인스타그램']
   },
@@ -420,7 +493,7 @@ const PROGRAMS: Program[] = [
         </div>
       </div>
     ),
-    access: 'PREMIUM',
+    access: 'PARTNER',
     category: 'VIDEO',
     tags: ['유튜브', '영상제작']
   },
@@ -494,7 +567,7 @@ const PROGRAMS: Program[] = [
         </div>
       </div>
     ),
-    access: 'PREMIUM',
+    access: 'PARTNER',
     category: 'DESIGN',
     tags: ['유튜브', '썸네일', '디자인'],
     link: 'https://hyeoksinthumbnailver1.vercel.app/'
@@ -1553,7 +1626,7 @@ const PROGRAMS: Program[] = [
     promptText: '당신은 숏폼 콘텐츠 디렉터입니다. MZ세대를 타겟으로 [우리 과자]를 활용한 틱톡 챌린지를 기획해 주세요. 누구나 쉽게 따라 할 수 있는 동작이나 재미있는 상황 설정을 구상하고, 챌린지에 어울릴 만한 배경음악(BGM) 스타일과 필수 해시태그를 제안해 주세요.'
   },
   ...additionalPrompts
-].map(p => p.category === 'PROMPT' ? { ...p, access: 'PREMIUM' } : p);
+] as Program[]).map((p) => p.category === 'PROMPT' ? { ...p, access: 'PREMIUM' } : p);
 
 function PromptCard({ 
   program, 
@@ -1561,13 +1634,13 @@ function PromptCard({
   onRequireAuth 
 }: { 
   program: Program; 
-  authLevel: 'NONE' | 'BASIC' | 'PREMIUM';
+  authLevel: 'NONE' | 'BASIC' | 'PREMIUM' | 'PARTNER';
   onRequireAuth: () => void;
   key?: string;
 }) {
   const [copied, setCopied] = useState(false);
 
-  const isLocked = program.access === 'PREMIUM' && authLevel === 'NONE';
+  const isLocked = (program.access === 'PREMIUM' && authLevel !== 'PREMIUM' && authLevel !== 'STUDENT') || (program.access === 'PARTNER' && authLevel !== 'PARTNER' && authLevel !== 'PREMIUM' && authLevel !== 'STUDENT') || (program.access === 'STUDENT' && authLevel !== 'STUDENT');
 
   const handleCopy = () => {
     if (isLocked) {
@@ -1592,12 +1665,26 @@ function PromptCard({
       className="bg-white rounded-2xl overflow-hidden flex flex-col h-[460px] border border-gray-200 shadow-sm hover:shadow-md transition-shadow relative"
     >
       <div className="p-6 flex flex-col flex-grow overflow-hidden">
-        <div className="flex items-start gap-2 mb-3">
-          {program.access === 'PREMIUM' && (
-            <span className={`inline-flex items-center gap-1 px-2 py-1 ${isLocked ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'} text-[10px] font-bold rounded-md shrink-0`}>
-              {isLocked ? <Lock className="w-3 h-3" /> : <Unlock className="w-3 h-3" />}
-              멤버십 전용
+        <div className="flex items-start gap-2 mb-3 flex-wrap">
+          {program.access === 'STUDENT' && (
+            <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'STUDENT' ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-100 text-blue-700'} text-[10px] font-bold rounded-md shrink-0`}>
+              {authLevel === 'STUDENT' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+              수강생 전용
             </span>
+          )}
+          {(program.access === 'PREMIUM' || program.access === 'PARTNER') && (
+            <>
+              {program.access === 'PARTNER' && (
+                <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'PARTNER' || authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? 'bg-emerald-100 text-emerald-700' : 'bg-purple-100 text-purple-700'} text-[10px] font-bold rounded-md shrink-0`}>
+                  {authLevel === 'PARTNER' || authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                  파트너 전용
+                </span>
+              )}
+              <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'PREMIUM' || authLevel === 'STUDENT' || (program.access === 'PARTNER' && authLevel === 'PARTNER') ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'} text-[10px] font-bold rounded-md shrink-0`}>
+                {authLevel === 'PREMIUM' || authLevel === 'STUDENT' || (program.access === 'PARTNER' && authLevel === 'PARTNER') ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                멤버십 전용
+              </span>
+            </>
           )}
           {program.promptSubCategory && (
             <span className="inline-block px-2.5 py-1 bg-gray-100 text-gray-600 text-xs font-bold rounded-md w-fit shrink-0">
@@ -1622,7 +1709,7 @@ function PromptCard({
               <div className="bg-white p-3 rounded-full shadow-md mb-3">
                 <Lock className="w-6 h-6 text-amber-500" />
               </div>
-              <p className="text-sm font-bold text-gray-900 mb-1">멤버십 전용 프롬프트</p>
+              <p className="text-sm font-bold text-gray-900 mb-1">{program.access === 'STUDENT' ? '수강생 전용 프롬프트' : '멤버십 전용 프롬프트'}</p>
               <p className="text-xs text-gray-600 text-center px-4">
                 인증 코드를 입력하고<br/>모든 프롬프트를 확인하세요
               </p>
@@ -1666,24 +1753,55 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<Category>('ALL');
   const [selectedSubCategory, setSelectedSubCategory] = useState<PromptSubCategory | 'ALL'>('ALL');
-  const [selectedAccess, setSelectedAccess] = useState<'ALL' | 'FREE' | 'PREMIUM'>('ALL');
+  const [selectedAccess, setSelectedAccess] = useState<'ALL' | 'FREE' | 'PREMIUM' | 'PARTNER' | 'STUDENT'>('ALL');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [authLevel, setAuthLevel] = useState<'NONE' | 'BASIC' | 'PREMIUM'>('NONE');
-  const [showAuthModal, setShowAuthModal] = useState<false | 'BASIC' | 'PREMIUM'>(false);
+  const [authLevel, setAuthLevel] = useState<'NONE' | 'BASIC' | 'PREMIUM' | 'PARTNER' | 'STUDENT'>('NONE');
+  const [showAuthModal, setShowAuthModal] = useState<false | 'BASIC' | 'PREMIUM' | 'PARTNER' | 'STUDENT'>(false);
+  const [showTermsModal, setShowTermsModal] = useState(false);
+  const [showPrivacyModal, setShowPrivacyModal] = useState(false);
+  const [pageMap, setPageMap] = useState<Record<string, number>>({ PROGRAM: 1, PROMPT: 1, LECTURE: 1 });
+  const [itemsPerPage, setItemsPerPage] = useState(8);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1280) setItemsPerPage(8); // xl: 4 cols * 2
+      else if (window.innerWidth >= 1024) setItemsPerPage(6); // lg: 3 cols * 2
+      else if (window.innerWidth >= 768) setItemsPerPage(4); // md: 2 cols * 2
+      else setItemsPerPage(2); // sm: 1 col * 2
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   const [authCode, setAuthCode] = useState('');
   const [authError, setAuthError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleAuth = () => {
-    if (showAuthModal === 'PREMIUM' && authCode === 'hsaip0705') {
+    if (authCode === 'hsaip0705') {
       setAuthLevel('PREMIUM');
       setShowAuthModal(false);
       setAuthCode('');
       setAuthError('');
-    } else if (showAuthModal === 'BASIC' && authCode === '0515') {
+      setShowPassword(false);
+    } else if (authCode === 'hsedu1004') {
+      setAuthLevel('STUDENT');
+      setShowAuthModal(false);
+      setAuthCode('');
+      setAuthError('');
+      setShowPassword(false);
+    } else if (authCode === 'hsp1004') {
+      setAuthLevel('PARTNER');
+      setShowAuthModal(false);
+      setAuthCode('');
+      setAuthError('');
+      setShowPassword(false);
+    } else if (authCode === '0515') {
       setAuthLevel('BASIC');
       setShowAuthModal(false);
       setAuthCode('');
       setAuthError('');
+      setShowPassword(false);
     } else {
       setAuthError('인증 번호가 올바르지 않습니다.');
     }
@@ -1693,12 +1811,155 @@ export default function App() {
   const filteredPrograms = PROGRAMS.filter(program => {
     const matchesSearch = program.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
                           program.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'ALL' || program.category === selectedCategory;
+    const matchesCategory = selectedCategory === 'ALL' || 
+                            (selectedCategory === 'PROGRAM' ? !['PROMPT', 'LECTURE'].includes(program.category) : program.category === selectedCategory);
     const matchesSubCategory = selectedCategory !== 'PROMPT' || selectedSubCategory === 'ALL' || program.promptSubCategory === selectedSubCategory;
-    const matchesAccess = selectedAccess === 'ALL' || program.access === selectedAccess;
     
-    return matchesSearch && matchesCategory && matchesSubCategory && matchesAccess;
+    let matchesAccess = false;
+    if (selectedAccess === 'ALL') {
+      matchesAccess = true;
+    } else if (selectedAccess === 'STUDENT') {
+      matchesAccess = ['STUDENT', 'PREMIUM', 'PARTNER'].includes(program.access) || program.category === 'LECTURE';
+    } else {
+      matchesAccess = program.access === selectedAccess;
+    }
+    
+    // 전체 탭에서는 수강생 전용 항목을 숨김 (단, 권한 필터가 '수강생 전용'일 때는 표시)
+    const isHiddenStudent = program.access === 'STUDENT' && selectedCategory === 'ALL' && selectedAccess !== 'STUDENT';
+    
+    return matchesSearch && matchesCategory && matchesSubCategory && matchesAccess && !isHiddenStudent;
   });
+
+  const renderProgram = (program: Program) => (
+    program.category === 'PROMPT' ? (
+      <PromptCard 
+        key={program.id} 
+        program={program} 
+        authLevel={authLevel}
+        onRequireAuth={() => setShowAuthModal('BASIC')}
+      />
+    ) : (
+      <motion.div
+        layout
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        transition={{ duration: 0.2 }}
+        key={program.id}
+        className="group flex flex-col bg-[#121212] rounded-2xl border border-zinc-800 overflow-hidden hover:border-zinc-700 transition-all duration-300 hover:shadow-[0_0_30px_rgba(220,38,38,0.1)] h-[460px]"
+      >
+        {/* Image Container */}
+        <div className="relative h-[220px] shrink-0 overflow-hidden bg-zinc-900">
+          {program.customVisual ? (
+            <div className="w-full h-full opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500">
+              {program.customVisual}
+            </div>
+          ) : (
+            <img 
+              src={program.image} 
+              alt={program.title}
+              className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+              referrerPolicy="no-referrer"
+            />
+          )}
+          
+          {/* Top Badges */}
+          <div className="absolute top-3 left-3 flex gap-2 flex-wrap">
+            {program.access === 'STUDENT' ? (
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'STUDENT' ? 'bg-emerald-500' : 'bg-blue-500'} text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
+                {authLevel === 'STUDENT' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                {authLevel === 'STUDENT' ? '인증됨' : '수강생 전용'}
+              </div>
+            ) : program.access === 'PARTNER' ? (
+              <>
+                <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PARTNER' || authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? 'bg-emerald-500' : 'bg-purple-500'} text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
+                  {authLevel === 'PARTNER' || authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                  {authLevel === 'PARTNER' || authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? '인증됨' : '혁신 파트너'}
+                </div>
+                <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PREMIUM' || authLevel === 'PARTNER' || authLevel === 'STUDENT' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-black'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
+                  {authLevel === 'PREMIUM' || authLevel === 'PARTNER' || authLevel === 'STUDENT' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                  {authLevel === 'PREMIUM' || authLevel === 'PARTNER' || authLevel === 'STUDENT' ? '인증됨' : '프리미엄 멤버십'}
+                </div>
+              </>
+            ) : program.access === 'PREMIUM' ? (
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-black'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
+                {authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                {authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? '인증됨' : '프리미엄 멤버십'}
+              </div>
+            ) : (
+              <div className="flex items-center gap-1.5 px-2.5 py-1 bg-white/10 text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md border border-white/20">
+                무료버전
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="flex flex-col flex-grow p-5">
+          <h3 className="text-lg font-bold text-white mb-2 group-hover:text-red-400 transition-colors line-clamp-1">
+            {program.title}
+          </h3>
+          <p className="text-sm text-zinc-400 mb-4 line-clamp-3 flex-grow leading-relaxed">
+            {program.description}
+          </p>
+          
+          {/* Action Button */}
+          <div className="mt-auto pt-4">
+            {program.access === 'STUDENT' && authLevel !== 'STUDENT' ? (
+              <button 
+                onClick={() => setShowAuthModal('STUDENT')}
+                className={`w-full flex items-center justify-center gap-2 py-2.5 font-bold rounded-xl transition-all bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-400 hover:to-cyan-500 text-white shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]`}
+              >
+                <Lock className="w-4 h-4" />
+                잠금 해제 및 이동
+              </button>
+            ) : program.access === 'PARTNER' && authLevel !== 'PARTNER' && authLevel !== 'PREMIUM' && authLevel !== 'STUDENT' ? (
+              <button 
+                onClick={() => setShowAuthModal('PARTNER')}
+                className={`w-full flex items-center justify-center gap-2 py-2.5 font-bold rounded-xl transition-all ${
+                  authLevel === 'BASIC'
+                    ? 'bg-zinc-800 text-zinc-400 border border-zinc-700 cursor-not-allowed' 
+                    : 'bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500 text-white shadow-[0_0_15px_rgba(168,85,247,0.2)] hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]'
+                }`}
+                disabled={authLevel === 'BASIC'}
+              >
+                <Lock className="w-4 h-4" />
+                {authLevel === 'BASIC' ? '파트너 전용 이용 불가' : '잠금 해제 및 이동'}
+              </button>
+            ) : program.access === 'PREMIUM' && authLevel !== 'PREMIUM' && authLevel !== 'STUDENT' ? (
+              <button 
+                onClick={() => setShowAuthModal('PREMIUM')}
+                className={`w-full flex items-center justify-center gap-2 py-2.5 font-bold rounded-xl transition-all ${
+                  authLevel === 'BASIC' 
+                    ? 'bg-zinc-800 text-zinc-400 border border-zinc-700 cursor-not-allowed' 
+                    : 'bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black shadow-[0_0_15px_rgba(245,158,11,0.2)] hover:shadow-[0_0_20px_rgba(245,158,11,0.4)]'
+                }`}
+                disabled={authLevel === 'BASIC'}
+              >
+                <Lock className="w-4 h-4" />
+                {authLevel === 'BASIC' ? '프리미엄 멤버십 이용 불가' : '잠금 해제 및 이동'}
+              </button>
+            ) : program.link ? (
+              <a 
+                href={program.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-2 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-bold rounded-xl transition-all border border-zinc-700 hover:border-zinc-600"
+              >
+                <ExternalLink className="w-4 h-4" />
+                바로가기
+              </a>
+            ) : (
+              <button className="w-full flex items-center justify-center gap-2 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-bold rounded-xl transition-all border border-zinc-700 hover:border-zinc-600">
+                <ExternalLink className="w-4 h-4" />
+                바로가기
+              </button>
+            )}
+          </div>
+        </div>
+      </motion.div>
+    )
+  );
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 font-sans selection:bg-red-500/30">
@@ -1717,30 +1978,18 @@ export default function App() {
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8">
               <a href="/" className="text-zinc-300 hover:text-white transition-colors">홈</a>
-              <a href="#" className="text-zinc-300 hover:text-white transition-colors">프로그램</a>
             </div>
 
             {/* Right Actions */}
             <div className="hidden md:flex items-center space-x-4">
-              <a 
-                href="https://docs.google.com/presentation/d/10BbgaNbQg60yh3xkNgSahAEm9lyiaZJEUn8W6F6kS3U/edit?usp=sharing" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-sm text-blue-400 hover:text-blue-300 transition-colors border-r border-zinc-800 pr-4 flex items-center gap-1.5 font-medium"
-              >
-                <ExternalLink className="w-4 h-4" />
-                API KEY 설정방법
-              </a>
-              <div className="text-sm text-zinc-500 border-r border-zinc-800 pr-4">
-                Dev: 정혁신
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-amber-500/20 bg-amber-500/10 text-amber-400 text-sm font-bold shadow-[0_0_10px_rgba(245,158,11,0.1)] border-r border-zinc-800 mr-2">
+                <Sparkles className="w-4 h-4" />
+                개발자 : 정혁신
               </div>
-              <button className="p-2 text-zinc-400 hover:text-white transition-colors">
-                <Settings className="w-5 h-5" />
-              </button>
               {authLevel !== 'NONE' ? (
                 <div className="flex items-center gap-3">
                   <span className="text-sm text-emerald-400 font-medium">
-                    {authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '멤버십'}
+                    {authLevel === 'STUDENT' ? '수강생 (모든 권한 포함)' : authLevel === 'PARTNER' ? '혁신 파트너' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '멤버십'}
                   </span>
                   {authLevel === 'BASIC' && (
                     <button 
@@ -1749,6 +1998,15 @@ export default function App() {
                     >
                       <Lock className="w-4 h-4" />
                       프리미엄 인증
+                    </button>
+                  )}
+                  {authLevel !== 'PARTNER' && (
+                    <button 
+                      onClick={() => setShowAuthModal('PARTNER')}
+                      className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-4 py-2 rounded-md font-medium hover:from-purple-400 hover:to-indigo-500 transition-colors flex items-center gap-2"
+                    >
+                      <Lock className="w-4 h-4" />
+                      파트너 인증
                     </button>
                   )}
                   <button 
@@ -1762,6 +2020,12 @@ export default function App() {
               ) : (
                 <div className="flex items-center gap-2">
                   <button 
+                    onClick={() => setShowAuthModal('STUDENT')}
+                    className="bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-4 py-2 rounded-md font-medium hover:from-blue-400 hover:to-cyan-500 transition-colors"
+                  >
+                    수강생 인증
+                  </button>
+                  <button 
                     onClick={() => setShowAuthModal('BASIC')}
                     className="bg-zinc-800 text-white px-4 py-2 rounded-md font-medium hover:bg-zinc-700 transition-colors border border-zinc-700"
                   >
@@ -1772,6 +2036,12 @@ export default function App() {
                     className="bg-gradient-to-r from-amber-500 to-amber-600 text-black px-4 py-2 rounded-md font-medium hover:from-amber-400 hover:to-amber-500 transition-colors"
                   >
                     프리미엄 인증
+                  </button>
+                  <button 
+                    onClick={() => setShowAuthModal('PARTNER')}
+                    className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-4 py-2 rounded-md font-medium hover:from-purple-400 hover:to-indigo-500 transition-colors"
+                  >
+                    파트너 인증
                   </button>
                 </div>
               )}
@@ -1800,23 +2070,18 @@ export default function App() {
             >
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="/" className="block px-3 py-2 text-base font-medium text-white bg-white/5 rounded-md">홈</a>
-                <a href="#" className="block px-3 py-2 text-base font-medium text-zinc-300 hover:text-white hover:bg-white/5 rounded-md">프로그램</a>
-                <a 
-                  href="https://docs.google.com/presentation/d/10BbgaNbQg60yh3xkNgSahAEm9lyiaZJEUn8W6F6kS3U/edit?usp=sharing" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 py-2 text-base font-medium text-blue-400 hover:text-blue-300 hover:bg-white/5 rounded-md"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  API KEY 설정방법
-                </a>
-                <div className="px-3 py-2 text-sm text-amber-500 font-medium">Dev: 정혁신</div>
+                <div className="px-3 py-2">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-amber-500/20 bg-amber-500/10 text-amber-400 text-sm font-bold shadow-[0_0_10px_rgba(245,158,11,0.1)]">
+                    <Sparkles className="w-4 h-4" />
+                    개발자 : 정혁신
+                  </div>
+                </div>
                 
                 <div className="pt-4 pb-2 border-t border-zinc-800">
                   {authLevel !== 'NONE' ? (
                     <div className="flex flex-col gap-2 px-3">
                       <span className="text-sm text-emerald-400 font-medium mb-2">
-                        {authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '멤버십'} 인증 완료
+                        {authLevel === 'STUDENT' ? '수강생 (모든 권한 포함)' : authLevel === 'PARTNER' ? '혁신 파트너' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '멤버십'} 인증 완료
                       </span>
                       {authLevel === 'BASIC' && (
                         <button 
@@ -1828,6 +2093,18 @@ export default function App() {
                         >
                           <Lock className="w-4 h-4" />
                           프리미엄 인증
+                        </button>
+                      )}
+                      {authLevel !== 'PARTNER' && (
+                        <button 
+                          onClick={() => {
+                            setShowAuthModal('PARTNER');
+                            setIsMobileMenuOpen(false);
+                          }}
+                          className="w-full bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-4 py-2 rounded-md font-medium hover:from-purple-400 hover:to-indigo-500 transition-colors flex items-center justify-center gap-2"
+                        >
+                          <Lock className="w-4 h-4" />
+                          파트너 인증
                         </button>
                       )}
                       <button 
@@ -1845,6 +2122,15 @@ export default function App() {
                     <div className="flex flex-col gap-2 px-3">
                       <button 
                         onClick={() => {
+                          setShowAuthModal('STUDENT');
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className="w-full bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-4 py-2 rounded-md font-medium hover:from-blue-400 hover:to-cyan-500 transition-colors"
+                      >
+                        수강생 인증
+                      </button>
+                      <button 
+                        onClick={() => {
                           setShowAuthModal('BASIC');
                           setIsMobileMenuOpen(false);
                         }}
@@ -1860,6 +2146,15 @@ export default function App() {
                         className="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-black px-4 py-2 rounded-md font-medium hover:from-amber-400 hover:to-amber-500 transition-colors"
                       >
                         프리미엄 인증
+                      </button>
+                      <button 
+                        onClick={() => {
+                          setShowAuthModal('PARTNER');
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className="w-full bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-4 py-2 rounded-md font-medium hover:from-purple-400 hover:to-indigo-500 transition-colors"
+                      >
+                        파트너 인증
                       </button>
                     </div>
                   )}
@@ -1929,11 +2224,13 @@ export default function App() {
               <div className="flex bg-black rounded-xl p-1 border border-zinc-800 overflow-x-auto">
                 {[
                   { id: 'ALL', label: '전체' },
+                  { id: 'PROGRAM', label: '프로그램' },
                   { id: 'MARKETING', label: '마케팅' },
                   { id: 'DESIGN', label: '디자인' },
                   { id: 'VIDEO', label: '영상' },
                   { id: 'PLANNING', label: '기획' },
                   { id: 'PROMPT', label: '프롬프트' },
+                  { id: 'LECTURE', label: '강의자료' },
                 ].map((cat) => (
                   <button
                     key={cat.id}
@@ -1985,17 +2282,21 @@ export default function App() {
             <div className="flex bg-black rounded-xl p-1 border border-zinc-800">
               {[
                 { id: 'ALL', label: '전체' },
-                { id: 'FREE', label: '공개' },
+                { id: 'FREE', label: '무료버전' },
                 { id: 'PREMIUM', label: '멤버십 전용' },
+                { id: 'PARTNER', label: '파트너 전용' },
+                { id: 'STUDENT', label: '수강생 전용' },
               ].map((acc) => (
                 <button
                   key={acc.id}
                   onClick={() => setSelectedAccess(acc.id as any)}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                     selectedAccess === acc.id
-                      ? acc.id === 'PREMIUM' 
-                        ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-black shadow-sm' 
-                        : 'bg-zinc-800 text-white shadow-sm'
+                      ? acc.id === 'PARTNER'
+                        ? 'bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-sm'
+                        : acc.id === 'PREMIUM' 
+                          ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-black shadow-sm' 
+                          : 'bg-zinc-800 text-white shadow-sm'
                       : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900'
                   }`}
                 >
@@ -2007,103 +2308,77 @@ export default function App() {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          <AnimatePresence>
-            {filteredPrograms.map((program) => (
-              program.category === 'PROMPT' ? (
-                <PromptCard 
-                  key={program.id} 
-                  program={program} 
-                  authLevel={authLevel}
-                  onRequireAuth={() => setShowAuthModal('BASIC')}
-                />
-              ) : (
-              <motion.div
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.2 }}
-                key={program.id}
-                className="group flex flex-col bg-[#121212] rounded-2xl border border-zinc-800 overflow-hidden hover:border-zinc-700 transition-all duration-300 hover:shadow-[0_0_30px_rgba(220,38,38,0.1)] h-[460px]"
-              >
-                {/* Image Container */}
-                <div className="relative h-[220px] shrink-0 overflow-hidden bg-zinc-900">
-                  {program.customVisual ? (
-                    <div className="w-full h-full opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500">
-                      {program.customVisual}
-                    </div>
-                  ) : (
-                    <img 
-                      src={program.image} 
-                      alt={program.title}
-                      className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                      referrerPolicy="no-referrer"
-                    />
-                  )}
-                  
-                  {/* Top Badges */}
-                  <div className="absolute top-3 left-3 flex gap-2">
-                    {program.access === 'PREMIUM' ? (
-                      <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PREMIUM' ? 'bg-emerald-500' : 'bg-amber-500'} text-black text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
-                        {authLevel === 'PREMIUM' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                        {authLevel === 'PREMIUM' ? '인증됨' : '프리미엄 멤버십'}
-                      </div>
-                    ) : (
-                      <div className="flex items-center gap-1.5 px-2.5 py-1 bg-white/10 text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md border border-white/20">
-                        공개
-                      </div>
-                    )}
-                  </div>
-                </div>
+        {selectedCategory === 'ALL' ? (
+          <div className="space-y-16">
+            {['PROGRAM', 'PROMPT'].map(catId => {
+              const catPrograms = filteredPrograms.filter(p => catId === 'PROGRAM' ? !['PROMPT', 'LECTURE'].includes(p.category) : p.category === catId);
+              if (catPrograms.length === 0) return null;
+              
+              const currentPage = pageMap[catId] || 1;
+              const totalPages = Math.ceil(catPrograms.length / itemsPerPage);
+              const paginatedPrograms = catPrograms.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-                {/* Content */}
-                <div className="flex flex-col flex-grow p-5">
-                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-red-400 transition-colors line-clamp-1">
-                    {program.title}
-                  </h3>
-                  <p className="text-sm text-zinc-400 mb-4 line-clamp-3 flex-grow leading-relaxed">
-                    {program.description}
-                  </p>
-                  
-                  {/* Action Button */}
-                  <div className="mt-auto pt-4">
-                    {program.access === 'PREMIUM' && authLevel !== 'PREMIUM' ? (
-                      <button 
-                        onClick={() => setShowAuthModal('PREMIUM')}
-                        className={`w-full flex items-center justify-center gap-2 py-2.5 font-bold rounded-xl transition-all ${
-                          authLevel === 'BASIC' 
-                            ? 'bg-zinc-800 text-zinc-400 border border-zinc-700 cursor-not-allowed' 
-                            : 'bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black shadow-[0_0_15px_rgba(245,158,11,0.2)] hover:shadow-[0_0_20px_rgba(245,158,11,0.4)]'
-                        }`}
-                        disabled={authLevel === 'BASIC'}
-                      >
-                        <Lock className="w-4 h-4" />
-                        {authLevel === 'BASIC' ? '프리미엄 멤버십 이용 불가' : '잠금 해제 및 이동'}
-                      </button>
-                    ) : program.link ? (
-                      <a 
-                        href={program.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full flex items-center justify-center gap-2 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-bold rounded-xl transition-all border border-zinc-700 hover:border-zinc-600"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        바로가기
-                      </a>
-                    ) : (
-                      <button className="w-full flex items-center justify-center gap-2 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-bold rounded-xl transition-all border border-zinc-700 hover:border-zinc-600">
-                        <ExternalLink className="w-4 h-4" />
-                        바로가기
-                      </button>
-                    )}
+              return (
+                <div key={catId}>
+                  <div className="flex justify-between items-center mb-6">
+                    <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+                      {catId === 'PROGRAM' ? '🚀 프로그램' : catId === 'PROMPT' ? '💡 프롬프트' : '📚 강의자료'}
+                    </h2>
+                    <button
+                      onClick={() => {
+                        setSelectedCategory(catId as Category);
+                        setSelectedSubCategory('ALL');
+                      }}
+                      className="text-sm font-medium text-zinc-400 hover:text-white transition-colors flex items-center gap-1"
+                    >
+                      전체보기 <ChevronRight className="w-4 h-4" />
+                    </button>
                   </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <AnimatePresence>
+                      {paginatedPrograms.map(renderProgram)}
+                    </AnimatePresence>
+                  </div>
+
+                  {totalPages > 1 && (
+                    <div className="flex justify-center items-center gap-2 mt-8">
+                      <button 
+                        onClick={() => setPageMap(prev => ({ ...prev, [catId]: Math.max(1, currentPage - 1) }))}
+                        disabled={currentPage === 1}
+                        className="p-2 rounded-lg bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      >
+                        <ChevronLeft className="w-5 h-5" />
+                      </button>
+                      {Array.from({ length: totalPages }).map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setPageMap(prev => ({ ...prev, [catId]: i + 1 }))}
+                          className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${currentPage === i + 1 ? 'bg-red-600 text-white' : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 hover:text-white'}`}
+                        >
+                          {i + 1}
+                        </button>
+                      ))}
+                      <button 
+                        onClick={() => setPageMap(prev => ({ ...prev, [catId]: Math.min(totalPages, currentPage + 1) }))}
+                        disabled={currentPage === totalPages}
+                        className="p-2 rounded-lg bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      >
+                        <ChevronRight className="w-5 h-5" />
+                      </button>
+                    </div>
+                  )}
                 </div>
-              </motion.div>
-              )
-            ))}
-          </AnimatePresence>
-        </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <AnimatePresence>
+              {filteredPrograms.map(renderProgram)}
+            </AnimatePresence>
+          </div>
+        )}
 
         {filteredPrograms.length === 0 && (
           <div className="text-center py-20">
@@ -2125,7 +2400,10 @@ export default function App() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-              onClick={() => setShowAuthModal(false)}
+              onClick={() => {
+                setShowAuthModal(false);
+                setShowPassword(false);
+              }}
             />
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -2135,28 +2413,44 @@ export default function App() {
             >
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-xl font-bold text-white">
-                  {showAuthModal === 'PREMIUM' ? '프리미엄 멤버십 인증' : '멤버십 인증'}
+                  {showAuthModal === 'STUDENT' ? '수강생 인증' : showAuthModal === 'PARTNER' ? '혁신 파트너 인증' : showAuthModal === 'PREMIUM' ? '프리미엄 멤버십 인증' : '멤버십 인증'}
                 </h3>
-                <button onClick={() => setShowAuthModal(false)} className="text-zinc-400 hover:text-white transition-colors">
+                <button onClick={() => {
+                  setShowAuthModal(false);
+                  setShowPassword(false);
+                }} className="text-zinc-400 hover:text-white transition-colors">
                   <X className="w-5 h-5" />
                 </button>
               </div>
-              <p className="text-zinc-400 text-sm mb-6">
-                {showAuthModal === 'PREMIUM' ? '프리미엄 멤버십 코드를 입력해주세요.' : '멤버십 전용 코드를 입력해주세요.'}
+              <p className="text-zinc-400 text-sm mb-2">
+                {showAuthModal === 'STUDENT' ? '수강생 전용 코드를 입력해주세요.' : showAuthModal === 'PARTNER' ? '파트너 전용 코드를 입력해주세요.' : showAuthModal === 'PREMIUM' ? '프리미엄 멤버십 코드를 입력해주세요.' : '멤버십 전용 코드를 입력해주세요.'}
+              </p>
+              <p className="text-amber-400 text-xs font-medium mb-6 flex items-center gap-1">
+                <AlertTriangle className="w-3 h-3" />
+                모든 코드는 영어 소문자로 입력해주세요.
               </p>
               <div className="mb-4">
-                <input
-                  type="password"
-                  placeholder="인증 코드 입력"
-                  className="w-full bg-black border border-zinc-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all"
-                  value={authCode}
-                  onChange={(e) => {
-                    setAuthCode(e.target.value);
-                    setAuthError('');
-                  }}
-                  onKeyDown={(e) => e.key === 'Enter' && handleAuth()}
-                  autoFocus
-                />
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="인증 코드 입력"
+                    className="w-full bg-black border border-zinc-700 rounded-xl px-4 py-3 pr-16 text-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all font-mono"
+                    value={authCode}
+                    onChange={(e) => {
+                      setAuthCode(e.target.value);
+                      setAuthError('');
+                    }}
+                    onKeyDown={(e) => e.key === 'Enter' && handleAuth()}
+                    autoFocus
+                  />
+                  <button
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white transition-colors p-1"
+                    title={showPassword ? "숨기기" : "보기"}
+                  >
+                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  </button>
+                </div>
                 {authError && (
                   <motion.p 
                     initial={{ opacity: 0, y: -5 }}
@@ -2178,6 +2472,98 @@ export default function App() {
         )}
       </AnimatePresence>
 
+      {/* Terms Modal */}
+      <AnimatePresence>
+        {showTermsModal && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+              onClick={() => setShowTermsModal(false)}
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-full max-w-2xl shadow-2xl max-h-[80vh] flex flex-col"
+            >
+              <div className="flex justify-between items-center mb-4 shrink-0">
+                <h3 className="text-xl font-bold text-white">이용약관</h3>
+                <button onClick={() => setShowTermsModal(false)} className="text-zinc-400 hover:text-white transition-colors">
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="overflow-y-auto pr-2 text-zinc-300 text-sm leading-relaxed space-y-4">
+                <p className="font-bold text-white">제 1 조 (목적)</p>
+                <p>본 약관은 혁신AI(이하 "사이트")이 제공하는 인터넷 관련 서비스(이하 "서비스")를 이용함에 있어 사이트와 이용자의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.</p>
+                
+                <p className="font-bold text-white mt-6">제 2 조 (용어의 정의)</p>
+                <p>1. "이용자"란 사이트에 접속하여 본 약관에 따라 사이트가 제공하는 서비스를 받는 회원 및 비회원을 말합니다.</p>
+                <p>2. "콘텐츠"란 사이트에서 제공하는 정보, 텍스트, 이미지, 프롬프트, 프로그램 등을 말합니다.</p>
+
+                <p className="font-bold text-white mt-6">제 3 조 (약관의 효력 및 변경)</p>
+                <p>본 약관은 사이트 화면에 게시함으로써 효력이 발생하며, 사이트는 관련 법령을 위배하지 않는 범위 내에서 약관을 개정할 수 있습니다.</p>
+
+                <p className="font-bold text-white mt-6">제 4 조 (서비스의 제공 및 변경)</p>
+                <p>사이트는 AI 관련 정보 제공, 프롬프트 공유, 도구 배포 등의 서비스를 제공하며, 운영상 필요한 경우 서비스의 내용을 변경할 수 있습니다.</p>
+
+                <p className="font-bold text-white mt-6">제 5 조 (저작권의 귀속 및 이용제한)</p>
+                <p>1. 사이트가 작성한 저작물에 대한 저작권 및 기타 지적재산권은 사이트에 귀속됩니다.</p>
+                <p>2. 이용자는 서비스를 이용함으로써 얻은 정보를 사이트의 사전 승낙 없이 복제, 송신, 출판, 배포, 방송 기타 방법에 의하여 영리목적으로 이용하거나 제3자에게 이용하게 하여서는 안 됩니다.</p>
+
+                <p className="font-bold text-white mt-6">제 6 조 (면책조항)</p>
+                <p>사이트는 제공하는 정보 및 콘텐츠의 정확성이나 신뢰성에 대해 보증하지 않으며, 서비스 이용으로 인해 발생하는 결과에 대해 책임을 지지 않습니다. AI 모델의 답변이나 도구의 결과물은 사용자의 책임 하에 사용되어야 합니다.</p>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Privacy Modal */}
+      <AnimatePresence>
+        {showPrivacyModal && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+              onClick={() => setShowPrivacyModal(false)}
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-full max-w-2xl shadow-2xl max-h-[80vh] flex flex-col"
+            >
+              <div className="flex justify-between items-center mb-4 shrink-0">
+                <h3 className="text-xl font-bold text-white">개인정보처리방침</h3>
+                <button onClick={() => setShowPrivacyModal(false)} className="text-zinc-400 hover:text-white transition-colors">
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="overflow-y-auto pr-2 text-zinc-300 text-sm leading-relaxed space-y-4">
+                <p className="font-bold text-white">1. 개인정보의 수집 항목 및 방법</p>
+                <p>혁신AI는 이용자의 개인정보를 일체 수집하지 않습니다. 본 사이트 이용 시 어떠한 형태의 개인정보(이름, 이메일, 연락처 등)도 요구하거나 저장하지 않습니다.</p>
+                
+                <p className="font-bold text-white mt-6">2. 개인정보 자동 수집 장치의 설치/운영</p>
+                <p>본 사이트는 이용자의 정보를 수집하거나 저장하는 별도의 장치나 방법을 일체 운영하지 않습니다.</p>
+
+                <p className="font-bold text-white mt-6">3. 사용자 문의 및 답변</p>
+                <p>사용자 문의 및 답변은 사이트 내에서 이루어지지 않으며, 아래 이메일을 통해 문의하셔야 합니다. 정혁신의 AI강의 수강생분들은 정혁신에게 별도 문의 가능합니다. 사이트 내에는 문의를 위한 별도의 개인정보 수집 폼이 존재하지 않습니다.</p>
+
+                <div className="mt-8 p-4 bg-black/50 rounded-lg border border-zinc-800">
+                  <p className="mb-2"><span className="text-white font-medium">문의 메일 :</span> info@nextin.ai.kr</p>
+                  <p><span className="text-white font-medium">시행날짜 :</span> 2026년 3월 1일</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
       {/* Footer */}
       <footer className="border-t border-white/10 bg-black py-12 mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
@@ -2189,8 +2575,8 @@ export default function App() {
             © 2026 혁신 AI by 정혁신. All rights reserved.
           </div>
           <div className="flex gap-4 text-sm text-zinc-400">
-            <a href="#" className="hover:text-white">이용약관</a>
-            <a href="#" className="hover:text-white">개인정보처리방침</a>
+            <button onClick={() => setShowTermsModal(true)} className="hover:text-white transition-colors">이용약관</button>
+            <button onClick={() => setShowPrivacyModal(true)} className="hover:text-white transition-colors">개인정보처리방침</button>
           </div>
         </div>
       </footer>
