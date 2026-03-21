@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Lock, Unlock, ExternalLink, Menu, X, Settings, Zap, Sparkles, ArrowRight, Copy, Check, Bot, Youtube, Star, FileText, AlertTriangle, Wand2, Code, Eye, EyeOff, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, Lock, Unlock, ExternalLink, Menu, X, Settings, Zap, Sparkles, ArrowRight, Copy, Check, Bot, Youtube, Star, FileText, AlertTriangle, Wand2, Code, Eye, EyeOff, ChevronLeft, ChevronRight, ChevronDown, Lightbulb, HelpCircle, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { additionalPrompts } from './promptsData';
 
@@ -46,32 +46,6 @@ const PROGRAMS: Program[] = ([
     category: 'LECTURE',
     tags: ['가이드', 'API', '결제'],
     link: 'https://docs.google.com/document/d/1S37vCHrloJwcD1w-m8X1OXsBOAhO4MDJrzuVs0wbKkw/edit?tab=t.0#heading=h.7kaiinz6a899'
-  },
-  {
-    id: 'lecture-sample',
-    title: '혁신 AI 마스터 클래스',
-    description: '수강생 전용으로 제공되는 혁신 AI 마스터 클래스 강의 자료 및 VOD 링크입니다.',
-    image: '',
-    customVisual: (
-      <div className="w-full h-full bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81] relative overflow-hidden flex items-center justify-center p-6 text-center">
-        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.4) 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
-        <div className="relative z-10 w-full flex flex-col items-center justify-center">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/20 text-blue-300 text-xs font-bold w-max mb-4">
-            <span className="text-blue-400">📚</span> 수강생 전용 자료
-          </div>
-          <h2 className="text-3xl font-black text-white tracking-tight mb-3 drop-shadow-lg">
-            AI 마스터 클래스
-          </h2>
-          <p className="text-blue-200 text-sm leading-relaxed max-w-[90%] font-medium drop-shadow-md">
-            혁신 AI의 모든 것을 배우는<br/>핵심 강의 자료 모음
-          </p>
-        </div>
-      </div>
-    ),
-    access: 'STUDENT',
-    category: 'LECTURE',
-    tags: ['강의', 'VOD', '자료'],
-    link: '#'
   },
   {
     id: '1',
@@ -124,38 +98,82 @@ const PROGRAMS: Program[] = ([
     description: '여러분의 잠재력을 깨워서 형식적이고 실행불가한 AI수익화가 아닌 나만의 맞춤 AI수익화의 자세한 방향을 찾아드립니다!',
     image: '',
     customVisual: (
-      <div className="w-full h-full bg-gradient-to-br from-[#16162c] to-[#0a0a14] relative overflow-hidden flex items-center">
-        {/* Grid background */}
-        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.2) 1px, transparent 0)', backgroundSize: '16px 16px' }}></div>
-        
-        {/* Wavy lines placeholder */}
-        <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <path d="M-10,50 Q25,10 50,50 T110,50" fill="none" stroke="#4a4ae2" strokeWidth="0.2" />
-          <path d="M-10,70 Q30,110 60,50 T110,30" fill="none" stroke="#4a4ae2" strokeWidth="0.2" />
-          <path d="M-10,30 Q40,-10 70,60 T110,80" fill="none" stroke="#4a4ae2" strokeWidth="0.2" />
-          <path d="M-10,40 Q35,20 55,60 T110,40" fill="none" stroke="#4a4ae2" strokeWidth="0.2" />
-          <path d="M-10,60 Q45,90 65,40 T110,60" fill="none" stroke="#4a4ae2" strokeWidth="0.2" />
+      <div className="w-full h-full bg-[#0a0a0a] relative overflow-hidden flex items-center">
+        {/* Stock Chart Background */}
+        <svg className="absolute inset-0 w-full h-full opacity-40" viewBox="0 0 800 400" preserveAspectRatio="none">
+          {/* Grid lines */}
+          <path d="M0,50 L800,50 M0,100 L800,100 M0,150 L800,150 M0,200 L800,200 M0,250 L800,250 M0,300 L800,300 M0,350 L800,350" stroke="#ffffff" strokeWidth="0.5" opacity="0.05" />
+          <path d="M100,0 L100,400 M200,0 L200,400 M300,0 L300,400 M400,0 L400,400 M500,0 L500,400 M600,0 L600,400 M700,0 L700,400" stroke="#ffffff" strokeWidth="0.5" opacity="0.05" />
+          
+          {/* Moving Averages */}
+          <path d="M0,100 Q200,150 400,300 T800,350" fill="none" stroke="#3b82f6" strokeWidth="2" opacity="0.4" />
+          <path d="M0,150 Q250,200 450,350 T800,400" fill="none" stroke="#eab308" strokeWidth="2" opacity="0.4" />
+          <path d="M0,200 Q300,250 500,400 T800,450" fill="none" stroke="#10b981" strokeWidth="2" opacity="0.4" />
+          
+          {/* Candlesticks (Red downtrend) */}
+          <g opacity="0.6">
+            {/* Red candle */}
+            <rect x="250" y="120" width="12" height="60" fill="#991b1b" />
+            <line x1="256" y1="100" x2="256" y2="200" stroke="#991b1b" strokeWidth="2" />
+            
+            {/* Red candle */}
+            <rect x="280" y="140" width="12" height="80" fill="#991b1b" />
+            <line x1="286" y1="120" x2="286" y2="240" stroke="#991b1b" strokeWidth="2" />
+            
+            {/* Green candle */}
+            <rect x="310" y="180" width="12" height="40" fill="none" stroke="#16a34a" strokeWidth="2" />
+            <line x1="316" y1="160" x2="316" y2="240" stroke="#16a34a" strokeWidth="2" />
+            
+            {/* Red candle */}
+            <rect x="340" y="200" width="12" height="90" fill="#991b1b" />
+            <line x1="346" y1="180" x2="346" y2="310" stroke="#991b1b" strokeWidth="2" />
+            
+            {/* Red candle */}
+            <rect x="370" y="240" width="12" height="70" fill="#991b1b" />
+            <line x1="376" y1="220" x2="376" y2="330" stroke="#991b1b" strokeWidth="2" />
+            
+            {/* Green candle */}
+            <rect x="400" y="280" width="12" height="30" fill="none" stroke="#16a34a" strokeWidth="2" />
+            <line x1="406" y1="260" x2="406" y2="330" stroke="#16a34a" strokeWidth="2" />
+            
+            {/* Red candle */}
+            <rect x="430" y="290" width="12" height="80" fill="#991b1b" />
+            <line x1="436" y1="270" x2="436" y2="390" stroke="#991b1b" strokeWidth="2" />
+            
+            {/* Red candle */}
+            <rect x="460" y="320" width="12" height="60" fill="#991b1b" />
+            <line x1="466" y1="300" x2="466" y2="400" stroke="#991b1b" strokeWidth="2" />
+            
+            {/* Green candle */}
+            <rect x="490" y="350" width="12" height="40" fill="none" stroke="#16a34a" strokeWidth="2" />
+            <line x1="496" y1="330" x2="496" y2="410" stroke="#16a34a" strokeWidth="2" />
+          </g>
         </svg>
 
-        {/* Big AI Text */}
-        <div className="absolute right-[-5%] top-1/2 -translate-y-1/2 text-[140px] font-black text-[#1e293b] opacity-80 leading-none tracking-tighter select-none" style={{ textShadow: '10px 10px 20px rgba(0,0,0,0.5)' }}>
-          AI
-        </div>
-
         {/* Content */}
-        <div className="relative z-10 p-5 flex flex-col justify-center h-full w-full">
-          <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-500 text-[9px] font-bold w-max mb-3">
-            <span className="text-amber-400">✨</span> 정혁신 AI 솔루션
+        <div className="relative z-10 p-6 flex flex-col justify-center h-full w-full">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-amber-600/50 bg-black/40 text-amber-500 text-[10px] font-medium w-max mb-4">
+            <Sparkles className="w-3 h-3 text-amber-500" /> 정혁신 AI 솔루션
           </div>
-          <h2 className="text-xl font-bold text-white leading-tight mb-1">
+          <h2 className="text-[28px] font-bold text-white leading-tight mb-1 tracking-tight">
             AI로 시작하는
           </h2>
-          <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-red-500 mb-2">
-            무자본 수익화 혁명
+          <h2 className="text-[28px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 mb-4 tracking-tight">
+            나만의 맞춤 수익화 발굴
           </h2>
-          <p className="text-zinc-400 text-[9px] leading-relaxed max-w-[75%]">
-            당신의 숨겨진 잠재력을 찾아내어, 당장 오늘부터 시작할 수 있는 가장 현실적인 수익화 로드맵을 설계합니다.
+          <p className="text-zinc-300 text-[13px] leading-relaxed max-w-[85%] break-keep">
+            당신의 숨겨진 잠재력을 찾아내어, 당장 오늘부터 시작할 수 있는 가장<br/>현실적인 수익화 로드맵을 설계합니다.
           </p>
+        </div>
+
+        {/* Bottom Right Button */}
+        <div className="absolute bottom-6 right-6 z-10">
+          <div className="flex items-center gap-3 px-4 py-2 bg-[#1a1a1a] border border-zinc-800 rounded-xl shadow-2xl">
+            <div className="w-8 h-8 rounded-full bg-red-900/40 flex items-center justify-center">
+              <Lightbulb className="w-4 h-4 text-red-400" />
+            </div>
+            <span className="text-white text-sm font-bold">숨겨진 가치 발견</span>
+          </div>
         </div>
       </div>
     ),
@@ -722,6 +740,52 @@ const PROGRAMS: Program[] = ([
     category: 'PLANNING',
     tags: ['비즈니스', '분석', '리스크'],
     link: 'https://gemini.google.com/gem/1KpshogfylCy9GoY4QGNZACEfJ81FkCjd?usp=sharing'
+  },
+  {
+    id: 'p-ppt-notebooklm',
+    title: 'PPT 디자인 프롬프트 [학원_NotebookLM용]',
+    description: 'AI·에듀테크 기반 학원 브랜딩 슬라이드 전문가를 위한 NotebookLM 슬라이드 디자인 가이드 프롬프트입니다.',
+    image: '',
+    access: 'FREE',
+    category: 'PROMPT',
+    promptSubCategory: '디자인',
+    tags: ['PPT', '디자인', '학원', 'NotebookLM'],
+    promptText: `[NotebookLM Slide Design Guide]
+
+Role : AI·에듀테크 기반 학원 브랜딩 슬라이드 전문가
+Industry : 학원
+Type : 에듀테크 이노베이션 — AI·빅데이터 기반 맞춤 학습 시스템 자료
+
+[Color Guide]
+Background : #e8f0fe (라이트 블루)
+Text Color : #0a1a2e (딥 네이비) / #3a5070 (블루 그레이)
+Accent : #1a73e8 (디지털 블루) / #00c896 (에듀 민트)
+Font : DM Sans (제목) / Noto Sans KR (본문)
+
+[Tone & Manner]
+AI·빅데이터·디지털 학습 플랫폼을 앞세운 미래지향 학원 이미지. 앱 기반 개인 맞춤 학습·실시간 성취도 분석을 학부모에게 어필. 기술이 만드는 공정한 교육.
+
+[Image Principles]
+태블릿·학습 앱 UI 이미지. 민트·블루 에듀 아이콘. 학습 데이터 대시보드. AI 추천 학습 경로 플로우.
+
+[Design Characteristics]
+• 라이트 블루 + 민트 배색
+• 앱 UI 모형 레이아웃
+• 학습 데이터 시각화
+• AI 기능 아이콘 카드
+• 학부모·학생 피드백 배지
+
+[Layout Guide]
+- Title Slide : 라이트 블루 + 앱 UI 모형 + 블루 헤드라인
+- Spec Slide : AI 기능 카드 그리드 (진단·추천·분석·리포트)
+- Comparison Slide : 일반 수업 vs AI 맞춤 학습 성취도 비교
+- CTA Slide : 민트 버튼 + 무료 체험 신청 CTA
+- Tone : Innovative / Data-driven / Modern
+- Slide count : 7 pages
+- Font size contrast : 제목 42pt / 소제목 20pt / 본문 14pt
+- Text per slide : 최대 50단어
+
+Apply this style consistently across all slides for a cohesive, professional slides design.`
   },
   {
     id: 'p1',
@@ -1669,7 +1733,7 @@ function PromptCard({
           {program.access === 'STUDENT' && (
             <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'STUDENT' ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-100 text-blue-700'} text-[10px] font-bold rounded-md shrink-0`}>
               {authLevel === 'STUDENT' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-              수강생 전용
+              🎓 수강생 전용
             </span>
           )}
           {(program.access === 'PREMIUM' || program.access === 'PARTNER') && (
@@ -1677,12 +1741,12 @@ function PromptCard({
               {program.access === 'PARTNER' && (
                 <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'PARTNER' || authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? 'bg-emerald-100 text-emerald-700' : 'bg-purple-100 text-purple-700'} text-[10px] font-bold rounded-md shrink-0`}>
                   {authLevel === 'PARTNER' || authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                  파트너 전용
+                  🤝 파트너 전용
                 </span>
               )}
               <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'PREMIUM' || authLevel === 'STUDENT' || (program.access === 'PARTNER' && authLevel === 'PARTNER') ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'} text-[10px] font-bold rounded-md shrink-0`}>
                 {authLevel === 'PREMIUM' || authLevel === 'STUDENT' || (program.access === 'PARTNER' && authLevel === 'PARTNER') ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                멤버십 전용
+                👑 멤버십 전용
               </span>
             </>
           )}
@@ -1709,7 +1773,7 @@ function PromptCard({
               <div className="bg-white p-3 rounded-full shadow-md mb-3">
                 <Lock className="w-6 h-6 text-amber-500" />
               </div>
-              <p className="text-sm font-bold text-gray-900 mb-1">{program.access === 'STUDENT' ? '수강생 전용 프롬프트' : '멤버십 전용 프롬프트'}</p>
+              <p className="text-sm font-bold text-gray-900 mb-1">{program.access === 'STUDENT' ? '🎓 수강생 전용 프롬프트' : '👑 멤버십 전용 프롬프트'}</p>
               <p className="text-xs text-gray-600 text-center px-4">
                 인증 코드를 입력하고<br/>모든 프롬프트를 확인하세요
               </p>
@@ -1754,11 +1818,13 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = useState<Category>('ALL');
   const [selectedSubCategory, setSelectedSubCategory] = useState<PromptSubCategory | 'ALL'>('ALL');
   const [selectedAccess, setSelectedAccess] = useState<'ALL' | 'FREE' | 'PREMIUM' | 'PARTNER' | 'STUDENT'>('ALL');
+  const [isVersionDropdownOpen, setIsVersionDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [authLevel, setAuthLevel] = useState<'NONE' | 'BASIC' | 'PREMIUM' | 'PARTNER' | 'STUDENT'>('NONE');
   const [showAuthModal, setShowAuthModal] = useState<false | 'BASIC' | 'PREMIUM' | 'PARTNER' | 'STUDENT'>(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
+  const [showSupportModal, setShowSupportModal] = useState(false);
   const [pageMap, setPageMap] = useState<Record<string, number>>({ PROGRAM: 1, PROMPT: 1, LECTURE: 1 });
   const [itemsPerPage, setItemsPerPage] = useState(8);
 
@@ -1868,27 +1934,27 @@ export default function App() {
             {program.access === 'STUDENT' ? (
               <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'STUDENT' ? 'bg-emerald-500' : 'bg-blue-500'} text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
                 {authLevel === 'STUDENT' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                {authLevel === 'STUDENT' ? '인증됨' : '수강생 전용'}
+                {authLevel === 'STUDENT' ? '인증됨' : '🎓 수강생 전용'}
               </div>
             ) : program.access === 'PARTNER' ? (
               <>
                 <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PARTNER' || authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? 'bg-emerald-500' : 'bg-purple-500'} text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
                   {authLevel === 'PARTNER' || authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                  {authLevel === 'PARTNER' || authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? '인증됨' : '혁신 파트너'}
+                  {authLevel === 'PARTNER' || authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? '인증됨' : '🤝 혁신 파트너'}
                 </div>
                 <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PREMIUM' || authLevel === 'PARTNER' || authLevel === 'STUDENT' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-black'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
                   {authLevel === 'PREMIUM' || authLevel === 'PARTNER' || authLevel === 'STUDENT' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                  {authLevel === 'PREMIUM' || authLevel === 'PARTNER' || authLevel === 'STUDENT' ? '인증됨' : '프리미엄 멤버십'}
+                  {authLevel === 'PREMIUM' || authLevel === 'PARTNER' || authLevel === 'STUDENT' ? '인증됨' : '👑 프리미엄 멤버십'}
                 </div>
               </>
             ) : program.access === 'PREMIUM' ? (
               <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-black'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
                 {authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                {authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? '인증됨' : '프리미엄 멤버십'}
+                {authLevel === 'PREMIUM' || authLevel === 'STUDENT' ? '인증됨' : '👑 프리미엄 멤버십'}
               </div>
             ) : (
               <div className="flex items-center gap-1.5 px-2.5 py-1 bg-white/10 text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md border border-white/20">
-                무료버전
+                🎁 무료버전
               </div>
             )}
           </div>
@@ -1968,12 +2034,12 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex-shrink-0 flex items-center gap-2">
+            <a href="/" className="flex-shrink-0 flex items-center gap-2 hover:opacity-80 transition-opacity">
               <div className="w-8 h-8 rounded bg-gradient-to-br from-red-600 to-amber-500 flex items-center justify-center">
                 <Zap className="w-5 h-5 text-white" />
               </div>
               <span className="font-bold text-xl tracking-tight">혁신 AI</span>
-            </div>
+            </a>
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8">
@@ -2211,7 +2277,7 @@ export default function App() {
             <input
               type="text"
               className="block w-full pl-10 pr-3 py-3 border border-zinc-800 rounded-xl leading-5 bg-black text-zinc-300 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500 transition-colors sm:text-sm"
-              placeholder="프로그램 검색..."
+              placeholder="무엇이든 검색하세요!"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -2223,14 +2289,14 @@ export default function App() {
             <div className="flex flex-col gap-3">
               <div className="flex bg-black rounded-xl p-1 border border-zinc-800 overflow-x-auto">
                 {[
-                  { id: 'ALL', label: '전체' },
-                  { id: 'PROGRAM', label: '프로그램' },
-                  { id: 'MARKETING', label: '마케팅' },
-                  { id: 'DESIGN', label: '디자인' },
-                  { id: 'VIDEO', label: '영상' },
-                  { id: 'PLANNING', label: '기획' },
-                  { id: 'PROMPT', label: '프롬프트' },
-                  { id: 'LECTURE', label: '강의자료' },
+                  { id: 'ALL', label: '🌟 전체' },
+                  { id: 'PROGRAM', label: '💻 프로그램' },
+                  { id: 'MARKETING', label: '📈 마케팅' },
+                  { id: 'DESIGN', label: '🎨 디자인' },
+                  { id: 'VIDEO', label: '🎬 영상' },
+                  { id: 'PLANNING', label: '📝 기획' },
+                  { id: 'PROMPT', label: '💬 프롬프트' },
+                  { id: 'LECTURE', label: '📚 강의자료' },
                 ].map((cat) => (
                   <button
                     key={cat.id}
@@ -2253,14 +2319,14 @@ export default function App() {
               {selectedCategory === 'PROMPT' && (
                 <div className="flex bg-black/50 rounded-xl p-1 border border-zinc-800/50 overflow-x-auto">
                   {[
-                    { id: 'ALL', label: '전체' },
-                    { id: '비즈니스', label: '비즈니스' },
-                    { id: '마케팅', label: '마케팅' },
-                    { id: '디자인', label: '디자인' },
-                    { id: '콘텐츠', label: '콘텐츠' },
-                    { id: '개발', label: '개발' },
-                    { id: '교육', label: '교육' },
-                    { id: '일상', label: '일상' },
+                    { id: 'ALL', label: '✨ 모든 프롬프트' },
+                    { id: '비즈니스', label: '💼 비즈니스' },
+                    { id: '마케팅', label: '📈 마케팅' },
+                    { id: '디자인', label: '🎨 디자인' },
+                    { id: '콘텐츠', label: '📝 콘텐츠' },
+                    { id: '개발', label: '💻 개발' },
+                    { id: '교육', label: '🎓 교육' },
+                    { id: '일상', label: '☕ 일상' },
                   ].map((subCat) => (
                     <button
                       key={subCat.id}
@@ -2279,25 +2345,29 @@ export default function App() {
             </div>
 
             {/* Access Filter */}
-            <div className="flex bg-black rounded-xl p-1 border border-zinc-800">
+            <div className="flex flex-wrap items-center gap-2">
               {[
-                { id: 'ALL', label: '전체' },
-                { id: 'FREE', label: '무료버전' },
-                { id: 'PREMIUM', label: '멤버십 전용' },
-                { id: 'PARTNER', label: '파트너 전용' },
-                { id: 'STUDENT', label: '수강생 전용' },
+                { id: 'ALL', label: '✨ 모든 버전' },
+                { id: 'FREE', label: '🎁 무료버전' },
+                { id: 'PREMIUM', label: '👑 멤버십 전용' },
+                { id: 'PARTNER', label: '🤝 파트너 전용' },
+                { id: 'STUDENT', label: '🎓 수강생 전용' },
               ].map((acc) => (
                 <button
                   key={acc.id}
                   onClick={() => setSelectedAccess(acc.id as any)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-full text-sm font-medium transition-all border ${
                     selectedAccess === acc.id
                       ? acc.id === 'PARTNER'
-                        ? 'bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-sm'
-                        : acc.id === 'PREMIUM' 
-                          ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-black shadow-sm' 
-                          : 'bg-zinc-800 text-white shadow-sm'
-                      : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900'
+                        ? 'bg-purple-500/20 border-purple-500/50 text-purple-300 shadow-[0_0_10px_rgba(168,85,247,0.2)]'
+                        : acc.id === 'PREMIUM'
+                          ? 'bg-amber-500/20 border-amber-500/50 text-amber-300 shadow-[0_0_10px_rgba(245,158,11,0.2)]'
+                          : acc.id === 'FREE'
+                            ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-300 shadow-[0_0_10px_rgba(16,185,129,0.2)]'
+                            : acc.id === 'STUDENT'
+                              ? 'bg-blue-500/20 border-blue-500/50 text-blue-300 shadow-[0_0_10px_rgba(59,130,246,0.2)]'
+                              : 'bg-zinc-100 border-zinc-100 text-black shadow-[0_0_10px_rgba(255,255,255,0.2)]'
+                      : 'bg-black border-zinc-800 text-zinc-400 hover:border-zinc-600 hover:text-zinc-200'
                   }`}
                 >
                   {acc.label}
@@ -2577,9 +2647,57 @@ export default function App() {
           <div className="flex gap-4 text-sm text-zinc-400">
             <button onClick={() => setShowTermsModal(true)} className="hover:text-white transition-colors">이용약관</button>
             <button onClick={() => setShowPrivacyModal(true)} className="hover:text-white transition-colors">개인정보처리방침</button>
+            <button onClick={() => setShowSupportModal(true)} className="hover:text-white transition-colors">오류 및 유지보수 문의</button>
           </div>
         </div>
       </footer>
+      {/* Support Modal */}
+      <AnimatePresence>
+        {showSupportModal && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+              onClick={() => setShowSupportModal(false)}
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-full max-w-md shadow-2xl flex flex-col"
+            >
+              <div className="flex justify-between items-center mb-6 shrink-0">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center border border-blue-500/30">
+                    <HelpCircle className="w-5 h-5 text-blue-400" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white">오류 및 유지보수 문의</h3>
+                </div>
+                <button onClick={() => setShowSupportModal(false)} className="text-zinc-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/5">
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="text-zinc-300 text-sm leading-relaxed mb-6">
+                <p className="mb-4">
+                  혁신AI 또는 맞춤 AI 제작물에 대한 오류 및 유지보수 문의는 아래 이메일을 통해 문의주시길 바랍니다.
+                </p>
+                <p className="font-medium text-amber-400">
+                  24시간 이내에 확인 후 피드백 드립니다.
+                </p>
+              </div>
+              <a 
+                href="mailto:info@nextin.ai.kr"
+                className="flex items-center justify-center gap-2 w-full py-3 bg-white text-black font-bold rounded-xl hover:bg-gray-100 transition-colors"
+              >
+                <Mail className="w-4 h-4" />
+                info@nextin.ai.kr
+              </a>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
