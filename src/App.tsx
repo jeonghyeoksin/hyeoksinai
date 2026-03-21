@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { additionalPrompts } from './promptsData';
 
 // --- Types ---
-type AccessLevel = 'FREE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER';
+type AccessLevel = 'FREE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER' | 'DONCLASS';
 type Category = 'ALL' | 'PROGRAM' | 'MARKETING' | 'DESIGN' | 'VIDEO' | 'PLANNING' | 'PROMPT' | 'LECTURE';
 type PromptSubCategory = '비즈니스' | '마케팅' | '디자인' | '콘텐츠' | '개발' | '교육' | '일상';
 
@@ -1814,13 +1814,13 @@ function PromptCard({
   onRequireAuth 
 }: { 
   program: Program; 
-  authLevel: 'NONE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER';
+  authLevel: 'NONE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER' | 'DONCLASS';
   onRequireAuth: () => void;
   key?: string;
 }) {
   const [copied, setCopied] = useState(false);
 
-  const isLocked = authLevel !== 'MASTER' && (
+  const isLocked = authLevel !== 'MASTER' && authLevel !== 'DONCLASS' && (
     (program.access === 'PREMIUM' && authLevel !== 'PREMIUM') || 
     (program.access === 'STUDENT' && authLevel !== 'STUDENT') ||
     (program.access === 'BASIC' && authLevel !== 'BASIC' && authLevel !== 'PREMIUM')
@@ -1851,22 +1851,22 @@ function PromptCard({
       <div className="p-6 flex flex-col flex-grow overflow-hidden">
         <div className="flex items-start gap-2 mb-3 flex-wrap">
           {program.access === 'STUDENT' && (
-            <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'STUDENT' || authLevel === 'MASTER' ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-100 text-blue-700'} text-[10px] font-bold rounded-md shrink-0`}>
-              {authLevel === 'STUDENT' || authLevel === 'MASTER' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+            <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-100 text-blue-700'} text-[10px] font-bold rounded-md shrink-0`}>
+              {authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
               🎓 수강생 전용
             </span>
           )}
           {(program.access === 'PREMIUM' || program.access === 'BASIC') && (
             <>
               {program.access === 'PREMIUM' && (
-                <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'PREMIUM' || authLevel === 'MASTER' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'} text-[10px] font-bold rounded-md shrink-0`}>
-                  {authLevel === 'PREMIUM' || authLevel === 'MASTER' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'} text-[10px] font-bold rounded-md shrink-0`}>
+                  {authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
                   💎 프리미엄 멤버십 전용
                 </span>
               )}
               {program.access === 'BASIC' && (
-                <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'} text-[10px] font-bold rounded-md shrink-0`}>
-                  {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'} text-[10px] font-bold rounded-md shrink-0`}>
+                  {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
                   👑 멤버십 전용
                 </span>
               )}
@@ -1943,10 +1943,10 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<Category>('ALL');
   const [selectedSubCategory, setSelectedSubCategory] = useState<PromptSubCategory | 'ALL'>('ALL');
-  const [selectedAccess, setSelectedAccess] = useState<'ALL' | 'FREE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER'>('ALL');
+  const [selectedAccess, setSelectedAccess] = useState<'ALL' | 'FREE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER' | 'DONCLASS'>('ALL');
   const [isVersionDropdownOpen, setIsVersionDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [authLevel, setAuthLevel] = useState<'NONE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER'>('NONE');
+  const [authLevel, setAuthLevel] = useState<'NONE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER' | 'DONCLASS'>('NONE');
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
@@ -1972,6 +1972,12 @@ export default function App() {
   const handleAuth = () => {
     if (authCode === 'master1004') {
       setAuthLevel('MASTER');
+      setShowAuthModal(false);
+      setAuthCode('');
+      setAuthError('');
+      setShowPassword(false);
+    } else if (authCode === 'donclass1') {
+      setAuthLevel('DONCLASS');
       setShowAuthModal(false);
       setAuthCode('');
       setAuthError('');
@@ -2056,19 +2062,19 @@ export default function App() {
           {/* Top Badges */}
           <div className="absolute top-3 left-3 flex gap-2 flex-wrap">
             {program.access === 'STUDENT' ? (
-              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'STUDENT' || authLevel === 'MASTER' ? 'bg-emerald-500' : 'bg-blue-500'} text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
-                {authLevel === 'STUDENT' || authLevel === 'MASTER' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                {authLevel === 'STUDENT' || authLevel === 'MASTER' ? '인증됨' : '🎓 수강생 전용'}
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? 'bg-emerald-500' : 'bg-blue-500'} text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
+                {authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                {authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? '인증됨' : '🎓 수강생 전용'}
               </div>
             ) : program.access === 'PREMIUM' ? (
-              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PREMIUM' || authLevel === 'MASTER' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-black'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
-                {authLevel === 'PREMIUM' || authLevel === 'MASTER' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                {authLevel === 'PREMIUM' || authLevel === 'MASTER' ? '인증됨' : '💎 프리미엄 멤버십'}
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-black'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
+                {authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                {authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? '인증됨' : '💎 프리미엄 멤버십'}
               </div>
             ) : program.access === 'BASIC' ? (
-              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-black'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
-                {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' ? '인증됨' : '👑 멤버십'}
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-black'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
+                {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'DONCLASS' ? '인증됨' : '👑 멤버십'}
               </div>
             ) : (
               <div className="flex items-center gap-1.5 px-2.5 py-1 bg-white/10 text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md border border-white/20">
@@ -2089,7 +2095,7 @@ export default function App() {
           
           {/* Action Button */}
           <div className="mt-auto pt-4">
-            {program.access === 'STUDENT' && authLevel !== 'STUDENT' && authLevel !== 'MASTER' ? (
+            {program.access === 'STUDENT' && authLevel !== 'STUDENT' && authLevel !== 'MASTER' && authLevel !== 'DONCLASS' ? (
               <button 
                 onClick={() => setShowAuthModal(true)}
                 className={`w-full flex items-center justify-center gap-2 py-2.5 font-bold rounded-xl transition-all ${
@@ -2102,7 +2108,7 @@ export default function App() {
                 <Lock className="w-4 h-4" />
                 {authLevel !== 'NONE' ? '수강생 전용 이용 불가' : '잠금 해제 및 이동'}
               </button>
-            ) : program.access === 'PREMIUM' && authLevel !== 'PREMIUM' && authLevel !== 'MASTER' ? (
+            ) : program.access === 'PREMIUM' && authLevel !== 'PREMIUM' && authLevel !== 'MASTER' && authLevel !== 'DONCLASS' ? (
               <button 
                 onClick={() => setShowAuthModal(true)}
                 className={`w-full flex items-center justify-center gap-2 py-2.5 font-bold rounded-xl transition-all ${
@@ -2115,7 +2121,7 @@ export default function App() {
                 <Lock className="w-4 h-4" />
                 {authLevel === 'BASIC' || authLevel === 'STUDENT' ? '프리미엄 멤버십 이용 불가' : '잠금 해제 및 이동'}
               </button>
-            ) : program.access === 'BASIC' && authLevel !== 'BASIC' && authLevel !== 'PREMIUM' && authLevel !== 'MASTER' ? (
+            ) : program.access === 'BASIC' && authLevel !== 'BASIC' && authLevel !== 'PREMIUM' && authLevel !== 'MASTER' && authLevel !== 'DONCLASS' ? (
               <button 
                 onClick={() => setShowAuthModal(true)}
                 className={`w-full flex items-center justify-center gap-2 py-2.5 font-bold rounded-xl transition-all ${
@@ -2178,7 +2184,7 @@ export default function App() {
               {authLevel !== 'NONE' ? (
                 <div className="flex items-center gap-3">
                   <span className="text-sm text-emerald-400 font-medium">
-                    {authLevel === 'MASTER' ? '마스터' : authLevel === 'STUDENT' ? '수강생' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '멤버십'}
+                    {authLevel === 'MASTER' ? '마스터' : authLevel === 'DONCLASS' ? '협력사 : 돈클' : authLevel === 'STUDENT' ? '수강생' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '멤버십'}
                   </span>
                   <button 
                     onClick={() => setAuthLevel('NONE')}
@@ -2235,7 +2241,7 @@ export default function App() {
                   {authLevel !== 'NONE' ? (
                     <div className="flex flex-col gap-2 px-3">
                       <span className="text-sm text-emerald-400 font-medium mb-2">
-                        {authLevel === 'MASTER' ? '마스터' : authLevel === 'STUDENT' ? '수강생' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '멤버십'} 인증 완료
+                        {authLevel === 'MASTER' ? '마스터' : authLevel === 'DONCLASS' ? '협력사 : 돈클' : authLevel === 'STUDENT' ? '수강생' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '멤버십'} 인증 완료
                       </span>
                       <button 
                         onClick={() => {
