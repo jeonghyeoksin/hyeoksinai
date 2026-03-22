@@ -186,6 +186,29 @@ const PROGRAMS: Program[] = ([
     link: 'https://docs.google.com/document/d/1WiYeaHaJ2zuR7iJ-z0wwRa8mhQacukenWt3veEjAKEg/edit?usp=sharing'
   },
   {
+    id: 'lecture-anydesk-install',
+    title: '원격서비스 Anydesk 설치방법 (수강생 전용)',
+    description: '원격 지원을 위한 Anydesk 설치 및 설정 가이드입니다.',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81] relative overflow-hidden flex items-center justify-center p-6 text-center">
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.4) 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+        <div className="relative z-10 w-full flex flex-col items-center justify-center">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/20 text-blue-300 text-xs font-bold w-max mb-4">
+            <span className="text-blue-400">📚</span> 수강생 전용 자료
+          </div>
+          <h2 className="text-2xl font-black text-white tracking-tight mb-3 drop-shadow-lg break-keep leading-snug">
+            원격서비스<br/>Anydesk 설치방법
+          </h2>
+        </div>
+      </div>
+    ),
+    access: 'STUDENT',
+    category: 'LECTURE',
+    tags: ['가이드', '원격지원', '설치'],
+    link: 'https://docs.google.com/document/d/153Z0KHMyiD-4cL--eD6j8-nxQMmY_9AVtguDzRRwPjY/edit?usp=sharing'
+  },
+  {
     id: '1',
     title: '혁신 AI Lite',
     description: '블로그, 카드뉴스, 이미지, 동영상을 한 번에 생성하는 올인원 AI 크리에이티브 스튜디오',
