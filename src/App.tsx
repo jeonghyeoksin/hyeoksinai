@@ -45,7 +45,7 @@ const PROGRAMS: Program[] = ([
     access: 'STUDENT',
     category: 'LECTURE',
     tags: ['가이드', 'API', '결제'],
-    link: 'https://docs.google.com/document/d/1S37vCHrloJwcD1w-m8X1OXsBOAhO4MDJrzuVs0wbKkw/edit?tab=t.0#heading=h.7kaiinz6a899'
+    link: 'https://docs.google.com/presentation/d/10BbgaNbQg60yh3xkNgSahAEm9lyiaZJEUn8W6F6kS3U/edit?slide=id.g3d0ca4dfca9_0_52#slide=id.g3d0ca4dfca9_0_52'
   },
   {
     id: 'lecture-api-tier1',
