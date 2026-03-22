@@ -26,8 +26,8 @@ interface Program {
 const PROGRAMS: Program[] = ([
   {
     id: 'lecture-api-key',
-    title: '구글 API KEY 발급 방법 & 결제카드 등록방법',
-    description: '구글 API KEY 발급 및 결제카드 등록 방법에 대한 상세 가이드 문서입니다.',
+    title: '구글 API Key 설정방법',
+    description: '구글 API Key 설정 방법에 대한 상세 가이드 문서입니다.',
     image: '',
     customVisual: (
       <div className="w-full h-full bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81] relative overflow-hidden flex items-center justify-center p-6 text-center">
@@ -37,7 +37,7 @@ const PROGRAMS: Program[] = ([
             <span className="text-blue-400">📚</span> 수강생 전용 자료
           </div>
           <h2 className="text-2xl font-black text-white tracking-tight mb-3 drop-shadow-lg break-keep leading-snug">
-            구글 API KEY 발급 방법 &<br/>결제카드 등록방법
+            구글 API Key 설정방법
           </h2>
         </div>
       </div>
@@ -71,6 +71,29 @@ const PROGRAMS: Program[] = ([
     link: 'https://docs.google.com/document/d/1xl434p1XbyqqYQt4GgKwiDFYd2oDK-sUvItl5Af4efk/edit?usp=sharing'
   },
   {
+    id: 'lecture-api-credit-usage',
+    title: 'API 크레딧 사용량 확인방법',
+    description: 'API 크레딧 사용량 확인 방법에 대한 상세 가이드 문서입니다.',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81] relative overflow-hidden flex items-center justify-center p-6 text-center">
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.4) 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+        <div className="relative z-10 w-full flex flex-col items-center justify-center">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/20 text-blue-300 text-xs font-bold w-max mb-4">
+            <span className="text-blue-400">📚</span> 수강생 전용 자료
+          </div>
+          <h2 className="text-2xl font-black text-white tracking-tight mb-3 drop-shadow-lg break-keep leading-snug">
+            API 크레딧<br/>사용량 확인방법
+          </h2>
+        </div>
+      </div>
+    ),
+    access: 'STUDENT',
+    category: 'LECTURE',
+    tags: ['가이드', 'API', '크레딧'],
+    link: 'https://docs.google.com/document/d/1YxpCMHv_w-TaaXCpy9z-kgQIJj-OEILXX68EWDWDRpo/edit?tab=t.0'
+  },
+  {
     id: 'lecture-markdown-guide',
     title: '마크다운 파일 생성해야하는 이유와 생성방법',
     description: '마크다운 파일의 필요성과 생성 방법에 대한 상세 가이드입니다.',
@@ -92,6 +115,29 @@ const PROGRAMS: Program[] = ([
     category: 'LECTURE',
     tags: ['가이드', '마크다운', 'Markdown'],
     link: 'https://hyeoksin.notion.site/2ebd4d37e510802a8685ce8ebfb6307e'
+  },
+  {
+    id: 'lecture-md-download-error',
+    title: 'MD파일이 다운로드 안되는 경우 해결방법',
+    description: 'MD파일이 다운로드 안되는 경우 해결방법에 대한 상세 가이드 문서입니다.',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81] relative overflow-hidden flex items-center justify-center p-6 text-center">
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.4) 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+        <div className="relative z-10 w-full flex flex-col items-center justify-center">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/20 text-blue-300 text-xs font-bold w-max mb-4">
+            <span className="text-blue-400">📚</span> 수강생 전용 자료
+          </div>
+          <h2 className="text-2xl font-black text-white tracking-tight mb-3 drop-shadow-lg break-keep leading-snug">
+            MD파일이 다운로드 안되는<br/>경우 해결방법
+          </h2>
+        </div>
+      </div>
+    ),
+    access: 'STUDENT',
+    category: 'LECTURE',
+    tags: ['가이드', '마크다운', '오류해결'],
+    link: 'https://docs.google.com/document/d/1gn81aKBt3dfZBSacx3K501lhoQRbYusLpMQ23HZo-do/edit?usp=sharing'
   },
   {
     id: 'lecture-api-security',
@@ -177,82 +223,14 @@ const PROGRAMS: Program[] = ([
     description: '여러분의 잠재력을 깨워서 형식적이고 실행불가한 AI수익화가 아닌 나만의 맞춤 AI수익화의 자세한 방향을 찾아드립니다!',
     image: '',
     customVisual: (
-      <div className="w-full h-full bg-[#0a0a0a] relative overflow-hidden flex items-center">
-        {/* Stock Chart Background */}
-        <svg className="absolute inset-0 w-full h-full opacity-40" viewBox="0 0 800 400" preserveAspectRatio="none">
-          {/* Grid lines */}
-          <path d="M0,50 L800,50 M0,100 L800,100 M0,150 L800,150 M0,200 L800,200 M0,250 L800,250 M0,300 L800,300 M0,350 L800,350" stroke="#ffffff" strokeWidth="0.5" opacity="0.05" />
-          <path d="M100,0 L100,400 M200,0 L200,400 M300,0 L300,400 M400,0 L400,400 M500,0 L500,400 M600,0 L600,400 M700,0 L700,400" stroke="#ffffff" strokeWidth="0.5" opacity="0.05" />
-          
-          {/* Moving Averages */}
-          <path d="M0,100 Q200,150 400,300 T800,350" fill="none" stroke="#3b82f6" strokeWidth="2" opacity="0.4" />
-          <path d="M0,150 Q250,200 450,350 T800,400" fill="none" stroke="#eab308" strokeWidth="2" opacity="0.4" />
-          <path d="M0,200 Q300,250 500,400 T800,450" fill="none" stroke="#10b981" strokeWidth="2" opacity="0.4" />
-          
-          {/* Candlesticks (Red downtrend) */}
-          <g opacity="0.6">
-            {/* Red candle */}
-            <rect x="250" y="120" width="12" height="60" fill="#991b1b" />
-            <line x1="256" y1="100" x2="256" y2="200" stroke="#991b1b" strokeWidth="2" />
-            
-            {/* Red candle */}
-            <rect x="280" y="140" width="12" height="80" fill="#991b1b" />
-            <line x1="286" y1="120" x2="286" y2="240" stroke="#991b1b" strokeWidth="2" />
-            
-            {/* Green candle */}
-            <rect x="310" y="180" width="12" height="40" fill="none" stroke="#16a34a" strokeWidth="2" />
-            <line x1="316" y1="160" x2="316" y2="240" stroke="#16a34a" strokeWidth="2" />
-            
-            {/* Red candle */}
-            <rect x="340" y="200" width="12" height="90" fill="#991b1b" />
-            <line x1="346" y1="180" x2="346" y2="310" stroke="#991b1b" strokeWidth="2" />
-            
-            {/* Red candle */}
-            <rect x="370" y="240" width="12" height="70" fill="#991b1b" />
-            <line x1="376" y1="220" x2="376" y2="330" stroke="#991b1b" strokeWidth="2" />
-            
-            {/* Green candle */}
-            <rect x="400" y="280" width="12" height="30" fill="none" stroke="#16a34a" strokeWidth="2" />
-            <line x1="406" y1="260" x2="406" y2="330" stroke="#16a34a" strokeWidth="2" />
-            
-            {/* Red candle */}
-            <rect x="430" y="290" width="12" height="80" fill="#991b1b" />
-            <line x1="436" y1="270" x2="436" y2="390" stroke="#991b1b" strokeWidth="2" />
-            
-            {/* Red candle */}
-            <rect x="460" y="320" width="12" height="60" fill="#991b1b" />
-            <line x1="466" y1="300" x2="466" y2="400" stroke="#991b1b" strokeWidth="2" />
-            
-            {/* Green candle */}
-            <rect x="490" y="350" width="12" height="40" fill="none" stroke="#16a34a" strokeWidth="2" />
-            <line x1="496" y1="330" x2="496" y2="410" stroke="#16a34a" strokeWidth="2" />
-          </g>
-        </svg>
-
-        {/* Content */}
-        <div className="relative z-10 p-6 flex flex-col justify-center h-full w-full">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-amber-600/50 bg-black/40 text-amber-500 text-[10px] font-medium w-max mb-4">
-            <Sparkles className="w-3 h-3 text-amber-500" /> 정혁신 AI 솔루션
-          </div>
-          <h2 className="text-[28px] font-bold text-white leading-tight mb-1 tracking-tight">
-            AI로 시작하는
+      <div className="w-full h-full bg-[#1a0f00] relative overflow-hidden flex items-center justify-center p-6 text-center">
+        <div className="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center mix-blend-luminosity"></div>
+        <div className="absolute inset-0 bg-gradient-to-tr from-[#451a03]/90 via-[#78350f]/60 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-transparent to-transparent opacity-80"></div>
+        <div className="relative z-10 w-full flex flex-col items-center justify-center">
+          <h2 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-yellow-500 tracking-tight drop-shadow-[0_0_15px_rgba(245,158,11,0.5)]">
+            혁신 수익화 발굴 AI
           </h2>
-          <h2 className="text-[28px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 mb-4 tracking-tight">
-            나만의 맞춤 수익화 발굴
-          </h2>
-          <p className="text-zinc-300 text-[13px] leading-relaxed max-w-[85%] break-keep">
-            당신의 숨겨진 잠재력을 찾아내어, 당장 오늘부터 시작할 수 있는 가장<br/>현실적인 수익화 로드맵을 설계합니다.
-          </p>
-        </div>
-
-        {/* Bottom Right Button */}
-        <div className="absolute bottom-6 right-6 z-10">
-          <div className="flex items-center gap-3 px-4 py-2 bg-[#1a1a1a] border border-zinc-800 rounded-xl shadow-2xl">
-            <div className="w-8 h-8 rounded-full bg-red-900/40 flex items-center justify-center">
-              <Lightbulb className="w-4 h-4 text-red-400" />
-            </div>
-            <span className="text-white text-sm font-bold">숨겨진 가치 발견</span>
-          </div>
         </div>
       </div>
     ),
@@ -267,16 +245,14 @@ const PROGRAMS: Program[] = ([
     description: '2026년 AI 수익화 트렌드를 분석하고, 당신만의 완벽한 비즈니스 로드맵과 마케팅 전략을 설계하세요.',
     image: '',
     customVisual: (
-      <div className="w-full h-full bg-[#0a1128] relative overflow-hidden flex flex-col items-center justify-center p-6 text-center">
-        <div className="absolute inset-0 opacity-30 bg-[url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center mix-blend-luminosity"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a1128] via-[#0a1128]/80 to-transparent"></div>
+      <div className="w-full h-full bg-[#082f49] relative overflow-hidden flex flex-col items-center justify-center p-6 text-center">
+        <div className="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center mix-blend-luminosity"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0c4a6e]/90 via-[#0369a1]/50 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-transparent to-transparent opacity-80"></div>
         <div className="relative z-10 w-full flex flex-col items-center justify-center">
-          <h2 className="text-4xl font-black text-white tracking-tight mb-4 drop-shadow-lg">
+          <h2 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 to-blue-500 tracking-tight drop-shadow-[0_0_15px_rgba(6,182,212,0.5)]">
             혁신 트렌드 AI
           </h2>
-          <p className="text-zinc-300 text-sm leading-relaxed max-w-[90%] font-medium drop-shadow-md">
-            2026년 AI 수익화 트렌드를 분석하고, 당신만의 완벽한 비즈니스 로드맵과<br/>마케팅 전략을 설계하세요.
-          </p>
         </div>
       </div>
     ),
@@ -291,16 +267,14 @@ const PROGRAMS: Program[] = ([
     description: 'AI를 활용한 2026년 수익화 로드맵을 90일 캘린더로 완성하세요.',
     image: '',
     customVisual: (
-      <div className="w-full h-full bg-[#1a1a1a] relative overflow-hidden flex flex-col items-center justify-center p-6 text-center">
-        <div className="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1506784951209-26879bd3b2cb?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center mix-blend-luminosity"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/70 to-transparent"></div>
+      <div className="w-full h-full bg-[#2e1065] relative overflow-hidden flex flex-col items-center justify-center p-6 text-center">
+        <div className="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1506784365847-bbad939e9335?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center mix-blend-luminosity"></div>
+        <div className="absolute inset-0 bg-gradient-to-bl from-[#4c1d95]/90 via-[#6d28d9]/50 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-transparent to-transparent opacity-80"></div>
         <div className="relative z-10 w-full flex flex-col items-center justify-center">
-          <h2 className="text-4xl font-black text-white tracking-tight mb-4 drop-shadow-lg">
+          <h2 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-200 to-fuchsia-500 tracking-tight drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]">
             혁신 수익화 캘린더 AI
           </h2>
-          <p className="text-zinc-300 text-sm leading-relaxed max-w-[90%] font-medium drop-shadow-md">
-            AI를 활용한 2026년 수익화 로드맵을<br/>90일 캘린더로 완성하세요.
-          </p>
         </div>
       </div>
     ),
@@ -529,26 +503,13 @@ const PROGRAMS: Program[] = ([
     description: '나만의 맞춤형 프롬프트를 생성해주는 강력한 AI 에이전트',
     image: '',
     customVisual: (
-      <div className="w-full h-full relative overflow-hidden flex items-center justify-center p-6">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop)' }}
-        ></div>
-        {/* Neon Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/80 via-[#1e1b4b]/70 to-[#0f172a]/90"></div>
-        <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay"></div>
-        
-        {/* Content */}
-        <div className="relative z-10 text-center w-full flex flex-col items-center">
-          <div className="w-14 h-14 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center mb-3 shadow-[0_0_30px_rgba(6,182,212,0.5)]">
-            <Bot className="w-7 h-7 text-white" />
-          </div>
-          <h2 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-200 to-purple-300 mb-1 drop-shadow-[0_0_10px_rgba(6,182,212,0.8)] tracking-tight">
-            맞춤 프롬프트
-          </h2>
-          <h2 className="text-xl font-black text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] tracking-tight">
-            생성 에이전트
+      <div className="w-full h-full bg-[#4c0519] relative overflow-hidden flex items-center justify-center p-6 text-center">
+        <div className="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center mix-blend-luminosity"></div>
+        <div className="absolute inset-0 bg-gradient-to-tr from-[#881337]/90 via-[#be123c]/50 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#000000] via-transparent to-transparent opacity-80"></div>
+        <div className="relative z-10 w-full flex flex-col items-center justify-center">
+          <h2 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-200 to-rose-500 tracking-tight drop-shadow-[0_0_15px_rgba(244,63,94,0.5)]">
+            혁신 맞춤 프롬프트 생성 AI
           </h2>
         </div>
       </div>
@@ -1716,6 +1677,51 @@ function PromptCard({
   );
 }
 
+const FAQ_DATA = [
+  {
+    question: '혁신 AI란 무엇인가요?',
+    answer: '혁신 AI는 생산성과 효율성의 한계를 뛰어넘어 여러분의 수익화 파이프라인 구축을 돕는 AI 통합 플랫폼입니다. 블로그, 썸네일, 프롬프트 생성 등 다양한 맞춤형 AI 도구를 제공합니다.'
+  },
+  {
+    question: '수강생 전용 도구는 어떻게 이용하나요?',
+    answer: '수강생 전용 도구는 혁신 AI 교육 과정을 수강하시는 분들에게 제공되는 프리미엄 기능입니다. 우측 상단의 "코드 인증" 버튼을 클릭하여 발급받으신 인증 코드를 입력하시면 모든 기능을 이용하실 수 있습니다.'
+  },
+  {
+    question: '무료 버전과 멤버십 버전의 차이는 무엇인가요?',
+    answer: '무료 버전은 기본적인 AI 도구를 체험해 볼 수 있으며, 멤버십 버전은 더 고도화된 프롬프트와 전문적인 결과물을 생성하는 프리미엄 AI 에이전트 접근 권한을 제공합니다.'
+  },
+  {
+    question: '구글 API Key는 왜 필요한가요?',
+    answer: '일부 고급 AI 기능은 구글의 최신 AI 모델을 직접 호출하여 사용합니다. 이를 위해 사용자 본인의 구글 API Key를 입력하여 안전하고 독립적인 환경에서 AI를 활용할 수 있도록 설계되었습니다.'
+  },
+  {
+    question: '구글 API Key 카드 연결은 체크카드로도 가능한가요?',
+    answer: '체크카드로도 가능하지만 미리 결제를 하고 환불을 받아야 합니다. 기간은 7일정도 소요됩니다. 가능하면 신용카드로 연결하시는 것을 권장드립니다.'
+  },
+  {
+    question: '구글 API Key는 비용이 드나요?',
+    answer: (
+      <div className="flex flex-col gap-2">
+        <p>구글 API Key는 사용량만큼 비용이 과금되는 시스템입니다. 단, 지금 현재 구글에서 신규가입을 후 카드연결을한 회원들을 대상으로 90일동안 300달러의 무료 크레딧을 제공하고 있습니다.</p>
+        <p>90일동안 사용하시고 90일 뒤에 새로운 구글 계정으로 카드연결을 해서 사용하시면 지속적으로 무료로 구글 API Key를 사용하실 수 있습니다.</p>
+        <p>자세한 설정방법은 아래 링크를 참고하여 진행해주시면 됩니다.</p>
+        <a 
+          href="https://docs.google.com/presentation/d/10BbgaNbQg60yh3xkNgSahAEm9lyiaZJEUn8W6F6kS3U/edit?slide=id.g3d0ca4dfca9_0_52#slide=id.g3d0ca4dfca9_0_52" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="text-blue-400 hover:text-blue-300 underline break-all"
+        >
+          https://docs.google.com/presentation/d/10BbgaNbQg60yh3xkNgSahAEm9lyiaZJEUn8W6F6kS3U/edit?slide=id.g3d0ca4dfca9_0_52#slide=id.g3d0ca4dfca9_0_52
+        </a>
+      </div>
+    )
+  },
+  {
+    question: '인증 코드를 분실했어요.',
+    answer: '인증 코드를 분실하신 경우, 구매하신 플랫폼의 메시지나 고객센터 이메일(info@nextin.ai.kr)로 문의해 주시면 본인 확인 후 재발급을 도와드립니다.'
+  }
+];
+
 export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<Category>('ALL');
@@ -1728,6 +1734,8 @@ export default function App() {
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
   const [showSupportModal, setShowSupportModal] = useState(false);
+  const [currentView, setCurrentView] = useState<'HOME' | 'FAQ'>('HOME');
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [pageMap, setPageMap] = useState<Record<string, number>>({ PROGRAM: 1, PROMPT: 1, LECTURE: 1 });
   const [itemsPerPage, setItemsPerPage] = useState(8);
 
@@ -1803,10 +1811,7 @@ export default function App() {
       matchesAccess = program.access === selectedAccess;
     }
     
-    // 전체 탭에서는 수강생 전용 항목을 숨김 (단, 권한 필터가 '수강생 전용'일 때는 표시)
-    const isHiddenStudent = program.access === 'STUDENT' && selectedCategory === 'ALL' && selectedAccess !== 'STUDENT';
-    
-    return matchesSearch && matchesCategory && matchesSubCategory && matchesAccess && !isHiddenStudent;
+    return matchesSearch && matchesCategory && matchesSubCategory && matchesAccess;
   });
 
   const renderProgram = (program: Program) => (
@@ -1961,7 +1966,18 @@ export default function App() {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8">
-              <a href="/" className="text-zinc-300 hover:text-white transition-colors">홈</a>
+              <button 
+                onClick={() => setCurrentView('HOME')}
+                className={`${currentView === 'HOME' ? 'text-white font-bold' : 'text-zinc-300 hover:text-white'} transition-colors`}
+              >
+                홈
+              </button>
+              <button 
+                onClick={() => setCurrentView('FAQ')}
+                className={`${currentView === 'FAQ' ? 'text-white font-bold' : 'text-zinc-300 hover:text-white'} transition-colors`}
+              >
+                FAQ
+              </button>
             </div>
 
             {/* Right Actions */}
@@ -2018,7 +2034,18 @@ export default function App() {
               className="md:hidden border-b border-white/10 bg-[#0a0a0a]"
             >
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="/" className="block px-3 py-2 text-base font-medium text-white bg-white/5 rounded-md">홈</a>
+                <button 
+                  onClick={() => { setCurrentView('HOME'); setIsMobileMenuOpen(false); }}
+                  className={`block w-full text-left px-3 py-2 text-base font-medium rounded-md ${currentView === 'HOME' ? 'text-white bg-white/5' : 'text-zinc-300 hover:text-white hover:bg-white/5'}`}
+                >
+                  홈
+                </button>
+                <button 
+                  onClick={() => { setCurrentView('FAQ'); setIsMobileMenuOpen(false); }}
+                  className={`block w-full text-left px-3 py-2 text-base font-medium rounded-md ${currentView === 'FAQ' ? 'text-white bg-white/5' : 'text-zinc-300 hover:text-white hover:bg-white/5'}`}
+                >
+                  FAQ
+                </button>
                 <div className="px-3 py-2">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-amber-500/20 bg-amber-500/10 text-amber-400 text-sm font-bold shadow-[0_0_10px_rgba(245,158,11,0.1)]">
                     <Sparkles className="w-4 h-4" />
@@ -2064,8 +2091,10 @@ export default function App() {
         </AnimatePresence>
       </nav>
 
-      {/* Hero Section */}
-      <div className="relative overflow-hidden bg-[#030014] border-b border-white/5 min-h-[300px] flex items-center">
+      {currentView === 'HOME' ? (
+        <>
+          {/* Hero Section */}
+          <div className="relative overflow-hidden bg-[#030014] border-b border-white/5 min-h-[300px] flex items-center">
         {/* Abstract Background Image */}
         <motion.div 
           initial={{ scale: 1.1, opacity: 0 }}
@@ -2385,6 +2414,58 @@ export default function App() {
           </div>
         )}
       </div>
+      </>
+      ) : (
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 min-h-[60vh]">
+          <div className="text-center mb-16">
+            <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
+              자주 묻는 질문 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">FAQ</span>
+            </h1>
+            <p className="text-zinc-400 text-lg">혁신 AI에 대해 궁금하신 점을 확인해보세요.</p>
+          </div>
+          
+          <div className="space-y-4">
+            {FAQ_DATA.map((faq, index) => (
+              <div 
+                key={index}
+                className={`border border-zinc-800 rounded-2xl overflow-hidden transition-all duration-300 ${openFaqIndex === index ? 'bg-zinc-900/80 border-zinc-700 shadow-[0_0_15px_rgba(59,130,246,0.1)]' : 'bg-zinc-900/30 hover:bg-zinc-900/50 hover:border-zinc-700'}`}
+              >
+                <button
+                  onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
+                  className="w-full flex items-center justify-between p-6 text-left"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center shrink-0">
+                      <span className="text-blue-400 font-bold text-sm">Q</span>
+                    </div>
+                    <span className="text-lg font-bold text-white pr-4">{faq.question}</span>
+                  </div>
+                  <ChevronDown className={`w-5 h-5 text-zinc-400 shrink-0 transition-transform duration-300 ${openFaqIndex === index ? 'rotate-180 text-blue-400' : ''}`} />
+                </button>
+                <AnimatePresence>
+                  {openFaqIndex === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="p-6 pt-0 text-zinc-300 leading-relaxed border-t border-zinc-800/50 mt-2 flex gap-4">
+                        <div className="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center shrink-0 mt-1">
+                          <span className="text-emerald-400 font-bold text-sm">A</span>
+                        </div>
+                        <div className="pt-1.5">
+                          {faq.answer}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       
       {/* Auth Modal */}
       <AnimatePresence>
