@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Lock, Unlock, ExternalLink, Menu, X, Settings, Zap, Sparkles, ArrowRight, Copy, Check, Bot, Youtube, Star, FileText, AlertTriangle, Wand2, Code, Eye, EyeOff, ChevronLeft, ChevronRight, ChevronDown, Lightbulb, HelpCircle, Mail, Layout } from 'lucide-react';
+import { Search, Lock, Unlock, ExternalLink, Menu, X, Settings, Zap, Sparkles, ArrowRight, Copy, Check, Bot, Youtube, Star, FileText, AlertTriangle, Wand2, Code, Eye, EyeOff, ChevronLeft, ChevronRight, ChevronDown, Lightbulb, HelpCircle, Mail, Layout, Clock, Users, TrendingUp, Timer, ShieldCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { additionalPrompts } from './promptsData';
 
@@ -207,6 +207,29 @@ const PROGRAMS: Program[] = ([
     category: 'LECTURE',
     tags: ['가이드', '원격지원', '설치'],
     link: 'https://docs.google.com/document/d/153Z0KHMyiD-4cL--eD6j8-nxQMmY_9AVtguDzRRwPjY/edit?usp=sharing'
+  },
+  {
+    id: 'lecture-api-billing-account',
+    title: 'API키 결제 등급에 My Billing Account라고 되어있을 경우 해결방법',
+    description: 'API키 결제 등급에 My Billing Account라고 표시될 때의 해결 방법에 대한 가이드 문서입니다.',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81] relative overflow-hidden flex items-center justify-center p-6 text-center">
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.4) 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+        <div className="relative z-10 w-full flex flex-col items-center justify-center">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/20 text-blue-300 text-xs font-bold w-max mb-4">
+            <span className="text-blue-400">📚</span> 수강생 전용 자료
+          </div>
+          <h2 className="text-2xl font-black text-white tracking-tight mb-3 drop-shadow-lg break-keep leading-snug">
+            API키 결제 등급에<br/>My Billing Account 해결방법
+          </h2>
+        </div>
+      </div>
+    ),
+    access: 'STUDENT',
+    category: 'LECTURE',
+    tags: ['가이드', 'API', '결제'],
+    link: 'https://docs.google.com/document/d/1rPu0ERoeLaSvAV-xPlPLGrRYd4DcGc4l8WVsXM3bPmU/edit?usp=sharing'
   },
   {
     id: '1',
@@ -1757,7 +1780,7 @@ export default function App() {
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
   const [showSupportModal, setShowSupportModal] = useState(false);
-  const [currentView, setCurrentView] = useState<'HOME' | 'FAQ' | 'MEMBERSHIP'>('HOME');
+  const [currentView, setCurrentView] = useState<'HOME' | 'FAQ' | 'MEMBERSHIP' | 'CONSULTING' | 'AGENCY'>('HOME');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [pageMap, setPageMap] = useState<Record<string, number>>({ PROGRAM: 1, PROMPT: 1, LECTURE: 1 });
   const [itemsPerPage, setItemsPerPage] = useState(8);
@@ -2007,6 +2030,18 @@ export default function App() {
               >
                 멤버십 구독
               </button>
+              <button 
+                onClick={() => setCurrentView('CONSULTING')}
+                className={`${currentView === 'CONSULTING' ? 'text-white font-bold' : 'text-zinc-300 hover:text-white'} transition-colors`}
+              >
+                컨설팅 문의
+              </button>
+              <button 
+                onClick={() => setCurrentView('AGENCY')}
+                className={`${currentView === 'AGENCY' ? 'text-white font-bold' : 'text-zinc-300 hover:text-white'} transition-colors`}
+              >
+                대행 문의
+              </button>
             </div>
 
             {/* Right Actions */}
@@ -2080,6 +2115,18 @@ export default function App() {
                   className={`block w-full text-left px-3 py-2 text-base font-medium rounded-md ${currentView === 'MEMBERSHIP' ? 'text-white bg-white/5' : 'text-zinc-300 hover:text-white hover:bg-white/5'}`}
                 >
                   멤버십 구독
+                </button>
+                <button 
+                  onClick={() => { setCurrentView('CONSULTING'); setIsMobileMenuOpen(false); }}
+                  className={`block w-full text-left px-3 py-2 text-base font-medium rounded-md ${currentView === 'CONSULTING' ? 'text-white bg-white/5' : 'text-zinc-300 hover:text-white hover:bg-white/5'}`}
+                >
+                  컨설팅 문의
+                </button>
+                <button 
+                  onClick={() => { setCurrentView('AGENCY'); setIsMobileMenuOpen(false); }}
+                  className={`block w-full text-left px-3 py-2 text-base font-medium rounded-md ${currentView === 'AGENCY' ? 'text-white bg-white/5' : 'text-zinc-300 hover:text-white hover:bg-white/5'}`}
+                >
+                  대행 문의
                 </button>
                 <div className="px-3 py-2">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-amber-500/20 bg-amber-500/10 text-amber-400 text-sm font-bold shadow-[0_0_10px_rgba(245,158,11,0.1)]">
@@ -2450,6 +2497,354 @@ export default function App() {
         )}
       </div>
       </>
+      ) : currentView === 'CONSULTING' ? (
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 min-h-[60vh]">
+          {/* Hero Section */}
+          <div className="text-center mb-20">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 text-sm font-bold mb-8"
+            >
+              <AlertTriangle className="w-4 h-4" />
+              <span>대표님, 언제까지 인건비만 감당하시겠습니까?</span>
+            </motion.div>
+            
+            <h1 className="text-4xl md:text-7xl font-black text-white tracking-tight mb-8 leading-[1.1]">
+              매달 빠져나가는 <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-amber-500">
+                직원 10명의 인건비,
+              </span>
+              <br />
+              언제까지 감당하시겠습니까?
+            </h1>
+            
+            <p className="text-zinc-400 text-xl max-w-3xl mx-auto leading-relaxed">
+              숨만 쉬어도 나가는 고정비 때문에 밤잠 설치는 날이 많으시죠. <br />
+              이제 <span className="text-zinc-200 font-bold">AI 마케팅 코칭</span>을 통해 인건비는 1/10로 줄이고, <br />
+              매출은 자동화 시스템으로 24시간 벌어들이세요.
+            </p>
+          </div>
+
+          {/* Pain Points Section */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
+            {[
+              {
+                title: "인건비 부담",
+                desc: "직원 한 명 뽑으려면 월 200만 원... 퇴직금에 4대 보험까지 너무 부담스럽습니다.",
+                icon: <Users className="w-6 h-6 text-red-400" />
+              },
+              {
+                title: "성과 없는 대행",
+                desc: "마케팅 대행사에 수백만 원을 줬는데, 매출은 제자리걸음입니다.",
+                icon: <TrendingUp className="w-6 h-6 text-orange-400" />
+              },
+              {
+                title: "막막한 AI 도입",
+                desc: "AI가 대세라는데, 정작 내 사업에 어떻게 써야 할지 막막합니다.",
+                icon: <HelpCircle className="w-6 h-6 text-amber-400" />
+              }
+            ].map((item, i) => (
+              <div key={i} className="bg-zinc-900/50 border border-zinc-800 p-8 rounded-3xl backdrop-blur-sm">
+                <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-bold text-white mb-4">{item.title}</h3>
+                <p className="text-zinc-400 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Solution Section */}
+          <div className="bg-gradient-to-br from-indigo-600/10 via-purple-600/10 to-pink-600/10 border border-white/10 rounded-[40px] p-8 md:p-16 mb-24 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 blur-[100px] -z-10"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 blur-[100px] -z-10"></div>
+            
+            <div className="max-w-3xl">
+              <h2 className="text-3xl md:text-5xl font-black text-white mb-8 leading-tight">
+                단순한 강의가 아닙니다. <br />
+                <span className="text-indigo-400">기술 이전 컨설팅</span>입니다.
+              </h2>
+              <p className="text-zinc-300 text-lg mb-12 leading-relaxed">
+                대표님의 사업을 분석하여 당장 실무에 투입 가능한 <span className="text-white font-bold">'맞춤형 AI 에이전트'</span>를 제작해 드립니다. 
+                스스로 AI 시스템을 구축하고 무한대로 복제할 수 있는 능력을 갖게 됩니다.
+              </p>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-indigo-500/20 flex items-center justify-center shrink-0">
+                    <Zap className="w-5 h-5 text-indigo-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold mb-1">인건비 혁명</h4>
+                    <p className="text-zinc-400 text-sm">월 250만 원 신입 사원 10명의 몫을 AI 1명이 처리</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center shrink-0">
+                    <Timer className="w-5 h-5 text-purple-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold mb-1">업무 시간 90% 단축</h4>
+                    <p className="text-zinc-400 text-sm">3시간 걸리던 블로그 글쓰기를 단 10분으로</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Program Details Section */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
+            <div className="bg-zinc-900/50 border border-zinc-800 p-10 rounded-[32px] backdrop-blur-sm">
+              <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+                <Clock className="w-6 h-6 text-indigo-400" />
+                컨설팅 프로그램 구성
+              </h3>
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-6 h-6 rounded-full bg-indigo-500/10 flex items-center justify-center shrink-0 mt-1">
+                    <Check className="w-3.5 h-3.5 text-indigo-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold mb-1">1:1 맞춤 집중 컨설팅</h4>
+                    <p className="text-zinc-400">총 3시간 X 2회 (심층 코칭)</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-6 h-6 rounded-full bg-indigo-500/10 flex items-center justify-center shrink-0 mt-1">
+                    <Check className="w-3.5 h-3.5 text-indigo-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold mb-1">유연한 장소 선택</h4>
+                    <p className="text-zinc-400">온라인 코칭 / 오프라인 (부산 시청 넥스트인 사무실) 중 택 1</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-6 h-6 rounded-full bg-indigo-500/10 flex items-center justify-center shrink-0 mt-1">
+                    <Check className="w-3.5 h-3.5 text-indigo-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold mb-1">컨설팅 비용</h4>
+                    <p className="text-zinc-400">220만원 (VAT 별도)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-zinc-900/50 border border-zinc-800 p-10 rounded-[32px] backdrop-blur-sm">
+              <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+                <Zap className="w-6 h-6 text-amber-400" />
+                컨설팅으로 얻을 수 있는 것
+              </h3>
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-6 h-6 rounded-full bg-amber-500/10 flex items-center justify-center shrink-0 mt-1">
+                    <Check className="w-3.5 h-3.5 text-amber-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold mb-1">맞춤형 AI 제작</h4>
+                    <p className="text-zinc-400">개인/기업 비즈니스에 최적화된 AI 시스템 구축</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-6 h-6 rounded-full bg-amber-500/10 flex items-center justify-center shrink-0 mt-1">
+                    <Check className="w-3.5 h-3.5 text-amber-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold mb-1">사용 매뉴얼 제공</h4>
+                    <p className="text-zinc-400">누구나 쉽게 사용할 수 있는 전용 매뉴얼 제작</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-6 h-6 rounded-full bg-amber-500/10 flex items-center justify-center shrink-0 mt-1">
+                    <Check className="w-3.5 h-3.5 text-amber-400" />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold mb-1">유지보수 지원</h4>
+                    <p className="text-zinc-400">컨설팅 종료 후 1개월간 추가 유지보수 지원</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Scarcity Section */}
+          <div className="text-center mb-24">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-amber-500/20 bg-amber-500/10 text-amber-400 text-xs font-bold mb-6">
+              <Clock className="w-3.5 h-3.5" />
+              <span>LIMITED AVAILABILITY</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-black text-white mb-6">매주 단 2명, 소수 정예</h2>
+            <p className="text-zinc-400 text-lg max-w-2xl mx-auto leading-relaxed mb-12">
+              퀄리티 유지를 위해 매주 단 2분의 대표님만 모시고 진행합니다. <br />
+              고민하는 순간, 이번 주 스케줄은 마감됩니다.
+            </p>
+            
+            <div className="max-w-3xl mx-auto p-8 rounded-3xl bg-white/5 border border-white/10 mb-12">
+              <p className="text-xl md:text-2xl font-bold text-white leading-relaxed">
+                "2026년, AI를 지배하는 대표님이 되시겠습니까? <br />
+                아니면 AI를 쓰는 경쟁사에게 밀려나시겠습니까?"
+              </p>
+            </div>
+          </div>
+
+          {/* Inquiry Form */}
+          <div className="bg-zinc-900 border border-zinc-800 p-10 rounded-[32px] shadow-2xl">
+            <div className="flex flex-col md:flex-row gap-12">
+              <div className="md:w-1/3">
+                <h3 className="text-2xl font-bold text-white mb-4">컨설팅 신청 문의</h3>
+                <p className="text-zinc-400 text-sm leading-relaxed mb-6">
+                  양식을 복사하여 메일로 보내주시면 <br />
+                  정혁신이 직접 확인 후 연락드립니다.
+                </p>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3 text-zinc-300">
+                    <Mail className="w-5 h-5 text-indigo-400" />
+                    <span>info@nextin.ai.kr</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-zinc-300">
+                    <ShieldCheck className="w-5 h-5 text-indigo-400" />
+                    <span>기술 이전 및 유지보수 지원</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="md:w-2/3">
+                <div className="bg-black/50 p-8 rounded-2xl border border-zinc-800 text-zinc-300 font-mono text-sm whitespace-pre-wrap leading-loose">
+                  성함 : {"\n"}
+                  회사명 : (개인은 생략 가능) {"\n"}
+                  연락처 : {"\n"}
+                  희망 일정 : (여러 일정을 남겨주세요) {"\n"}
+                  희망 장소 : (온라인 or 오프라인) {"\n"}
+                  컨설팅 희망 내용 : (최대한 상세히)
+                </div>
+                <a 
+                  href="mailto:info@nextin.ai.kr"
+                  className="mt-8 w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-5 rounded-2xl font-black text-lg hover:from-indigo-500 hover:to-purple-500 transition-all shadow-xl shadow-indigo-500/20"
+                >
+                  <Mail className="w-6 h-6" />
+                  지금 바로 컨설팅 신청하기
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : currentView === 'AGENCY' ? (
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 min-h-[60vh]">
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-400 text-xs font-bold mb-6"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>AI MARKETING AGENCY</span>
+            </motion.div>
+            <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight mb-6 leading-tight">
+              혼자서 마케팅 어려우신가요? <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400">
+                그렇다면 일반 마케팅이 아닌 <br />
+                AI마케팅 대행을 시작하세요.
+              </span>
+            </h1>
+            <p className="text-zinc-400 text-lg max-w-2xl mx-auto leading-relaxed">
+              혁신 AI 대행 서비스는 단순한 광고 집행이 아닙니다. <br />
+              <span className="text-zinc-200 font-bold">비즈니스의 성장을 가속화하는 AI 전략</span>을 당신의 비즈니스에 구축합니다.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            <div className="bg-zinc-900/50 border border-zinc-800 p-6 rounded-3xl backdrop-blur-sm text-center">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center mx-auto mb-4">
+                <Layout className="w-6 h-6 text-emerald-400" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">콘텐츠 제작</h3>
+              <p className="text-zinc-500 text-sm">블로그, SNS, 상세페이지 등 AI 최적화 콘텐츠</p>
+            </div>
+            <div className="bg-zinc-900/50 border border-zinc-800 p-6 rounded-3xl backdrop-blur-sm text-center">
+              <div className="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center mx-auto mb-4">
+                <Search className="w-6 h-6 text-blue-400" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">SEO 최적화</h3>
+              <p className="text-zinc-500 text-sm">검색 엔진 상위 노출을 위한 AI 전략 수립</p>
+            </div>
+            <div className="bg-zinc-900/50 border border-zinc-800 p-6 rounded-3xl backdrop-blur-sm text-center">
+              <div className="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center mx-auto mb-4">
+                <Bot className="w-6 h-6 text-purple-400" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">AI 최적화</h3>
+              <p className="text-zinc-500 text-sm">AI가 여러분의 서비스와 상품을 답변하도록 최적화</p>
+            </div>
+          </div>
+
+          <div className="bg-zinc-900/50 border border-zinc-800 p-10 rounded-3xl mb-16">
+            <h3 className="text-2xl font-bold text-white mb-8 text-center">AI 최적화 마케팅</h3>
+            <p className="text-zinc-300 text-center text-lg leading-relaxed mb-10">
+              "이제 검색 엔진보다 AI를 통해 질문하여 답변하는 시대입니다." <br />
+              <span className="text-emerald-400 font-bold">AI를 통해 여러분의 서비스와 상품이 답변할 수 있도록</span> <br />
+              AI 최적화 마케팅을 진행합니다.
+            </p>
+            
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center shrink-0">
+                  <span className="text-emerald-400 font-bold">01</span>
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-white mb-1">합리적인 비용 체계</h4>
+                  <p className="text-zinc-400 text-sm leading-relaxed">
+                    AI를 활용하여 인건비를 획기적으로 낮췄습니다. 기존 대행사 대비 <span className="text-emerald-400 font-bold">절반 이하의 비용</span>으로 더 높은 퀄리티를 보장합니다.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center shrink-0">
+                  <span className="text-emerald-400 font-bold">02</span>
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-white mb-1">데이터 기반 성과 측정</h4>
+                  <p className="text-zinc-400 text-sm leading-relaxed">
+                    단순히 "열심히" 하지 않습니다. AI 분석 도구를 통해 철저하게 데이터로 증명되는 성과만을 추구합니다.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center shrink-0">
+                  <span className="text-emerald-400 font-bold">03</span>
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-white mb-1">지속적인 시스템 업데이트</h4>
+                  <p className="text-zinc-400 text-sm leading-relaxed">
+                    급변하는 AI 트렌드에 맞춰 대행 시스템을 매주 업데이트합니다. 가장 앞선 기술을 가장 먼저 적용해드립니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-br from-emerald-900/20 to-teal-900/20 border border-emerald-500/30 p-10 rounded-3xl text-center">
+            <h2 className="text-2xl font-bold text-white mb-4">대행 신청 문의</h2>
+            <p className="text-zinc-400 mb-8 leading-relaxed">
+              아래 양식을 복사하여 <span className="text-emerald-400 font-bold">info@nextin.ai.kr</span> 메일로 보내주세요. <br />
+              정혁신이 직접 확인 후 개별 연락드립니다.
+            </p>
+            <div className="bg-black/50 p-6 rounded-2xl border border-zinc-800 text-left font-mono text-sm text-zinc-300 mb-8 whitespace-pre-wrap">
+              성함 : {"\n"}
+              회사명 : (회사로 대행 신청하시는 경우, 개인은 생략) {"\n"}
+              연락처 : {"\n"}
+              희망하시는 대행 분야 : (최대한 상세히 남겨주실수록 좋습니다.) {"\n"}
+              원하시는 장소 : (온라인 or 오프라인 (부산 시청)) {"\n"}
+              궁금하신 점 및 요청사항 : (최대한 상세히 남겨주실수록 좋습니다.)
+            </div>
+            <a 
+              href="mailto:info@nextin.ai.kr"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-8 py-4 rounded-xl font-bold hover:from-emerald-500 hover:to-teal-500 transition-all shadow-lg shadow-emerald-500/20"
+            >
+              <Mail className="w-5 h-5" />
+              메일 보내기
+            </a>
+          </div>
+        </div>
       ) : currentView === 'FAQ' ? (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 min-h-[60vh]">
           <div className="text-center mb-16">
