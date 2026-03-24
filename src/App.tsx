@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import { Search, Lock, Unlock, ExternalLink, Menu, X, Settings, Zap, Sparkles, ArrowRight, Copy, Check, Bot, Youtube, Star, FileText, AlertTriangle, Wand2, Code, Eye, EyeOff, ChevronLeft, ChevronRight, ChevronDown, Lightbulb, HelpCircle, Mail, Layout, Clock, Users, TrendingUp, Timer, ShieldCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { additionalPrompts } from './promptsData';
-import { ApplicationForm } from './components/ApplicationForm';
-import { AuthModal } from './components/AuthModal';
-import { supabase } from './lib/supabase';
 
 // --- Types ---
 type AccessLevel = 'FREE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER' | 'DONCLASS' | 'COACHINGPASS' | 'CONSULTING';
@@ -1779,7 +1776,6 @@ export default function App() {
   const [isVersionDropdownOpen, setIsVersionDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [authLevel, setAuthLevel] = useState<'NONE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER' | 'DONCLASS' | 'COACHINGPASS' | 'CONSULTING'>('NONE');
-  const [user, setUser] = useState<{ name: string; email: string; picture: string; phone?: string } | null>(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
@@ -1788,8 +1784,6 @@ export default function App() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [pageMap, setPageMap] = useState<Record<string, number>>({ PROGRAM: 1, PROMPT: 1, LECTURE: 1 });
   const [itemsPerPage, setItemsPerPage] = useState(8);
-  const [isFormOpen, setIsFormOpen] = useState(false);
-  const [selectedProgram, setSelectedProgram] = useState<string | undefined>(undefined);
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -1802,51 +1796,56 @@ export default function App() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+  const [authCode, setAuthCode] = useState('');
+  const [authError, setAuthError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
-  React.useEffect(() => {
-    // Check initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) {
-        const userData = {
-          name: session.user.user_metadata.full_name || session.user.email?.split('@')[0] || 'User',
-          email: session.user.email || '',
-          picture: session.user.user_metadata.avatar_url || `https://ui-avatars.com/api/?name=${session.user.email}&background=random`,
-          phone: session.user.user_metadata.phone
-        };
-        setUser(userData);
-        if (userData.email === 'info@nextin.ai.kr') {
-          setAuthLevel('MASTER');
-        }
-      }
-    });
-
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session) {
-        const userData = {
-          name: session.user.user_metadata.full_name || session.user.email?.split('@')[0] || 'User',
-          email: session.user.email || '',
-          picture: session.user.user_metadata.avatar_url || `https://ui-avatars.com/api/?name=${session.user.email}&background=random`,
-          phone: session.user.user_metadata.phone
-        };
-        setUser(userData);
-        if (userData.email === 'info@nextin.ai.kr') {
-          setAuthLevel('MASTER');
-        }
-      } else {
-        setUser(null);
-        setAuthLevel('NONE');
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
-    setAuthLevel('NONE');
-    setIsMobileMenuOpen(false);
+  const handleAuth = () => {
+    if (authCode === 'master1004') {
+      setAuthLevel('MASTER');
+      setShowAuthModal(false);
+      setAuthCode('');
+      setAuthError('');
+      setShowPassword(false);
+    } else if (authCode === 'cst1004') {
+      setAuthLevel('CONSULTING');
+      setShowAuthModal(false);
+      setAuthCode('');
+      setAuthError('');
+      setShowPassword(false);
+    } else if (authCode === 'donclass1') {
+      setAuthLevel('DONCLASS');
+      setShowAuthModal(false);
+      setAuthCode('');
+      setAuthError('');
+      setShowPassword(false);
+    } else if (authCode === 'cp') {
+      setAuthLevel('COACHINGPASS');
+      setShowAuthModal(false);
+      setAuthCode('');
+      setAuthError('');
+      setShowPassword(false);
+    } else if (authCode === 'hsaip0705') {
+      setAuthLevel('PREMIUM');
+      setShowAuthModal(false);
+      setAuthCode('');
+      setAuthError('');
+      setShowPassword(false);
+    } else if (authCode === 'hsedu1004') {
+      setAuthLevel('STUDENT');
+      setShowAuthModal(false);
+      setAuthCode('');
+      setAuthError('');
+      setShowPassword(false);
+    } else if (authCode === '0515') {
+      setAuthLevel('BASIC');
+      setShowAuthModal(false);
+      setAuthCode('');
+      setAuthError('');
+      setShowPassword(false);
+    } else {
+      setAuthError('인증 번호가 올바르지 않습니다.');
+    }
   };
 
   // Filter logic
@@ -2057,23 +2056,17 @@ export default function App() {
                 <Sparkles className="w-4 h-4" />
                 개발자 : 정혁신
               </div>
-              {user && (
-                <div className="flex items-center gap-2 px-2 py-1 rounded-full bg-white/5 border border-white/10">
-                  <img src={user.picture} alt={user.name} className="w-6 h-6 rounded-full" referrerPolicy="no-referrer" />
-                  <span className="text-xs text-zinc-300 font-medium">{user.name}</span>
-                </div>
-              )}
-              {authLevel !== 'NONE' || user ? (
+              {authLevel !== 'NONE' ? (
                 <div className="flex items-center gap-3">
                   <span className="text-sm text-emerald-400 font-medium">
-                    {authLevel === 'MASTER' ? '마스터' : authLevel === 'CONSULTING' ? '1:1 컨설팅' : authLevel === 'COACHINGPASS' ? '협력사 : 코칭패스' : authLevel === 'DONCLASS' ? '협력사 : 돈클' : authLevel === 'STUDENT' ? '수강생' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : authLevel === 'BASIC' ? '스탠다드 멤버십' : '회원'}
+                    {authLevel === 'MASTER' ? '마스터' : authLevel === 'CONSULTING' ? '1:1 컨설팅' : authLevel === 'COACHINGPASS' ? '협력사 : 코칭패스' : authLevel === 'DONCLASS' ? '협력사 : 돈클' : authLevel === 'STUDENT' ? '수강생' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '스탠다드 멤버십'}
                   </span>
                   <button 
-                    onClick={handleLogout}
+                    onClick={() => setAuthLevel('NONE')}
                     className="bg-zinc-800 text-emerald-400 px-4 py-2 rounded-md font-medium hover:bg-zinc-700 transition-colors border border-zinc-700 flex items-center gap-2"
                   >
                     <Unlock className="w-4 h-4" />
-                    로그아웃
+                    인증 해제
                   </button>
                 </div>
               ) : (
@@ -2083,7 +2076,7 @@ export default function App() {
                     className="bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-4 py-2 rounded-md font-medium hover:from-blue-400 hover:to-cyan-500 transition-colors flex items-center gap-2"
                   >
                     <Lock className="w-4 h-4" />
-                    로그인 / 회원가입
+                    코드 인증 및 해제
                   </button>
                 </div>
               )}
@@ -2149,17 +2142,20 @@ export default function App() {
                 </div>
                 
                 <div className="pt-4 pb-2 border-t border-zinc-800">
-                  {authLevel !== 'NONE' || user ? (
+                  {authLevel !== 'NONE' ? (
                     <div className="flex flex-col gap-2 px-3">
                       <span className="text-sm text-emerald-400 font-medium mb-2">
-                        {authLevel === 'MASTER' ? '마스터' : authLevel === 'CONSULTING' ? '1:1 컨설팅' : authLevel === 'COACHINGPASS' ? '협력사 : 코칭패스' : authLevel === 'DONCLASS' ? '협력사 : 돈클' : authLevel === 'STUDENT' ? '수강생' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : authLevel === 'BASIC' ? '스탠다드 멤버십' : '회원'} 인증 완료
+                        {authLevel === 'MASTER' ? '마스터' : authLevel === 'CONSULTING' ? '1:1 컨설팅' : authLevel === 'COACHINGPASS' ? '협력사 : 코칭패스' : authLevel === 'DONCLASS' ? '협력사 : 돈클' : authLevel === 'STUDENT' ? '수강생' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '스탠다드 멤버십'} 인증 완료
                       </span>
                       <button 
-                        onClick={handleLogout}
+                        onClick={() => {
+                          setAuthLevel('NONE');
+                          setIsMobileMenuOpen(false);
+                        }}
                         className="w-full bg-zinc-800 text-emerald-400 px-4 py-2 rounded-md font-medium hover:bg-zinc-700 transition-colors border border-zinc-700 flex items-center justify-center gap-2"
                       >
                         <Unlock className="w-4 h-4" />
-                        로그아웃
+                        인증 해제
                       </button>
                     </div>
                   ) : (
@@ -2172,7 +2168,7 @@ export default function App() {
                         className="w-full bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-4 py-2 rounded-md font-medium hover:from-blue-400 hover:to-cyan-500 transition-colors flex items-center justify-center gap-2"
                       >
                         <Lock className="w-4 h-4" />
-                        로그인 / 회원가입
+                        코드 인증 및 해제
                       </button>
                     </div>
                   )}
@@ -2762,16 +2758,13 @@ export default function App() {
                   희망 장소 : (온라인 or 오프라인) {"\n"}
                   컨설팅 희망 내용 : (최대한 상세히)
                 </div>
-                <button 
-                  onClick={() => {
-                    setSelectedProgram('1:1 맞춤 집중 컨설팅');
-                    setIsFormOpen(true);
-                  }}
+                <a 
+                  href="mailto:info@nextin.ai.kr"
                   className="mt-8 w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-5 rounded-2xl font-black text-lg hover:from-indigo-500 hover:to-purple-500 transition-all shadow-xl shadow-indigo-500/20"
                 >
                   <Mail className="w-6 h-6" />
                   지금 바로 컨설팅 신청하기
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -2883,16 +2876,13 @@ export default function App() {
               원하시는 장소 : (온라인 or 오프라인 (부산 시청)) {"\n"}
               궁금하신 점 및 요청사항 : (최대한 상세히 남겨주실수록 좋습니다.)
             </div>
-            <button 
-              onClick={() => {
-                setSelectedProgram('AI 마케팅 대행 서비스');
-                setIsFormOpen(true);
-              }}
+            <a 
+              href="mailto:info@nextin.ai.kr"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-8 py-4 rounded-xl font-bold hover:from-emerald-500 hover:to-teal-500 transition-all shadow-lg shadow-emerald-500/20"
             >
               <Mail className="w-5 h-5" />
-              신청폼 작성하기
-            </button>
+              메일 보내기
+            </a>
           </div>
         </div>
       ) : currentView === 'FAQ' ? (
@@ -3159,49 +3149,119 @@ export default function App() {
             <div className="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <Mail className="w-8 h-8 text-red-500" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">구독 및 문의 신청</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">구독 신청 안내</h2>
             <p className="text-zinc-400 mb-8 max-w-2xl mx-auto">
-              혁신 AI의 멤버십 구독 또는 컨설팅/대행 서비스를 희망하시면 아래 신청폼을 작성해 주세요.<br className="hidden md:block" />
-              개발자 정혁신이 직접 확인 후 신속하게 연락드리겠습니다.
+              구독 신청을 희망하시면 아래 메일에 양식을 작성하여 보내주시면, <br className="hidden md:block" />
+              개발자 정혁신이 직접 연락드려서 구독 안내 도와드리겠습니다.
             </p>
             
             <div className="bg-black/50 border border-zinc-800 rounded-2xl p-6 text-left mb-8 max-w-lg mx-auto">
-              <p className="text-zinc-500 text-xs mb-4 uppercase tracking-widest font-bold">신청 프로세스</p>
-              <div className="space-y-4 text-zinc-300 text-sm">
-                <div className="flex gap-3">
-                  <div className="w-6 h-6 rounded-full bg-red-500/20 text-red-500 flex items-center justify-center text-xs font-bold shrink-0">1</div>
-                  <p>아래 '신청폼 작성하기' 버튼을 클릭하여 정보를 입력합니다.</p>
-                </div>
-                <div className="flex gap-3">
-                  <div className="w-6 h-6 rounded-full bg-red-500/20 text-red-500 flex items-center justify-center text-xs font-bold shrink-0">2</div>
-                  <p>입력하신 정보는 보안이 유지된 상태로 Supabase 백엔드에 저장됩니다.</p>
-                </div>
-                <div className="flex gap-3">
-                  <div className="w-6 h-6 rounded-full bg-red-500/20 text-red-500 flex items-center justify-center text-xs font-bold shrink-0">3</div>
-                  <p>확인 즉시 기재해주신 연락처로 안내 문자를 발송해 드립니다.</p>
-                </div>
+              <p className="text-zinc-500 text-xs mb-4 uppercase tracking-widest font-bold">신청 양식</p>
+              <div className="space-y-2 text-zinc-300 font-mono text-sm">
+                <p>수신: <span className="text-white font-bold">info@nextin.ai.kr</span></p>
+                <div className="h-px bg-zinc-800 my-4"></div>
+                <p>성함 :</p>
+                <p>연락처 :</p>
+                <p>희망하시는 구독 플랜 및 월결제, 연결제 여부 :</p>
+                <p>문의사항 (선택) :</p>
               </div>
             </div>
 
-            <button 
-              onClick={() => {
-                setSelectedProgram('멤버십 구독/문의');
-                setIsFormOpen(true);
-              }}
+            <a 
+              href="mailto:info@nextin.ai.kr?subject=혁신 AI 멤버십 구독 신청&body=성함 : %0D%0A연락처 : %0D%0A희망하시는 구독 플랜 및 월결제, 연결제 여부 : %0D%0A문의사항 (선택) :"
               className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-2xl font-bold hover:bg-zinc-200 transition-all shadow-[0_0_30px_rgba(255,255,255,0.1)]"
             >
-              신청폼 작성하기
+              이메일로 신청하기
               <ArrowRight className="w-5 h-5" />
-            </button>
+            </a>
           </div>
         </div>
       )}
       
       {/* Auth Modal */}
-      <AuthModal 
-        isOpen={showAuthModal} 
-        onClose={() => setShowAuthModal(false)} 
-      />
+      <AnimatePresence>
+        {showAuthModal && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+              onClick={() => {
+                setShowAuthModal(false);
+                setShowPassword(false);
+              }}
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-full max-w-sm shadow-2xl"
+            >
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-bold text-white">
+                  코드 인증
+                </h3>
+                <button onClick={() => {
+                  setShowAuthModal(false);
+                  setShowPassword(false);
+                }} className="text-zinc-400 hover:text-white transition-colors">
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <p className="text-zinc-400 text-sm mb-2">
+                인증 코드를 입력해주세요.
+              </p>
+              <p className="text-emerald-400 text-xs font-medium mb-2 flex items-center gap-1">
+                <Lightbulb className="w-3 h-3" />
+                멤버십 전환시 로그아웃(인증 해제) 후 다시 희망하는 코드로 입력하면 됩니다.
+              </p>
+              <p className="text-amber-400 text-xs font-medium mb-6 flex items-center gap-1">
+                <AlertTriangle className="w-3 h-3" />
+                모든 코드는 영어 소문자로 입력해주세요.
+              </p>
+              <div className="mb-4">
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="인증 코드 입력"
+                    className="w-full bg-black border border-zinc-700 rounded-xl px-4 py-3 pr-16 text-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all font-mono"
+                    value={authCode}
+                    onChange={(e) => {
+                      setAuthCode(e.target.value);
+                      setAuthError('');
+                    }}
+                    onKeyDown={(e) => e.key === 'Enter' && handleAuth()}
+                    autoFocus
+                  />
+                  <button
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white transition-colors p-1"
+                    title={showPassword ? "숨기기" : "보기"}
+                  >
+                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  </button>
+                </div>
+                {authError && (
+                  <motion.p 
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-red-500 text-sm mt-2"
+                  >
+                    {authError}
+                  </motion.p>
+                )}
+              </div>
+              <button
+                onClick={handleAuth}
+                className="w-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white font-bold py-3 rounded-xl transition-all shadow-[0_0_15px_rgba(220,38,38,0.3)] hover:shadow-[0_0_20px_rgba(220,38,38,0.5)]"
+              >
+                인증하기
+              </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* Terms Modal */}
       <AnimatePresence>
@@ -3277,13 +3337,13 @@ export default function App() {
               </div>
               <div className="overflow-y-auto pr-2 text-zinc-300 text-sm leading-relaxed space-y-4">
                 <p className="font-bold text-white">1. 개인정보의 수집 항목 및 방법</p>
-                <p>혁신AI는 서비스 신청 및 상담을 위해 필요한 최소한의 개인정보(이름, 이메일, 연락처, 문의내용)를 수집합니다. 수집된 정보는 Supabase 보안 서버에 안전하게 저장됩니다.</p>
+                <p>혁신AI는 이용자의 개인정보를 일체 수집하지 않습니다. 본 사이트 이용 시 어떠한 형태의 개인정보(이름, 이메일, 연락처 등)도 요구하거나 저장하지 않습니다.</p>
                 
-                <p className="font-bold text-white mt-6">2. 개인정보의 수집 및 이용 목적</p>
-                <p>수집된 개인정보는 멤버십 구독 안내, 컨설팅 상담, 대행 서비스 제공 및 관련 문의 응대를 위해서만 사용됩니다.</p>
+                <p className="font-bold text-white mt-6">2. 개인정보 자동 수집 장치의 설치/운영</p>
+                <p>본 사이트는 이용자의 정보를 수집하거나 저장하는 별도의 장치나 방법을 일체 운영하지 않습니다.</p>
 
-                <p className="font-bold text-white mt-6">3. 개인정보의 보유 및 이용 기간</p>
-                <p>원칙적으로 개인정보 수집 및 이용 목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 단, 관계법령의 규정에 의하여 보존할 필요가 있는 경우 일정 기간 동안 보관할 수 있습니다.</p>
+                <p className="font-bold text-white mt-6">3. 사용자 문의 및 답변</p>
+                <p>사용자 문의 및 답변은 사이트 내에서 이루어지지 않으며, 아래 이메일을 통해 문의하셔야 합니다. 정혁신의 AI강의 수강생분들은 정혁신에게 별도 문의 가능합니다. 사이트 내에는 문의를 위한 별도의 개인정보 수집 폼이 존재하지 않습니다.</p>
 
                 <div className="mt-8 p-4 bg-black/50 rounded-lg border border-zinc-800">
                   <p className="mb-2"><span className="text-white font-medium">문의 메일 :</span> info@nextin.ai.kr</p>
@@ -3366,11 +3426,6 @@ export default function App() {
           </div>
         )}
       </AnimatePresence>
-      <ApplicationForm 
-        isOpen={isFormOpen} 
-        onClose={() => setIsFormOpen(false)} 
-        programTitle={selectedProgram}
-      />
     </div>
   );
 }
