@@ -2593,6 +2593,40 @@ export default function App() {
             </div>
           </div>
 
+          {/* Target Audience Section */}
+          <div className="mb-24">
+            <h3 className="text-2xl md:text-4xl font-black text-white text-center mb-12">
+              누구를 위한 컨설팅인가요?
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                {
+                  title: "기업 및 법인",
+                  desc: "비효율적인 업무 프로세스를 AI로 자동화하고, 인건비 절감과 생산성 극대화를 동시에 달성하고 싶은 기업",
+                  tag: "CORPORATE"
+                },
+                {
+                  title: "1인 사업가",
+                  desc: "혼자서 마케팅부터 CS까지 모든 것을 감당하기 벅찬 대표님. AI 직원을 통해 10명의 몫을 해내고 싶은 분",
+                  tag: "SOLOPRENEUR"
+                },
+                {
+                  title: "부업러 & 예비 창업자",
+                  desc: "적은 시간 투자로 높은 수익을 내는 자동화 수익 모델을 구축하고, 본업 이상의 가치를 만들고 싶은 분",
+                  tag: "SIDE-HUSTLER"
+                }
+              ].map((item, i) => (
+                <div key={i} className="group bg-zinc-900/30 border border-zinc-800/50 p-8 rounded-[32px] hover:border-indigo-500/30 transition-all duration-300">
+                  <div className="inline-block px-3 py-1 rounded-lg bg-indigo-500/10 text-indigo-400 text-[10px] font-bold tracking-wider mb-4">
+                    {item.tag}
+                  </div>
+                  <h4 className="text-xl font-bold text-white mb-4 group-hover:text-indigo-400 transition-colors">{item.title}</h4>
+                  <p className="text-zinc-500 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Program Details Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">
             <div className="bg-zinc-900/50 border border-zinc-800 p-10 rounded-[32px] backdrop-blur-sm">
@@ -2674,10 +2708,10 @@ export default function App() {
               <Clock className="w-3.5 h-3.5" />
               <span>LIMITED AVAILABILITY</span>
             </div>
-            <h2 className="text-3xl md:text-5xl font-black text-white mb-6">매주 단 2명, 소수 정예</h2>
+            <h2 className="text-3xl md:text-5xl font-black text-white mb-6">매월 단 3명, 소수 정예</h2>
             <p className="text-zinc-400 text-lg max-w-2xl mx-auto leading-relaxed mb-12">
-              퀄리티 유지를 위해 매주 단 2분의 대표님만 모시고 진행합니다. <br />
-              고민하는 순간, 이번 주 스케줄은 마감됩니다.
+              퀄리티 유지를 위해 매월 단 3분의 대표님만 모시고 진행합니다. <br />
+              고민하는 순간, 이번 달 스케줄은 마감됩니다.
             </p>
             
             <div className="max-w-3xl mx-auto p-8 rounded-3xl bg-white/5 border border-white/10 mb-12">
@@ -2982,16 +3016,10 @@ export default function App() {
                     <td className="py-4 px-6 text-center text-zinc-300 font-bold text-amber-400">[ALL] 홈페이지 개발/역량 강화</td>
                   </tr>
                   <tr className="border-b border-zinc-900">
-                    <td className="py-4 px-6 text-zinc-400 font-medium">개인 API 최적화</td>
-                    <td className="py-4 px-6 text-center text-zinc-500">일반 모드</td>
-                    <td className="py-4 px-6 text-center text-zinc-300">중급 프롬프트 엔진</td>
-                    <td className="py-4 px-6 text-center text-zinc-300 font-bold text-amber-400">[VVIP] 초정밀 고효율 엔진</td>
-                  </tr>
-                  <tr className="border-b border-zinc-900">
                     <td className="py-4 px-6 text-zinc-400 font-medium">VVIP 커뮤니티</td>
                     <td className="py-4 px-6 text-center text-zinc-600">권한 없음</td>
                     <td className="py-4 px-6 text-center text-zinc-300">일반 정보 공유방</td>
-                    <td className="py-4 px-6 text-center text-zinc-300 font-bold text-amber-400">비공개 수익 인증 & 노하우방</td>
+                    <td className="py-4 px-6 text-center text-zinc-300 font-bold text-amber-400">AI 수익화 노하우방</td>
                   </tr>
                   <tr className="border-b border-zinc-800">
                     <td className="py-4 px-6 text-zinc-400 font-medium">하루 투자 비용</td>
