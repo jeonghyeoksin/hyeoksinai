@@ -1604,10 +1604,10 @@ function PromptCard({
 }) {
   const [copied, setCopied] = useState(false);
 
-  const isLocked = authLevel !== 'MASTER' && authLevel !== 'CONSULTING' && authLevel !== 'DONCLASS' && authLevel !== 'COACHINGPASS' && (
-    (program.access === 'PREMIUM' && authLevel !== 'PREMIUM') || 
+  const isLocked = authLevel !== 'MASTER' && authLevel !== 'CONSULTING' && authLevel !== 'COACHINGPASS' && (
+    (program.access === 'PREMIUM' && authLevel !== 'PREMIUM' && authLevel !== 'DONCLASS') || 
     (program.access === 'STUDENT' && authLevel !== 'STUDENT') ||
-    (program.access === 'BASIC' && authLevel !== 'BASIC' && authLevel !== 'PREMIUM')
+    (program.access === 'BASIC' && authLevel !== 'BASIC' && authLevel !== 'PREMIUM' && authLevel !== 'DONCLASS')
   );
 
   const handleCopy = () => {
@@ -1635,8 +1635,8 @@ function PromptCard({
       <div className="p-6 flex flex-col flex-grow overflow-hidden">
         <div className="flex items-start gap-2 mb-3 flex-wrap">
           {program.access === 'STUDENT' && (
-            <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-100 text-blue-700'} text-[10px] font-bold rounded-md shrink-0`}>
-              {authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+            <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'COACHINGPASS' ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-100 text-blue-700'} text-[10px] font-bold rounded-md shrink-0`}>
+              {authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
               🎓 수강생 전용
             </span>
           )}
@@ -1799,6 +1799,7 @@ export default function App() {
   const [authCode, setAuthCode] = useState('');
   const [authError, setAuthError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [authCodeUsed, setAuthCodeUsed] = useState('');
 
   const handleAuth = () => {
     if (authCode === 'master1004') {
@@ -1819,6 +1820,19 @@ export default function App() {
       setAuthCode('');
       setAuthError('');
       setShowPassword(false);
+    } else if (authCode === 'dc1004') {
+      const currentDate = new Date();
+      const expirationDate = new Date('2027-04-01T00:00:00+09:00');
+      if (currentDate < expirationDate) {
+        setAuthLevel('DONCLASS');
+        setAuthCodeUsed('dc1004');
+        setShowAuthModal(false);
+        setAuthCode('');
+        setAuthError('');
+        setShowPassword(false);
+      } else {
+        setAuthError('만료된 인증 코드입니다.');
+      }
     } else if (authCode === 'cp') {
       setAuthLevel('COACHINGPASS');
       setShowAuthModal(false);
@@ -1902,9 +1916,9 @@ export default function App() {
           {/* Top Badges */}
           <div className="absolute top-3 left-3 flex gap-2 flex-wrap">
             {program.access === 'STUDENT' ? (
-              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-500' : 'bg-blue-500'} text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
-                {authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                {authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? '인증됨' : '🎓 수강생 전용'}
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'COACHINGPASS' ? 'bg-emerald-500' : 'bg-blue-500'} text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
+                {authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                {authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'COACHINGPASS' ? '인증됨' : '🎓 수강생 전용'}
               </div>
             ) : program.access === 'PREMIUM' ? (
               <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-black'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
@@ -1935,7 +1949,7 @@ export default function App() {
           
           {/* Action Button */}
           <div className="mt-auto pt-4">
-            {program.access === 'STUDENT' && authLevel !== 'STUDENT' && authLevel !== 'MASTER' && authLevel !== 'CONSULTING' && authLevel !== 'DONCLASS' && authLevel !== 'COACHINGPASS' ? (
+            {program.access === 'STUDENT' && authLevel !== 'STUDENT' && authLevel !== 'MASTER' && authLevel !== 'CONSULTING' && authLevel !== 'COACHINGPASS' ? (
               <button 
                 onClick={() => setShowAuthModal(true)}
                 className={`w-full flex items-center justify-center gap-2 py-2.5 font-bold rounded-xl transition-all ${
@@ -2058,11 +2072,21 @@ export default function App() {
               </div>
               {authLevel !== 'NONE' ? (
                 <div className="flex items-center gap-3">
-                  <span className="text-sm text-emerald-400 font-medium">
-                    {authLevel === 'MASTER' ? '마스터' : authLevel === 'CONSULTING' ? '1:1 컨설팅' : authLevel === 'COACHINGPASS' ? '협력사 : 코칭패스' : authLevel === 'DONCLASS' ? '협력사 : 돈클' : authLevel === 'STUDENT' ? '수강생' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '스탠다드 멤버십'}
-                  </span>
+                  <div className="flex flex-col items-end">
+                    <span className="text-sm text-emerald-400 font-medium">
+                      {authLevel === 'MASTER' ? '마스터' : authLevel === 'CONSULTING' ? '1:1 컨설팅' : authLevel === 'COACHINGPASS' ? '협력사 : 코칭패스' : authLevel === 'DONCLASS' ? '돈버는형님들 수강생 전용' : authLevel === 'STUDENT' ? '수강생' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '스탠다드 멤버십'} 인증 완료
+                    </span>
+                    {authCodeUsed === 'dc1004' && (
+                      <span className="text-xs text-amber-400 font-medium mt-0.5">
+                        (만료일: 2027.04.01)
+                      </span>
+                    )}
+                  </div>
                   <button 
-                    onClick={() => setAuthLevel('NONE')}
+                    onClick={() => {
+                      setAuthLevel('NONE');
+                      setAuthCodeUsed('');
+                    }}
                     className="bg-zinc-800 text-emerald-400 px-4 py-2 rounded-md font-medium hover:bg-zinc-700 transition-colors border border-zinc-700 flex items-center gap-2"
                   >
                     <Unlock className="w-4 h-4" />
@@ -2144,12 +2168,20 @@ export default function App() {
                 <div className="pt-4 pb-2 border-t border-zinc-800">
                   {authLevel !== 'NONE' ? (
                     <div className="flex flex-col gap-2 px-3">
-                      <span className="text-sm text-emerald-400 font-medium mb-2">
-                        {authLevel === 'MASTER' ? '마스터' : authLevel === 'CONSULTING' ? '1:1 컨설팅' : authLevel === 'COACHINGPASS' ? '협력사 : 코칭패스' : authLevel === 'DONCLASS' ? '협력사 : 돈클' : authLevel === 'STUDENT' ? '수강생' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '스탠다드 멤버십'} 인증 완료
-                      </span>
+                      <div className="flex flex-col mb-2">
+                        <span className="text-sm text-emerald-400 font-medium">
+                          {authLevel === 'MASTER' ? '마스터' : authLevel === 'CONSULTING' ? '1:1 컨설팅' : authLevel === 'COACHINGPASS' ? '협력사 : 코칭패스' : authLevel === 'DONCLASS' ? '돈버는형님들 수강생 전용' : authLevel === 'STUDENT' ? '수강생' : authLevel === 'PREMIUM' ? '프리미엄 멤버십' : '스탠다드 멤버십'} 인증 완료
+                        </span>
+                        {authCodeUsed === 'dc1004' && (
+                          <span className="text-xs text-amber-400 font-medium mt-0.5">
+                            (만료일: 2027.04.01)
+                          </span>
+                        )}
+                      </div>
                       <button 
                         onClick={() => {
                           setAuthLevel('NONE');
+                          setAuthCodeUsed('');
                           setIsMobileMenuOpen(false);
                         }}
                         className="w-full bg-zinc-800 text-emerald-400 px-4 py-2 rounded-md font-medium hover:bg-zinc-700 transition-colors border border-zinc-700 flex items-center justify-center gap-2"
