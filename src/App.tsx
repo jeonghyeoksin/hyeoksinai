@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Lock, Unlock, ExternalLink, Menu, X, Settings, Zap, Sparkles, ArrowRight, Copy, Check, Bot, Youtube, Star, FileText, AlertTriangle, Wand2, Code, Eye, EyeOff, ChevronLeft, ChevronRight, ChevronDown, Lightbulb, HelpCircle, Mail, Layout, Clock, Users, TrendingUp, Timer, ShieldCheck } from 'lucide-react';
+import { Search, Lock, Unlock, ExternalLink, Menu, X, Settings, Zap, Sparkles, ArrowRight, Copy, Check, Bot, Youtube, Star, FileText, AlertTriangle, Wand2, Code, Eye, EyeOff, ChevronLeft, ChevronRight, ChevronDown, Lightbulb, HelpCircle, Mail, Layout, Clock, Users, TrendingUp, Timer, ShieldCheck, Crown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { additionalPrompts } from './promptsData';
 
@@ -350,7 +350,7 @@ const PROGRAMS: Program[] = ([
         </div>
       </div>
     ),
-    access: 'PREMIUM',
+    access: 'BASIC',
     category: 'MARKETING',
     tags: ['블로그', '콘텐츠 생성'],
     link: 'https://hyeoksinblog.fragrant-flower-7056.workers.dev'
@@ -378,7 +378,7 @@ const PROGRAMS: Program[] = ([
         </div>
       </div>
     ),
-    access: 'PREMIUM',
+    access: 'BASIC',
     category: 'DESIGN',
     tags: ['상세페이지', '디자인'],
     link: 'https://hyeoksin-sangsepage-ver16.vercel.app'
@@ -411,6 +411,64 @@ const PROGRAMS: Program[] = ([
     category: 'PLANNING',
     tags: ['홈페이지', '개발', '프롬프트'],
     link: 'https://hyeoksin-homepage.fragrant-flower-7056.workers.dev'
+  },
+  {
+    id: 'sourcing',
+    title: '혁신 소싱 AI',
+    description: 'AI를 활용하여 최적의 소싱 아이템을 발굴하고 분석합니다.',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center p-6">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&auto=format&fit=crop)' }}
+        ></div>
+        
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-teal-900/80 via-slate-900/85 to-black/90 backdrop-blur-[2px]"></div>
+        
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center text-center w-full px-2">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            혁신 <br/> 소싱 AI
+          </h2>
+        </div>
+      </div>
+    ),
+    access: 'PREMIUM',
+    category: 'PLANNING',
+    tags: ['소싱', '비즈니스'],
+    link: 'https://hyeoksin-sale.fragrant-flower-7056.workers.dev'
+  },
+  {
+    id: 'newsletter',
+    title: '혁신 뉴스레터 AI',
+    description: 'AI를 활용하여 매력적인 뉴스레터를 기획하고 작성합니다.',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center p-6">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1557200134-90327ee9fafa?q=80&w=800&auto=format&fit=crop)' }}
+        ></div>
+        
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/80 via-slate-900/85 to-black/90 backdrop-blur-[2px]"></div>
+        
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center text-center w-full px-2">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            혁신 <br/> 뉴스레터 AI
+          </h2>
+        </div>
+      </div>
+    ),
+    access: 'PREMIUM',
+    category: 'PLANNING',
+    tags: ['뉴스레터', '마케팅'],
+    link: 'https://hyeoksin-news.fragrant-flower-7056.workers.dev'
   },
   {
     id: '5',
@@ -482,7 +540,7 @@ const PROGRAMS: Program[] = ([
         </div>
       </div>
     ),
-    access: 'PREMIUM',
+    access: 'BASIC',
     category: 'DESIGN',
     tags: ['카드뉴스', '인스타그램']
   },
@@ -1651,7 +1709,7 @@ function PromptCard({
               {program.access === 'BASIC' && (
                 <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-100 text-indigo-700'} text-[10px] font-bold rounded-md shrink-0`}>
                   {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                  ⚡ 스탠다드 멤버십 전용
+                  ⚡ 스탠다드 / 프리미엄 멤버십
                 </span>
               )}
             </>
@@ -1873,11 +1931,17 @@ export default function App() {
     let matchesAccess = false;
     if (selectedAccess === 'ALL') {
       matchesAccess = true;
+    } else if (selectedAccess === 'PREMIUM') {
+      matchesAccess = program.access === 'PREMIUM' || program.access === 'BASIC';
     } else {
       matchesAccess = program.access === selectedAccess;
     }
     
     return matchesSearch && matchesCategory && matchesSubCategory && matchesAccess;
+  }).sort((a, b) => {
+    if (a.access === 'STUDENT' && b.access !== 'STUDENT') return 1;
+    if (a.access !== 'STUDENT' && b.access === 'STUDENT') return -1;
+    return 0;
   });
 
   const renderProgram = (program: Program) => (
@@ -1928,7 +1992,7 @@ export default function App() {
             ) : program.access === 'BASIC' ? (
               <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-500 text-white' : 'bg-indigo-500 text-white'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
                 {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? '인증됨' : '⚡ 스탠다드 멤버십'}
+                {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? '인증됨' : '⚡ 스탠다드 / 프리미엄 멤버십'}
               </div>
             ) : (
               <div className="flex items-center gap-1.5 px-2.5 py-1 bg-white/10 text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md border border-white/20">
@@ -1973,7 +2037,7 @@ export default function App() {
                 disabled={authLevel === 'BASIC' || authLevel === 'STUDENT'}
               >
                 <Lock className="w-4 h-4" />
-                {authLevel === 'BASIC' || authLevel === 'STUDENT' ? '프리미엄 멤버십 이용 불가' : '잠금 해제 및 이동'}
+                {authLevel === 'BASIC' || authLevel === 'STUDENT' ? '프리미엄 멤버십 필요' : '잠금 해제 및 이동'}
               </button>
             ) : program.access === 'BASIC' && authLevel !== 'BASIC' && authLevel !== 'PREMIUM' && authLevel !== 'MASTER' && authLevel !== 'CONSULTING' && authLevel !== 'DONCLASS' && authLevel !== 'COACHINGPASS' ? (
               <button 
@@ -1986,7 +2050,7 @@ export default function App() {
                 disabled={authLevel === 'STUDENT'}
               >
                 <Lock className="w-4 h-4" />
-                {authLevel === 'STUDENT' ? '스탠다드 멤버십 이용 불가' : '잠금 해제 및 이동'}
+                {authLevel === 'STUDENT' ? '스탠다드 / 프리미엄 멤버십 필요' : '잠금 해제 및 이동'}
               </button>
             ) : program.link ? (
               <a 
@@ -2423,7 +2487,7 @@ export default function App() {
               {[
                 { id: 'ALL', label: '✨ 모든 버전' },
                 { id: 'FREE', label: '🎁 무료버전' },
-                { id: 'BASIC', label: '⚡ 스탠다드 멤버십 전용' },
+                { id: 'BASIC', label: '⚡ 스탠다드 / 프리미엄 멤버십' },
                 { id: 'PREMIUM', label: '💎 프리미엄 멤버십 전용' },
                 { id: 'STUDENT', label: '🎓 수강생 전용' },
               ].map((acc) => (
@@ -3062,8 +3126,8 @@ export default function App() {
                   <tr className="border-b border-zinc-800">
                     <td className="py-4 px-6 text-zinc-400 font-medium">하루 투자 비용</td>
                     <td className="py-4 px-6 text-center text-zinc-500">0원</td>
-                    <td className="py-4 px-6 text-center text-indigo-400 font-bold">약 630원 (연간 기준)</td>
-                    <td className="py-4 px-6 text-center text-amber-400 font-bold">약 1,140원 (연간 기준)</td>
+                    <td className="py-4 px-6 text-center text-indigo-400 font-bold">약 1,280원 (연간 기준)</td>
+                    <td className="py-4 px-6 text-center text-amber-400 font-bold">약 2,270원 (연간 기준)</td>
                   </tr>
                 </tbody>
               </table>
@@ -3093,7 +3157,7 @@ export default function App() {
                   </div>
                   <div>
                     <p className="text-white font-black text-sm leading-tight">혁신 AI 사이트 신규 오픈 기념</p>
-                    <p className="text-red-500 font-bold text-xs">선착순 최대 65% 얼리버드 할인가 <span className="text-zinc-500 font-medium ml-1">(선착순 30명)</span></p>
+                    <p className="text-red-500 font-bold text-xs">선착순 최대 30% 얼리버드 할인가 <span className="text-zinc-500 font-medium ml-1">(선착순 30명)</span></p>
                   </div>
                 </div>
               </motion.div>
@@ -3111,13 +3175,11 @@ export default function App() {
                     <div>
                       <p className="text-zinc-500 text-xs mb-1">월간 구독</p>
                       <div className="flex items-center gap-2">
-                        <span className="text-zinc-600 line-through text-sm">49,000원</span>
-                        <span className="text-white font-bold text-xl">29,000원</span>
+                        <span className="text-white font-bold text-xl">49,000원</span>
                       </div>
                     </div>
                     <div className="text-right">
-                      <span className="inline-block px-2 py-1 rounded-md bg-zinc-800 text-zinc-400 text-[10px] font-bold mb-1">40% OFF</span>
-                      <p className="text-zinc-400 text-xs">일 약 960원</p>
+                      <p className="text-zinc-400 text-xs">일 약 1,630원</p>
                     </div>
                   </div>
                   <div className="flex justify-between items-center p-6 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 relative overflow-hidden">
@@ -3126,21 +3188,27 @@ export default function App() {
                       <p className="text-indigo-300 text-xs mb-1 font-bold">연간 구독 (추천)</p>
                       <div className="flex items-center gap-2">
                         <span className="text-indigo-900 line-through text-sm">588,000원</span>
-                        <span className="text-white font-black text-2xl">228,000원</span>
+                        <span className="text-white font-black text-2xl">470,400원</span>
                       </div>
                     </div>
                     <div className="text-right">
-                      <span className="inline-block px-2 py-1 rounded-md bg-red-500 text-white text-[10px] font-black mb-1 animate-pulse">61% OFF 🔥</span>
-                      <p className="text-indigo-200 text-sm font-bold">일 약 630원</p>
+                      <span className="inline-block px-2 py-1 rounded-md bg-red-500 text-white text-[10px] font-black mb-1 animate-pulse">20% OFF 🔥</span>
+                      <p className="text-indigo-200 text-sm font-bold">일 약 1,280원</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Premium */}
-              <div className="bg-zinc-900/50 border border-zinc-800 rounded-3xl p-8 hover:border-amber-500/50 transition-all group">
+              <div className="bg-gradient-to-b from-amber-900/20 to-zinc-900/50 border-2 border-amber-500/50 rounded-3xl p-8 hover:border-amber-400 transition-all group relative shadow-[0_0_30px_rgba(245,158,11,0.15)] transform hover:-translate-y-1">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-500 to-yellow-400 text-black font-black text-sm px-4 py-1 rounded-full shadow-lg whitespace-nowrap">
+                  가장 추천하는 플랜
+                </div>
                 <div className="mb-6">
-                  <h3 className="text-xl font-bold text-white mb-2">2. Premium 멤버십</h3>
+                  <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+                    <Crown className="w-5 h-5 text-amber-400" />
+                    2. Premium 멤버십
+                  </h3>
                   <p className="text-amber-400 text-sm font-medium">"AI로 비즈니스 시스템을 구축하고 싶은 1인 기업가 추천!"</p>
                 </div>
                 <div className="space-y-4">
@@ -3148,27 +3216,25 @@ export default function App() {
                     <div>
                       <p className="text-zinc-500 text-xs mb-1">월간 구독</p>
                       <div className="flex items-center gap-2">
-                        <span className="text-zinc-600 line-through text-sm">99,000원</span>
-                        <span className="text-white font-bold text-xl">59,000원</span>
+                        <span className="text-white font-bold text-xl">99,000원</span>
                       </div>
                     </div>
                     <div className="text-right">
-                      <span className="inline-block px-2 py-1 rounded-md bg-zinc-800 text-zinc-400 text-[10px] font-bold mb-1">40% OFF</span>
-                      <p className="text-zinc-400 text-xs">일 약 1,960원</p>
+                      <p className="text-zinc-400 text-xs">일 약 3,300원</p>
                     </div>
                   </div>
-                  <div className="flex justify-between items-center p-6 rounded-2xl bg-amber-500/10 border border-amber-500/30 relative overflow-hidden">
+                  <div className="flex justify-between items-center p-6 rounded-2xl bg-amber-500/20 border border-amber-500/50 relative overflow-hidden shadow-[inset_0_0_20px_rgba(245,158,11,0.2)]">
                     <div className="absolute top-0 right-0 bg-amber-500 text-black text-[10px] font-black px-3 py-1 rounded-bl-xl uppercase tracking-wider">Best Value</div>
                     <div>
                       <p className="text-amber-300 text-xs mb-1 font-bold">연간 구독 (추천)</p>
                       <div className="flex items-center gap-2">
-                        <span className="text-amber-900 line-through text-sm">1,188,000원</span>
-                        <span className="text-white font-black text-2xl">417,600원</span>
+                        <span className="text-amber-900/70 line-through text-sm">1,188,000원</span>
+                        <span className="text-white font-black text-2xl">831,600원</span>
                       </div>
                     </div>
                     <div className="text-right">
-                      <span className="inline-block px-2 py-1 rounded-md bg-amber-500 text-black text-[10px] font-black mb-1">65% OFF 👑</span>
-                      <p className="text-amber-200 text-sm font-bold">일 약 1,140원</p>
+                      <span className="inline-block px-2 py-1 rounded-md bg-amber-500 text-black text-[10px] font-black mb-1 animate-pulse">30% OFF 👑</span>
+                      <p className="text-amber-200 text-sm font-bold">일 약 2,270원</p>
                     </div>
                   </div>
                 </div>
