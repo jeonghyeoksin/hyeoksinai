@@ -24,7 +24,8 @@
     "incremental": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "strict": true
+    "strict": true,
+    "types": ["vite/client"]
   },
   "include": [
     "next-env.d.ts",

@@ -17,7 +17,8 @@ import {
   getDoc,
   onAuthStateChanged,
   handleFirestoreError,
-  OperationType
+  OperationType,
+  User
 } from '@/lib/firebase';
 import { 
   Plus, 
@@ -49,7 +50,7 @@ interface UserProfile {
 }
 
 export default function Home() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [notes, setNotes] = useState<Note[]>([]);
   const [loading, setLoading] = useState(true);
@@ -60,7 +61,7 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user: User | null) => {
       if (user) {
         setUser(user);
         const profileDoc = await getDoc(doc(db, 'users', user.uid));
@@ -85,8 +86,8 @@ export default function Home() {
       orderBy('createdAt', 'desc')
     );
 
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const notesData = snapshot.docs.map(doc => ({
+    const unsubscribe = onSnapshot(q, (snapshot: any) => {
+      const notesData = snapshot.docs.map((doc: any) => ({
         id: doc.id,
         ...doc.data()
       })) as Note[];

@@ -12,7 +12,8 @@ import {
   deleteDoc, 
   doc, 
   getDoc,
-  onAuthStateChanged
+  onAuthStateChanged,
+  User
 } from '@/lib/firebase';
 import { 
   Trash2, 
@@ -30,14 +31,14 @@ interface UserProfile {
 }
 
 export default function AdminDashboard() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [users, setUsers] = useState<UserProfile[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user: User | null) => {
       if (user) {
         setUser(user);
         const profileDoc = await getDoc(doc(db, 'users', user.uid));
@@ -59,8 +60,8 @@ export default function AdminDashboard() {
     if (profile?.role !== 'admin') return;
 
     const q = query(collection(db, 'users'), orderBy('createdAt', 'desc'));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const usersData = snapshot.docs.map(doc => ({
+    const unsubscribe = onSnapshot(q, (snapshot: any) => {
+      const usersData = snapshot.docs.map((doc: any) => ({
         ...doc.data()
       })) as UserProfile[];
       setUsers(usersData);

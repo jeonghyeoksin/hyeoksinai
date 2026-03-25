@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Search, Lock, Unlock, ExternalLink, Menu, X, Settings, Zap, Sparkles, ArrowRight, Copy, Check, Bot, Youtube, Star, FileText, AlertTriangle, Wand2, Code, Eye, EyeOff, ChevronLeft, ChevronRight, ChevronDown, Lightbulb, HelpCircle, Mail, Layout, Clock, Users, TrendingUp, Timer, ShieldCheck, Crown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { additionalPrompts } from './promptsData';
+import { Session } from '@supabase/supabase-js';
 
 // --- Types ---
 type AccessLevel = 'FREE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER' | 'DONCLASS' | 'COACHINGPASS' | 'CONSULTING';
@@ -1826,7 +1827,7 @@ const FAQ_DATA = [
   }
 ];
 
-export default function App() {
+export default function App({ session }: { session: Session | null }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<Category>('ALL');
   const [selectedSubCategory, setSelectedSubCategory] = useState<PromptSubCategory | 'ALL'>('ALL');

@@ -53,8 +53,9 @@ export default function Auth() {
         await signInWithEmailAndPassword(auth, email, password);
         router.push('/');
       }
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      const error = err as Error;
+      setError(error.message);
     } finally {
       setLoading(false);
     }
@@ -77,8 +78,9 @@ export default function Auth() {
       });
 
       router.push('/');
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      const error = err as Error;
+      setError(error.message);
     }
   };
 
