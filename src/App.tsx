@@ -546,6 +546,35 @@ const PROGRAMS: Program[] = ([
     tags: ['카드뉴스', '인스타그램']
   },
   {
+    id: '17',
+    title: '혁신 플레이스 최적화 AI',
+    description: '네이버 스마트플레이스 상위노출을 위한 최적화 가이드 및 세팅 AI',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full relative overflow-hidden flex flex-col items-center justify-center p-6">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop)' }}
+        ></div>
+        
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/80 to-[#0f172a]/40 backdrop-blur-[2px]"></div>
+        
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center text-center w-full px-2">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            혁신 <br/> 플레이스 최적화 AI
+          </h2>
+        </div>
+      </div>
+    ),
+    access: 'PREMIUM',
+    category: 'MARKETING',
+    tags: ['플레이스', '상위노출', '마케팅'],
+    link: 'https://hyeoksin-place.fragrant-flower-7056.workers.dev'
+  },
+  {
     id: '8',
     title: '혁신 전자책 AI',
     description: 'Gemini 3.1 Pro의 강력한 추론 능력과 이미지 생성 기능을 결합하여 단 몇 번의 클릭으로 전문가 수준의 전자책을 기획하고 출판하세요.',
