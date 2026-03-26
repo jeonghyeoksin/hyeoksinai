@@ -2154,12 +2154,12 @@ export default function App({ session }: { session: Session | null }) {
               >
                 FAQ
               </button>
-              <button 
-                onClick={() => setCurrentView('MEMBERSHIP')}
-                className={`${currentView === 'MEMBERSHIP' ? 'text-white font-bold' : 'text-zinc-300 hover:text-white'} transition-colors`}
+              <a 
+                href="https://hyeoksinai.com/membership"
+                className="text-zinc-300 hover:text-white transition-colors"
               >
                 멤버십 구독
-              </button>
+              </a>
               <button 
                 onClick={() => setCurrentView('CONSULTING')}
                 className={`${currentView === 'CONSULTING' ? 'text-white font-bold' : 'text-zinc-300 hover:text-white'} transition-colors`}
@@ -2250,12 +2250,12 @@ export default function App({ session }: { session: Session | null }) {
                 >
                   FAQ
                 </button>
-                <button 
-                  onClick={() => { setCurrentView('MEMBERSHIP'); setIsMobileMenuOpen(false); }}
-                  className={`block w-full text-left px-3 py-2 text-base font-medium rounded-md ${currentView === 'MEMBERSHIP' ? 'text-white bg-white/5' : 'text-zinc-300 hover:text-white hover:bg-white/5'}`}
+                <a 
+                  href="https://hyeoksinai.com/membership"
+                  className="block w-full text-left px-3 py-2 text-base font-medium rounded-md text-zinc-300 hover:text-white hover:bg-white/5"
                 >
                   멤버십 구독
-                </button>
+                </a>
                 <button 
                   onClick={() => { setCurrentView('CONSULTING'); setIsMobileMenuOpen(false); }}
                   className={`block w-full text-left px-3 py-2 text-base font-medium rounded-md ${currentView === 'CONSULTING' ? 'text-white bg-white/5' : 'text-zinc-300 hover:text-white hover:bg-white/5'}`}
@@ -3295,27 +3295,15 @@ export default function App({ session }: { session: Session | null }) {
             </div>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">구독 신청 안내</h2>
             <p className="text-zinc-400 mb-8 max-w-2xl mx-auto">
-              구독 신청을 희망하시면 아래 메일에 양식을 작성하여 보내주시면, <br className="hidden md:block" />
-              개발자 정혁신이 직접 연락드려서 구독 안내 도와드리겠습니다.
+              구독 신청을 희망하시면 아래 버튼을 클릭하여 <br className="hidden md:block" />
+              멤버십 구독 페이지로 이동하여 신청해주시길 바랍니다.
             </p>
-            
-            <div className="bg-black/50 border border-zinc-800 rounded-2xl p-6 text-left mb-8 max-w-lg mx-auto">
-              <p className="text-zinc-500 text-xs mb-4 uppercase tracking-widest font-bold">신청 양식</p>
-              <div className="space-y-2 text-zinc-300 font-mono text-sm">
-                <p>수신: <span className="text-white font-bold">info@nextin.ai.kr</span></p>
-                <div className="h-px bg-zinc-800 my-4"></div>
-                <p>성함 :</p>
-                <p>연락처 :</p>
-                <p>희망하시는 구독 플랜 및 월결제, 연결제 여부 :</p>
-                <p>문의사항 (선택) :</p>
-              </div>
-            </div>
 
             <a 
-              href="mailto:info@nextin.ai.kr?subject=혁신 AI 멤버십 구독 신청&body=성함 : %0D%0A연락처 : %0D%0A희망하시는 구독 플랜 및 월결제, 연결제 여부 : %0D%0A문의사항 (선택) :"
+              href="https://hyeoksinai.com/membership"
               className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-2xl font-bold hover:bg-zinc-200 transition-all shadow-[0_0_30px_rgba(255,255,255,0.1)]"
             >
-              이메일로 신청하기
+              구독 신청하기
               <ArrowRight className="w-5 h-5" />
             </a>
           </div>
@@ -3398,10 +3386,18 @@ export default function App({ session }: { session: Session | null }) {
               </div>
               <button
                 onClick={handleAuth}
-                className="w-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white font-bold py-3 rounded-xl transition-all shadow-[0_0_15px_rgba(220,38,38,0.3)] hover:shadow-[0_0_20px_rgba(220,38,38,0.5)]"
+                className="w-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white font-bold py-3 rounded-xl transition-all shadow-[0_0_15px_rgba(220,38,38,0.3)] hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] mb-4"
               >
                 인증하기
               </button>
+              <div className="text-center">
+                <a 
+                  href="https://hyeoksinai.com/membership"
+                  className="text-zinc-500 hover:text-white text-sm transition-colors"
+                >
+                  멤버십 구독하기
+                </a>
+              </div>
             </motion.div>
           </div>
         )}
