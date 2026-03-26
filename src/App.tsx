@@ -2160,18 +2160,18 @@ export default function App({ session }: { session: Session | null }) {
               >
                 멤버십 구독
               </a>
-              <button 
-                onClick={() => setCurrentView('CONSULTING')}
-                className={`${currentView === 'CONSULTING' ? 'text-white font-bold' : 'text-zinc-300 hover:text-white'} transition-colors`}
+              <a 
+                href="https://hyeoksinai.com/consulting"
+                className="text-zinc-300 hover:text-white transition-colors"
               >
                 컨설팅 문의
-              </button>
-              <button 
-                onClick={() => setCurrentView('AGENCY')}
-                className={`${currentView === 'AGENCY' ? 'text-white font-bold' : 'text-zinc-300 hover:text-white'} transition-colors`}
+              </a>
+              <a 
+                href="https://hyeoksinai.com/ad"
+                className="text-zinc-300 hover:text-white transition-colors"
               >
                 대행 문의
-              </button>
+              </a>
             </div>
 
             {/* Right Actions */}
@@ -2256,18 +2256,18 @@ export default function App({ session }: { session: Session | null }) {
                 >
                   멤버십 구독
                 </a>
-                <button 
-                  onClick={() => { setCurrentView('CONSULTING'); setIsMobileMenuOpen(false); }}
-                  className={`block w-full text-left px-3 py-2 text-base font-medium rounded-md ${currentView === 'CONSULTING' ? 'text-white bg-white/5' : 'text-zinc-300 hover:text-white hover:bg-white/5'}`}
+                <a 
+                  href="https://hyeoksinai.com/consulting"
+                  className="block w-full text-left px-3 py-2 text-base font-medium rounded-md text-zinc-300 hover:text-white hover:bg-white/5"
                 >
                   컨설팅 문의
-                </button>
-                <button 
-                  onClick={() => { setCurrentView('AGENCY'); setIsMobileMenuOpen(false); }}
-                  className={`block w-full text-left px-3 py-2 text-base font-medium rounded-md ${currentView === 'AGENCY' ? 'text-white bg-white/5' : 'text-zinc-300 hover:text-white hover:bg-white/5'}`}
+                </a>
+                <a 
+                  href="https://hyeoksinai.com/ad"
+                  className="block w-full text-left px-3 py-2 text-base font-medium rounded-md text-zinc-300 hover:text-white hover:bg-white/5"
                 >
                   대행 문의
-                </button>
+                </a>
                 <div className="px-3 py-2">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-amber-500/20 bg-amber-500/10 text-amber-400 text-sm font-bold shadow-[0_0_10px_rgba(245,158,11,0.1)]">
                     <Sparkles className="w-4 h-4" />
