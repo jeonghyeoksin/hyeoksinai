@@ -1708,10 +1708,18 @@ function PromptCard({
                 </span>
               )}
               {program.access === 'BASIC' && (
-                <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-100 text-indigo-700'} text-[10px] font-bold rounded-md shrink-0`}>
-                  {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                  ⚡ 스탠다드 / 프리미엄 멤버십
-                </span>
+                <>
+                  <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-100 text-indigo-700'} text-[10px] font-bold rounded-md shrink-0`}>
+                    {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                    ⚡ 스탠다드 멤버십
+                  </span>
+                  {['혁신 블로그 AI', '혁신 상세페이지 AI', '혁신 카드뉴스 AI'].includes(program.title) && (
+                    <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'} text-[10px] font-bold rounded-md shrink-0`}>
+                      {authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                      💎 프리미엄 멤버십
+                    </span>
+                  )}
+                </>
               )}
             </>
           )}
@@ -1991,10 +1999,18 @@ export default function App({ session }: { session: Session | null }) {
                 {authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? '인증됨' : '💎 프리미엄 멤버십'}
               </div>
             ) : program.access === 'BASIC' ? (
-              <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-500 text-white' : 'bg-indigo-500 text-white'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
-                {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
-                {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? '인증됨' : '⚡ 스탠다드 / 프리미엄 멤버십'}
-              </div>
+              <>
+                <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-500 text-white' : 'bg-indigo-500 text-white'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
+                  {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                  {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? '인증됨' : '⚡ 스탠다드 멤버십'}
+                </div>
+                {['혁신 블로그 AI', '혁신 상세페이지 AI', '혁신 카드뉴스 AI'].includes(program.title) && (
+                  <div className={`flex items-center gap-1.5 px-2.5 py-1 ${authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-black'} text-xs font-bold rounded-md shadow-lg backdrop-blur-md transition-colors`}>
+                    {authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
+                    {authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? '인증됨' : '💎 프리미엄 멤버십'}
+                  </div>
+                )}
+              </>
             ) : (
               <div className="flex items-center gap-1.5 px-2.5 py-1 bg-white/10 text-white text-xs font-bold rounded-md shadow-lg backdrop-blur-md border border-white/20">
                 🎁 무료버전
@@ -2051,7 +2067,7 @@ export default function App({ session }: { session: Session | null }) {
                 disabled={authLevel === 'STUDENT'}
               >
                 <Lock className="w-4 h-4" />
-                {authLevel === 'STUDENT' ? '스탠다드 / 프리미엄 멤버십 필요' : '잠금 해제 및 이동'}
+                {authLevel === 'STUDENT' ? '스탠다드 멤버십 필요' : '잠금 해제 및 이동'}
               </button>
             ) : program.link ? (
               <a 
@@ -2488,9 +2504,9 @@ export default function App({ session }: { session: Session | null }) {
               {[
                 { id: 'ALL', label: '✨ 모든 버전' },
                 { id: 'FREE', label: '🎁 무료버전' },
-                { id: 'BASIC', label: '⚡ 스탠다드 / 프리미엄 멤버십' },
-                { id: 'PREMIUM', label: '💎 프리미엄 멤버십 전용' },
-                { id: 'STUDENT', label: '🎓 수강생 전용' },
+                { id: 'BASIC', label: '⚡ 스탠다드 멤버십' },
+                { id: 'PREMIUM', label: '💎 프리미엄 멤버십' },
+                { id: 'STUDENT', label: '🎓 수강생' },
               ].map((acc) => (
                 <button
                   key={acc.id}
