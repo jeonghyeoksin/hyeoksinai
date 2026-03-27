@@ -46,7 +46,7 @@ const PROGRAMS: Program[] = ([
     access: 'STUDENT',
     category: 'LECTURE',
     tags: ['가이드', 'API', '결제'],
-    link: 'https://docs.google.com/presentation/d/10BbgaNbQg60yh3xkNgSahAEm9lyiaZJEUn8W6F6kS3U/edit?slide=id.g3d0ca4dfca9_0_52#slide=id.g3d0ca4dfca9_0_52'
+    link: 'https://docs.google.com/presentation/d/10BbgaNbQg60yh3xkNgSahAEm9lyiaZJEUn8W6F6kS3U/edit?usp=sharing'
   },
   {
     id: 'lecture-api-tier1',
@@ -2470,8 +2470,8 @@ export default function App({ session }: { session: Session | null }) {
           {/* Filter Controls */}
           <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
             {/* Category Filter */}
-            <div className="flex flex-col gap-3">
-              <div className="flex bg-black rounded-xl p-1 border border-zinc-800 overflow-x-auto">
+            <div className="flex flex-col gap-3 w-full lg:w-auto">
+              <div className="flex bg-black rounded-xl p-1 border border-zinc-800 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 {[
                   { id: 'ALL', label: '🌟 전체' },
                   { id: 'PROGRAM', label: '💻 프로그램' },
@@ -2488,7 +2488,7 @@ export default function App({ session }: { session: Session | null }) {
                       setSelectedCategory(cat.id as Category);
                       if (cat.id !== 'PROMPT') setSelectedSubCategory('ALL');
                     }}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
+                    className={`shrink-0 px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
                       selectedCategory === cat.id
                         ? 'bg-zinc-800 text-white shadow-sm'
                         : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900'
@@ -2501,7 +2501,7 @@ export default function App({ session }: { session: Session | null }) {
 
               {/* Sub-Category Filter for PROMPT */}
               {selectedCategory === 'PROMPT' && (
-                <div className="flex bg-black/50 rounded-xl p-1 border border-zinc-800/50 overflow-x-auto">
+                <div className="flex bg-black/50 rounded-xl p-1 border border-zinc-800/50 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                   {[
                     { id: 'ALL', label: '✨ 모든 프롬프트' },
                     { id: '비즈니스', label: '💼 비즈니스' },
@@ -2515,7 +2515,7 @@ export default function App({ session }: { session: Session | null }) {
                     <button
                       key={subCat.id}
                       onClick={() => setSelectedSubCategory(subCat.id as PromptSubCategory | 'ALL')}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
+                      className={`shrink-0 px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
                         selectedSubCategory === subCat.id
                           ? 'bg-zinc-700 text-white shadow-sm'
                           : 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50'
