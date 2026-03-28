@@ -27,6 +27,29 @@ interface Program {
 // --- Mock Data ---
 const PROGRAMS: Program[] = ([
   {
+    id: 'lecture-vibecoding-guide',
+    title: '구글 AI스튜디오 바이브코딩 개발 모델 가이드북',
+    description: '구글 AI스튜디오 바이브코딩 개발 모델 가이드북입니다.',
+    image: '',
+    customVisual: (
+      <div className="w-full h-full bg-gradient-to-br from-[#0f172a] via-[#1e1b4b] to-[#312e81] relative overflow-hidden flex items-center justify-center p-6 text-center">
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.4) 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+        <div className="relative z-10 w-full flex flex-col items-center justify-center">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/20 text-blue-300 text-xs font-bold w-max mb-4">
+            <span className="text-blue-400">📚</span> 수강생 전용 자료
+          </div>
+          <h2 className="text-2xl font-black text-white tracking-tight mb-3 drop-shadow-lg break-keep leading-snug">
+            구글 AI스튜디오 바이브코딩 개발 모델 가이드북
+          </h2>
+        </div>
+      </div>
+    ),
+    access: 'STUDENT',
+    category: 'LECTURE',
+    tags: ['가이드', '바이브코딩', '개발'],
+    link: 'https://docs.google.com/presentation/d/1CCHDYadDA1HCarevYWoF2R5OxYC37MdE1oj_c6-pcx4/edit?slide=id.g3d32d0a8721_2_80#slide=id.g3d32d0a8721_2_80'
+  },
+  {
     id: 'lecture-api-key',
     title: '구글 API Key 설정방법',
     description: '구글 API Key 설정 방법에 대한 상세 가이드 문서입니다.',
