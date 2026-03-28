@@ -496,7 +496,8 @@ const PROGRAMS: Program[] = ([
     ),
     access: 'PREMIUM',
     category: 'PLANNING',
-    tags: ['직무역량', '커리어']
+    tags: ['직무역량', '커리어'],
+    link: 'https://hyeoksin-jobimprovement.fragrant-flower-7056.workers.dev'
   },
   {
     id: '6',
@@ -1900,7 +1901,10 @@ export default function App({ session }: { session: Session | null }) {
   const [selectedAccess, setSelectedAccess] = useState<'ALL' | 'FREE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER' | 'DONCLASS' | 'COACHINGPASS'>('ALL');
   const [isVersionDropdownOpen, setIsVersionDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [authLevel, setAuthLevel] = useState<'NONE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER' | 'DONCLASS' | 'COACHINGPASS' | 'CONSULTING'>('NONE');
+  const [authLevel, setAuthLevel] = useState<'NONE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER' | 'DONCLASS' | 'COACHINGPASS' | 'CONSULTING'>(() => {
+    const saved = localStorage.getItem('authLevel');
+    return (saved as any) || 'NONE';
+  });
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
@@ -1924,8 +1928,18 @@ export default function App({ session }: { session: Session | null }) {
   const [authCode, setAuthCode] = useState('');
   const [authError, setAuthError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [authCodeUsed, setAuthCodeUsed] = useState('');
+  const [authCodeUsed, setAuthCodeUsed] = useState(() => {
+    return localStorage.getItem('authCodeUsed') || '';
+  });
   const [showSpecialEffect, setShowSpecialEffect] = useState(false);
+
+  React.useEffect(() => {
+    localStorage.setItem('authLevel', authLevel);
+  }, [authLevel]);
+
+  React.useEffect(() => {
+    localStorage.setItem('authCodeUsed', authCodeUsed);
+  }, [authCodeUsed]);
 
   const handleAuth = () => {
     const trimmedCode = authCode.trim().toLowerCase();
