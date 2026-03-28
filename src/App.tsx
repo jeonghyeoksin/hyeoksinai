@@ -382,7 +382,7 @@ const PROGRAMS: Program[] = ([
     access: 'BASIC',
     category: 'DESIGN',
     tags: ['상세페이지', '디자인'],
-    link: 'https://hyeoksin-sangsepage-ver16.vercel.app'
+    link: 'https://hyeoksin-sangsepage.fragrant-flower-7056.workers.dev'
   },
   {
     id: '16',
