@@ -3,6 +3,7 @@ import { Search, Lock, Unlock, ExternalLink, Menu, X, Settings, Zap, Sparkles, A
 import { motion, AnimatePresence } from 'motion/react';
 import { additionalPrompts } from './promptsData';
 import { Session } from '@supabase/supabase-js';
+import PartnershipView from './components/PartnershipView';
 
 // --- Types ---
 type AccessLevel = 'FREE' | 'BASIC' | 'PREMIUM' | 'STUDENT' | 'MASTER' | 'DONCLASS' | 'COACHINGPASS' | 'CONSULTING';
@@ -520,7 +521,8 @@ const PROGRAMS: Program[] = ([
     ),
     access: 'PREMIUM',
     category: 'MARKETING',
-    tags: ['키워드', '마케팅']
+    tags: ['키워드', '마케팅'],
+    link: 'https://hyeoksin-keyword.fragrant-flower-7056.workers.dev'
   },
   {
     id: '7',
@@ -1909,7 +1911,7 @@ export default function App({ session }: { session: Session | null }) {
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
   const [showSupportModal, setShowSupportModal] = useState(false);
-  const [currentView, setCurrentView] = useState<'HOME' | 'FAQ' | 'MEMBERSHIP' | 'CONSULTING' | 'AGENCY'>('HOME');
+  const [currentView, setCurrentView] = useState<'HOME' | 'FAQ' | 'MEMBERSHIP' | 'CONSULTING' | 'AGENCY' | 'PARTNERSHIP'>('HOME');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [pageMap, setPageMap] = useState<Record<string, number>>({ PROGRAM: 1, PROMPT: 1, LECTURE: 1 });
   const [itemsPerPage, setItemsPerPage] = useState(8);
@@ -2252,6 +2254,12 @@ export default function App({ session }: { session: Session | null }) {
               >
                 대행 문의
               </button>
+              <button 
+                onClick={() => setCurrentView('PARTNERSHIP')}
+                className={`${currentView === 'PARTNERSHIP' ? 'text-white font-bold' : 'text-zinc-300 hover:text-white'} transition-colors`}
+              >
+                파트너십
+              </button>
             </div>
 
             {/* Right Actions */}
@@ -2358,6 +2366,12 @@ export default function App({ session }: { session: Session | null }) {
                   className={`block w-full text-left px-3 py-2 text-base font-medium rounded-md ${currentView === 'AGENCY' ? 'text-white bg-white/5' : 'text-zinc-300 hover:text-white hover:bg-white/5'}`}
                 >
                   대행 문의
+                </button>
+                <button 
+                  onClick={() => { setCurrentView('PARTNERSHIP'); setIsMobileMenuOpen(false); }}
+                  className={`block w-full text-left px-3 py-2 text-base font-medium rounded-md ${currentView === 'PARTNERSHIP' ? 'text-white bg-white/5' : 'text-zinc-300 hover:text-white hover:bg-white/5'}`}
+                >
+                  파트너십
                 </button>
                 <div className="px-3 py-2">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-amber-500/20 bg-amber-500/10 text-amber-400 text-sm font-bold shadow-[0_0_10px_rgba(245,158,11,0.1)]">
@@ -3002,13 +3016,16 @@ export default function App({ session }: { session: Session | null }) {
                   희망 장소 : (온라인 or 오프라인) {"\n"}
                   컨설팅 희망 내용 : (최대한 상세히)
                 </div>
-                <a 
-                  href="mailto:info@nextin.ai.kr"
-                  className="mt-8 w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-5 rounded-2xl font-black text-lg hover:from-indigo-500 hover:to-purple-500 transition-all shadow-xl shadow-indigo-500/20"
-                >
-                  <Mail className="w-6 h-6" />
-                  지금 바로 컨설팅 신청하기
-                </a>
+                <div className="mt-8 w-full flex items-center justify-center p-6 bg-gradient-to-r from-indigo-900/40 to-purple-900/40 border border-indigo-500/30 rounded-2xl shadow-[0_0_30px_rgba(99,102,241,0.15)] relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 animate-pulse"></div>
+                  <div className="relative z-10 flex items-center gap-3 text-center">
+                    <Sparkles className="w-6 h-6 text-indigo-400" />
+                    <span className="text-xl md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300">
+                      지금 바로 정혁신과 무료상담으로 방향을 잡아보세요!
+                    </span>
+                    <Sparkles className="w-6 h-6 text-purple-400" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -3120,13 +3137,16 @@ export default function App({ session }: { session: Session | null }) {
               원하시는 장소 : (온라인 or 오프라인 (부산 시청)) {"\n"}
               궁금하신 점 및 요청사항 : (최대한 상세히 남겨주실수록 좋습니다.)
             </div>
-            <a 
-              href="mailto:info@nextin.ai.kr"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-8 py-4 rounded-xl font-bold hover:from-emerald-500 hover:to-teal-500 transition-all shadow-lg shadow-emerald-500/20"
-            >
-              <Mail className="w-5 h-5" />
-              메일 보내기
-            </a>
+            <div className="mt-8 w-full flex items-center justify-center p-6 bg-gradient-to-r from-emerald-900/40 to-teal-900/40 border border-emerald-500/30 rounded-2xl shadow-[0_0_30px_rgba(16,185,129,0.15)] relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 animate-pulse"></div>
+              <div className="relative z-10 flex items-center gap-3 text-center">
+                <Sparkles className="w-6 h-6 text-emerald-400" />
+                <span className="text-xl md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-300 to-cyan-300">
+                  메일 양식 제출시 정혁신이 직접 무료로 맞춤 상담 진행해드립니다!
+                </span>
+                <Sparkles className="w-6 h-6 text-teal-400" />
+              </div>
+            </div>
           </div>
         </div>
       ) : currentView === 'FAQ' ? (
@@ -3180,6 +3200,8 @@ export default function App({ session }: { session: Session | null }) {
           </div>
         </div>
       ) : null}
+
+      {currentView === 'PARTNERSHIP' && <PartnershipView />}
 
       {currentView === 'MEMBERSHIP' && (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 min-h-[60vh]">
@@ -3392,22 +3414,36 @@ export default function App({ session }: { session: Session | null }) {
 
           {/* Application Form */}
           <div className="bg-gradient-to-br from-zinc-900 to-black border border-zinc-800 rounded-3xl p-8 md:p-12 text-center">
-            <div className="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <Mail className="w-8 h-8 text-red-500" />
+            <div className="w-16 h-16 bg-amber-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <Mail className="w-8 h-8 text-amber-500" />
             </div>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">구독 신청 안내</h2>
             <p className="text-zinc-400 mb-8 max-w-2xl mx-auto">
-              구독 신청을 희망하시면 아래 버튼을 클릭하여 <br className="hidden md:block" />
-              멤버십 구독 페이지로 이동하여 신청해주시길 바랍니다.
+              아래 계좌로 원하시는 멤버십의 금액을 결제하신 후 <br className="hidden md:block" />
+              <a href="mailto:info@nextin.ai.kr" className="text-amber-400 font-bold hover:underline">info@nextin.ai.kr</a>로 아래 양식을 보내주시면 코드를 보내드립니다.
             </p>
 
-            <a 
-              href="https://hyeoksinai.com/membership"
-              className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-2xl font-bold hover:bg-zinc-200 transition-all shadow-[0_0_30px_rgba(255,255,255,0.1)]"
-            >
-              구독 신청하기
-              <ArrowRight className="w-5 h-5" />
-            </a>
+            <div className="bg-black/50 border border-amber-500/30 rounded-2xl p-6 max-w-md mx-auto mb-8 shadow-[0_0_30px_rgba(245,158,11,0.1)]">
+              <div className="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500 mb-2">
+                기업은행 518-055815-02-017
+              </div>
+              <div className="text-zinc-300 font-medium">예금주: 정시훈</div>
+            </div>
+
+            <div className="bg-zinc-800/50 border border-zinc-700 rounded-xl p-6 max-w-md mx-auto text-left relative group">
+              <div className="text-amber-400 font-bold mb-3">&lt;신청양식&gt;</div>
+              <pre className="text-sm text-zinc-300 whitespace-pre-wrap font-mono leading-relaxed">
+{`성함 : (ex. 계좌이체한 이름)
+결제하신 멤버십 : (ex. 프리미엄멤버십 1년)`}
+              </pre>
+              <button 
+                onClick={() => navigator.clipboard.writeText('성함 : (ex. 계좌이체한 이름)\\n결제하신 멤버십 : (ex. 프리미엄멤버십 1년)')}
+                className="absolute top-4 right-4 p-2 rounded-lg bg-zinc-700 text-zinc-400 opacity-0 group-hover:opacity-100 transition-opacity hover:text-white hover:bg-zinc-600"
+                title="양식 복사하기"
+              >
+                <Copy className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
       )}
