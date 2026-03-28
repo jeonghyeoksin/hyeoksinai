@@ -543,7 +543,8 @@ const PROGRAMS: Program[] = ([
     ),
     access: 'BASIC',
     category: 'DESIGN',
-    tags: ['카드뉴스', '인스타그램']
+    tags: ['카드뉴스', '인스타그램'],
+    link: 'https://hyeoksin-instagram.fragrant-flower-7056.workers.dev'
   },
   {
     id: '17',
@@ -629,7 +630,8 @@ const PROGRAMS: Program[] = ([
     ),
     access: 'PREMIUM',
     category: 'VIDEO',
-    tags: ['유튜브', '영상제작']
+    tags: ['유튜브', '영상제작'],
+    link: 'https://hyeoksin-youtube.fragrant-flower-7056.workers.dev'
   },
   {
     id: '10',
@@ -1678,7 +1680,12 @@ Apply this style consistently across all slides for a cohesive, professional sli
     promptText: '당신은 숏폼 콘텐츠 디렉터입니다. MZ세대를 타겟으로 [우리 과자]를 활용한 틱톡 챌린지를 기획해 주세요. 누구나 쉽게 따라 할 수 있는 동작이나 재미있는 상황 설정을 구상하고, 챌린지에 어울릴 만한 배경음악(BGM) 스타일과 필수 해시태그를 제안해 주세요.'
   },
   ...additionalPrompts
-] as Program[]).map((p) => p.category === 'PROMPT' ? { ...p, access: 'BASIC' } : p.category === 'LECTURE' ? { ...p, access: 'STUDENT' } : p);
+] as Program[]).map((p) => {
+  if (!p) return p;
+  if (p.category === 'PROMPT') return { ...p, access: 'BASIC' };
+  if (p.category === 'LECTURE') return { ...p, access: 'STUDENT' };
+  return p;
+});
 
 function PromptCard({ 
   program, 
@@ -1692,22 +1699,44 @@ function PromptCard({
 }) {
   const [copied, setCopied] = useState(false);
 
+  if (!program) return null;
+
   const isLocked = authLevel !== 'MASTER' && authLevel !== 'CONSULTING' && authLevel !== 'COACHINGPASS' && (
-    (program.access === 'PREMIUM' && authLevel !== 'PREMIUM' && authLevel !== 'DONCLASS') || 
-    (program.access === 'STUDENT' && authLevel !== 'STUDENT') ||
-    (program.access === 'BASIC' && authLevel !== 'BASIC' && authLevel !== 'PREMIUM' && authLevel !== 'DONCLASS')
+    (program?.access === 'PREMIUM' && authLevel !== 'PREMIUM' && authLevel !== 'DONCLASS') || 
+    (program?.access === 'STUDENT' && authLevel !== 'STUDENT') ||
+    (program?.access === 'BASIC' && authLevel !== 'BASIC' && authLevel !== 'PREMIUM' && authLevel !== 'DONCLASS')
   );
 
-  const handleCopy = () => {
+  const handleCopy = async () => {
     if (isLocked) {
       onRequireAuth();
       return;
     }
     
-    if (program.promptText) {
-      navigator.clipboard.writeText(program.promptText);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+    if (program?.promptText) {
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(program.promptText);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        } else {
+          // Fallback for browsers without clipboard API
+          const textArea = document.createElement("textarea");
+          textArea.value = program.promptText;
+          document.body.appendChild(textArea);
+          textArea.select();
+          try {
+            document.execCommand('copy');
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+          } catch (err) {
+            console.error('Fallback copy error:', err);
+          }
+          document.body.removeChild(textArea);
+        }
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
     }
   };
 
@@ -1722,27 +1751,27 @@ function PromptCard({
     >
       <div className="p-6 flex flex-col flex-grow overflow-hidden">
         <div className="flex items-start gap-2 mb-3 flex-wrap">
-          {program.access === 'STUDENT' && (
+          {program?.access === 'STUDENT' && (
             <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'COACHINGPASS' ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-100 text-blue-700'} text-[10px] font-bold rounded-md shrink-0`}>
               {authLevel === 'STUDENT' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
               🎓 수강생 전용
             </span>
           )}
-          {(program.access === 'PREMIUM' || program.access === 'BASIC') && (
+          {(program?.access === 'PREMIUM' || program?.access === 'BASIC') && (
             <>
-              {program.access === 'PREMIUM' && (
+              {program?.access === 'PREMIUM' && (
                 <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'} text-[10px] font-bold rounded-md shrink-0`}>
                   {authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
                   💎 프리미엄 멤버십 전용
                 </span>
               )}
-              {program.access === 'BASIC' && (
+              {program?.access === 'BASIC' && (
                 <>
                   <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-100 text-emerald-700' : 'bg-indigo-100 text-indigo-700'} text-[10px] font-bold rounded-md shrink-0`}>
                     {authLevel === 'BASIC' || authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
                     ⚡ 스탠다드 멤버십
                   </span>
-                  {['혁신 블로그 AI', '혁신 상세페이지 AI', '혁신 카드뉴스 AI'].includes(program.title) && (
+                  {['혁신 블로그 AI', '혁신 상세페이지 AI', '혁신 카드뉴스 AI'].includes(program?.title || '') && (
                     <span className={`inline-flex items-center gap-1 px-2 py-1 ${authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'} text-[10px] font-bold rounded-md shrink-0`}>
                       {authLevel === 'PREMIUM' || authLevel === 'MASTER' || authLevel === 'CONSULTING' || authLevel === 'DONCLASS' || authLevel === 'COACHINGPASS' ? <Unlock className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
                       💎 프리미엄 멤버십
@@ -1752,22 +1781,22 @@ function PromptCard({
               )}
             </>
           )}
-          {program.promptSubCategory && (
+          {program?.promptSubCategory && (
             <span className="inline-block px-2.5 py-1 bg-gray-100 text-gray-600 text-xs font-bold rounded-md w-fit shrink-0">
               {program.promptSubCategory}
             </span>
           )}
         </div>
         <h3 className="text-lg font-bold text-gray-900 mb-2 shrink-0 line-clamp-1">
-          {program.title}
+          {program?.title || '제목 없음'}
         </h3>
         <p className="text-sm text-gray-600 mb-4 leading-relaxed shrink-0 line-clamp-2">
-          {program.description}
+          {program?.description || '설명이 없습니다.'}
         </p>
         
         <div className={`bg-[#F8F9FA] border border-gray-200 rounded-xl p-4 mb-4 flex-grow overflow-y-auto min-h-0 relative ${isLocked ? 'overflow-hidden' : ''}`}>
           <pre className={`text-[13px] text-gray-700 whitespace-pre-wrap font-sans leading-relaxed font-medium ${isLocked ? 'blur-[4px] select-none opacity-50' : ''}`}>
-            {program.promptText}
+            {program?.promptText || ''}
           </pre>
           
           {isLocked && (
@@ -1776,8 +1805,8 @@ function PromptCard({
                 <Lock className="w-6 h-6 text-amber-500" />
               </div>
               <p className="text-sm font-bold text-gray-900 mb-1">
-                {program.access === 'STUDENT' ? '🎓 수강생 전용 프롬프트' : 
-                 program.access === 'PREMIUM' ? '💎 프리미엄 멤버십 전용 프롬프트' : 
+                {program?.access === 'STUDENT' ? '🎓 수강생 전용 프롬프트' : 
+                 program?.access === 'PREMIUM' ? '💎 프리미엄 멤버십 전용 프롬프트' : 
                  '👑 멤버십 전용 프롬프트'}
               </p>
               <p className="text-xs text-gray-600 text-center px-4">
@@ -1899,101 +1928,128 @@ export default function App({ session }: { session: Session | null }) {
   const [showSpecialEffect, setShowSpecialEffect] = useState(false);
 
   const handleAuth = () => {
-    if (authCode === 'master1004') {
-      setAuthLevel('MASTER');
-      setShowAuthModal(false);
-      setAuthCode('');
-      setAuthError('');
-      setShowPassword(false);
-    } else if (authCode === 'cst1004') {
-      setAuthLevel('CONSULTING');
-      setShowAuthModal(false);
-      setAuthCode('');
-      setAuthError('');
-      setShowPassword(false);
-    } else if (authCode === 'donclass1') {
-      setAuthLevel('DONCLASS');
-      setShowAuthModal(false);
-      setAuthCode('');
-      setAuthError('');
-      setShowPassword(false);
-    } else if (authCode === 'donclass4') {
-      setAuthLevel('MASTER');
-      setAuthCodeUsed('donclass4');
-      setShowSpecialEffect(true);
-      setShowAuthModal(false);
-      setAuthCode('');
-      setAuthError('');
-      setShowPassword(false);
-      setTimeout(() => setShowSpecialEffect(false), 5000);
-    } else if (authCode === 'dc1004') {
-      const currentDate = new Date();
-      const expirationDate = new Date('2027-04-01T00:00:00+09:00');
-      if (currentDate < expirationDate) {
+    const trimmedCode = authCode.trim().toLowerCase();
+    if (!trimmedCode) {
+      setAuthError('인증 코드를 입력해주세요.');
+      return;
+    }
+
+    try {
+      if (trimmedCode === 'master1004') {
+        setAuthLevel('MASTER');
+        setShowAuthModal(false);
+        setAuthCode('');
+        setAuthError('');
+        setShowPassword(false);
+      } else if (trimmedCode === 'cst1004') {
+        setAuthLevel('CONSULTING');
+        setShowAuthModal(false);
+        setAuthCode('');
+        setAuthError('');
+        setShowPassword(false);
+      } else if (trimmedCode === 'donclass1') {
         setAuthLevel('DONCLASS');
-        setAuthCodeUsed('dc1004');
+        setShowAuthModal(false);
+        setAuthCode('');
+        setAuthError('');
+        setShowPassword(false);
+      } else if (trimmedCode === 'donclass4') {
+        setAuthLevel('MASTER');
+        setAuthCodeUsed('donclass4');
+        setShowSpecialEffect(true);
+        setShowAuthModal(false);
+        setAuthCode('');
+        setAuthError('');
+        setShowPassword(false);
+        setTimeout(() => setShowSpecialEffect(false), 5000);
+      } else if (trimmedCode === 'dc1004') {
+        const currentDate = new Date();
+        const expirationDate = new Date('2027-04-01T00:00:00+09:00');
+        if (currentDate < expirationDate) {
+          setAuthLevel('DONCLASS');
+          setAuthCodeUsed('dc1004');
+          setShowAuthModal(false);
+          setAuthCode('');
+          setAuthError('');
+          setShowPassword(false);
+        } else {
+          setAuthError('만료된 인증 코드입니다.');
+        }
+      } else if (trimmedCode === 'cp') {
+        setAuthLevel('COACHINGPASS');
+        setShowAuthModal(false);
+        setAuthCode('');
+        setAuthError('');
+        setShowPassword(false);
+      } else if (trimmedCode === 'hsaip0705') {
+        setAuthLevel('PREMIUM');
+        setShowAuthModal(false);
+        setAuthCode('');
+        setAuthError('');
+        setShowPassword(false);
+      } else if (trimmedCode === 'hsedu1004') {
+        setAuthLevel('STUDENT');
+        setShowAuthModal(false);
+        setAuthCode('');
+        setAuthError('');
+        setShowPassword(false);
+      } else if (trimmedCode === '0515') {
+        setAuthLevel('BASIC');
         setShowAuthModal(false);
         setAuthCode('');
         setAuthError('');
         setShowPassword(false);
       } else {
-        setAuthError('만료된 인증 코드입니다.');
+        setAuthError('인증 번호가 올바르지 않습니다.');
       }
-    } else if (authCode === 'cp') {
-      setAuthLevel('COACHINGPASS');
-      setShowAuthModal(false);
-      setAuthCode('');
-      setAuthError('');
-      setShowPassword(false);
-    } else if (authCode === 'hsaip0705') {
-      setAuthLevel('PREMIUM');
-      setShowAuthModal(false);
-      setAuthCode('');
-      setAuthError('');
-      setShowPassword(false);
-    } else if (authCode === 'hsedu1004') {
-      setAuthLevel('STUDENT');
-      setShowAuthModal(false);
-      setAuthCode('');
-      setAuthError('');
-      setShowPassword(false);
-    } else if (authCode === '0515') {
-      setAuthLevel('BASIC');
-      setShowAuthModal(false);
-      setAuthCode('');
-      setAuthError('');
-      setShowPassword(false);
-    } else {
-      setAuthError('인증 번호가 올바르지 않습니다.');
+    } catch (err) {
+      console.error('Auth error:', err);
+      setAuthError('인증 처리 중 오류가 발생했습니다. 다시 시도해주세요.');
     }
   };
 
   // Filter logic
   const filteredPrograms = PROGRAMS.filter(program => {
-    const matchesSearch = program.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          program.description.toLowerCase().includes(searchTerm.toLowerCase());
+    if (!program) return false;
+
+    const title = program.title || '';
+    const description = program.description || '';
+    const category = program.category || 'ALL';
+    const promptSubCategory = program.promptSubCategory || 'ALL';
+    const access = program.access || 'FREE';
+
+    const matchesSearch = title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          description.toLowerCase().includes(searchTerm.toLowerCase());
+    
     const matchesCategory = selectedCategory === 'ALL' || 
-                            (selectedCategory === 'PROGRAM' ? !['PROMPT', 'LECTURE'].includes(program.category) : program.category === selectedCategory);
-    const matchesSubCategory = selectedCategory !== 'PROMPT' || selectedSubCategory === 'ALL' || program.promptSubCategory === selectedSubCategory;
+                            (selectedCategory === 'PROGRAM' ? !['PROMPT', 'LECTURE'].includes(category) : category === selectedCategory);
+    
+    const matchesSubCategory = selectedCategory !== 'PROMPT' || selectedSubCategory === 'ALL' || promptSubCategory === selectedSubCategory;
     
     let matchesAccess = false;
     if (selectedAccess === 'ALL') {
       matchesAccess = true;
     } else if (selectedAccess === 'PREMIUM') {
-      matchesAccess = program.access === 'PREMIUM' || program.access === 'BASIC';
+      matchesAccess = access === 'PREMIUM' || access === 'BASIC';
     } else {
-      matchesAccess = program.access === selectedAccess;
+      matchesAccess = access === selectedAccess;
     }
     
     return matchesSearch && matchesCategory && matchesSubCategory && matchesAccess;
   }).sort((a, b) => {
-    if (a.access === 'STUDENT' && b.access !== 'STUDENT') return 1;
-    if (a.access !== 'STUDENT' && b.access === 'STUDENT') return -1;
+    const accessA = a?.access || 'FREE';
+    const accessB = b?.access || 'FREE';
+    if (accessA === 'STUDENT' && accessB !== 'STUDENT') return 1;
+    if (accessA !== 'STUDENT' && accessB === 'STUDENT') return -1;
     return 0;
   });
 
-  const renderProgram = (program: Program) => (
-    program.category === 'PROMPT' ? (
+  const renderProgram = (program: Program) => {
+    if (!program) return null;
+    
+    const category = program.category || 'ALL';
+    
+    return category === 'PROMPT' ? (
       <PromptCard 
         key={program.id} 
         program={program} 
@@ -2018,8 +2074,8 @@ export default function App({ session }: { session: Session | null }) {
             </div>
           ) : (
             <img 
-              src={program.image} 
-              alt={program.title}
+              src={program.image || 'https://picsum.photos/seed/ai/800/600'} 
+              alt={program.title || '이미지'}
               className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
               referrerPolicy="no-referrer"
             />
@@ -2127,8 +2183,8 @@ export default function App({ session }: { session: Session | null }) {
           </div>
         </div>
       </motion.div>
-    )
-  );
+    );
+  };
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-zinc-100 font-sans selection:bg-red-500/30">
@@ -2503,7 +2559,7 @@ export default function App({ session }: { session: Session | null }) {
           <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
             {/* Category Filter */}
             <div className="flex flex-col gap-3 w-full lg:w-auto">
-              <div className="flex bg-black rounded-xl p-1 border border-zinc-800 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              <div className="flex flex-wrap lg:flex-nowrap bg-black rounded-xl p-1 border border-zinc-800 overflow-x-auto lg:overflow-visible [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 {[
                   { id: 'ALL', label: '🌟 전체' },
                   { id: 'PROGRAM', label: '💻 프로그램' },
@@ -2533,7 +2589,7 @@ export default function App({ session }: { session: Session | null }) {
 
               {/* Sub-Category Filter for PROMPT */}
               {selectedCategory === 'PROMPT' && (
-                <div className="flex bg-black/50 rounded-xl p-1 border border-zinc-800/50 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                <div className="flex flex-wrap lg:flex-nowrap bg-black/50 rounded-xl p-1 border border-zinc-800/50 overflow-x-auto lg:overflow-visible [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                   {[
                     { id: 'ALL', label: '✨ 모든 프롬프트' },
                     { id: '비즈니스', label: '💼 비즈니스' },
