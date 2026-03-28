@@ -1896,6 +1896,7 @@ export default function App({ session }: { session: Session | null }) {
   const [authError, setAuthError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [authCodeUsed, setAuthCodeUsed] = useState('');
+  const [showSpecialEffect, setShowSpecialEffect] = useState(false);
 
   const handleAuth = () => {
     if (authCode === 'master1004') {
@@ -1916,6 +1917,15 @@ export default function App({ session }: { session: Session | null }) {
       setAuthCode('');
       setAuthError('');
       setShowPassword(false);
+    } else if (authCode === 'donclass4') {
+      setAuthLevel('MASTER');
+      setAuthCodeUsed('donclass4');
+      setShowSpecialEffect(true);
+      setShowAuthModal(false);
+      setAuthCode('');
+      setAuthError('');
+      setShowPassword(false);
+      setTimeout(() => setShowSpecialEffect(false), 5000);
     } else if (authCode === 'dc1004') {
       const currentDate = new Date();
       const expirationDate = new Date('2027-04-01T00:00:00+09:00');
@@ -2191,6 +2201,17 @@ export default function App({ session }: { session: Session | null }) {
                         (만료일: 2027.04.01)
                       </span>
                     )}
+                    {authCodeUsed === 'donclass4' && (
+                      <div className="flex items-center gap-1 mt-0.5">
+                        <motion.span 
+                          initial={{ opacity: 0, y: 5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="text-[10px] px-1.5 py-0.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded font-bold shadow-[0_0_10px_rgba(245,158,11,0.3)]"
+                        >
+                          돈버는클래스 정혁신 AI 4기 특별 코드
+                        </motion.span>
+                      </div>
+                    )}
                   </div>
                   <button 
                     onClick={() => {
@@ -2286,6 +2307,17 @@ export default function App({ session }: { session: Session | null }) {
                           <span className="text-xs text-amber-400 font-medium mt-0.5">
                             (만료일: 2027.04.01)
                           </span>
+                        )}
+                        {authCodeUsed === 'donclass4' && (
+                          <div className="flex items-center gap-1 mt-0.5">
+                            <motion.span 
+                              initial={{ opacity: 0, scale: 0.9 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              className="text-[10px] px-1.5 py-0.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded font-bold shadow-[0_0_10px_rgba(245,158,11,0.3)]"
+                            >
+                              돈버는클래스 정혁신 AI 4기 특별 코드
+                            </motion.span>
+                          </div>
                         )}
                       </div>
                       <button 
@@ -3567,6 +3599,75 @@ export default function App({ session }: { session: Session | null }) {
               </a>
             </motion.div>
           </div>
+        )}
+      </AnimatePresence>
+
+      {/* Special Effect Overlay */}
+      <AnimatePresence>
+        {showSpecialEffect && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center pointer-events-none p-4"
+          >
+            <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+            <motion.div
+              initial={{ scale: 0.5, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 1.2, opacity: 0, y: -20 }}
+              transition={{ type: "spring", damping: 15 }}
+              className="relative px-8 py-8 rounded-3xl bg-zinc-900/95 border border-amber-500/50 shadow-[0_0_50px_rgba(245,158,11,0.3)] flex flex-col items-center gap-5 text-center max-w-sm"
+            >
+              <motion.div 
+                animate={{ 
+                  rotateY: [0, 360],
+                  scale: [1, 1.1, 1]
+                }}
+                transition={{ 
+                  duration: 3, 
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="w-20 h-20 rounded-full bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center shadow-[0_0_20px_rgba(245,158,11,0.5)]"
+              >
+                <Crown className="w-10 h-10 text-white" />
+              </motion.div>
+              <div className="space-y-2">
+                <motion.h3 
+                  animate={{ 
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+                  }}
+                  transition={{ duration: 5, repeat: Infinity }}
+                  className="text-2xl font-black bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 bg-[length:200%_auto] bg-clip-text text-transparent"
+                >
+                  특별 코드 인증 완료
+                </motion.h3>
+                <p className="text-lg text-white font-bold tracking-tight leading-tight">
+                  돈버는클래스 정혁신 AI 4기 특별 코드
+                </p>
+              </div>
+              <div className="flex gap-2">
+                {[...Array(5)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    animate={{ 
+                      scale: [1, 1.3, 1],
+                      rotate: [0, 15, -15, 0],
+                      opacity: [0.5, 1, 0.5]
+                    }}
+                    transition={{ 
+                      repeat: Infinity, 
+                      duration: 2,
+                      delay: i * 0.3
+                    }}
+                  >
+                    <Sparkles className="w-5 h-5 text-amber-400" />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>
